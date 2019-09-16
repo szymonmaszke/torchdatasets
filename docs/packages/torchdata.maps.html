@@ -1,0 +1,726 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchdata.maps &mdash; torchdata  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchdata/packages/torchdata.maps.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="torchdata.modifiers" href="torchdata.modifiers.html" />
+    <link rel="prev" title="torchdata.cachers" href="torchdata.cachers.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchdata">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="torchdata.html">torchdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">torchdata.maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.modifiers.html">torchdata.modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.samplers.html">torchdata.samplers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+        </a> &gt;
+      </li>
+
+        
+      <li>torchdata.maps</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/packages/torchdata.maps.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-torchdata.maps">
+<span id="torchdata-maps"></span><h1>torchdata.maps<a class="headerlink" href="#module-torchdata.maps" title="Permalink to this headline">¶</a></h1>
+<p><strong>This module provides functions one can use with</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset.map</span></code> <strong>method.</strong></p>
+<p>Following <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset</span></code> object will be used throughout documentation for brevity (if not defined explicitly):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image loading dataset</span>
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code> below are general and can be used in various scenarios.</p>
+<dl class="class">
+<dt id="torchdata.maps.After">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">After</code><span class="sig-paren">(</span><em class="sig-param">samples: int</em>, <em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#After"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.After" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function after specified number of samples passed.</strong></p>
+<p>Useful for introducing data augmentation after an initial warm-up period.
+If you want a direct control over when function will be applied to sample,
+please use <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.transforms.OnSignal</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># After 10 samples apply lambda mapping</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">After</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>int</em>) – After how many samples function will start being applied.</p></li>
+<li><p><strong>function</strong> (<em>Callable</em>) – Function to apply to sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Either unchanged sample or function(sample)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[sample, function(sample)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.Drop">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Drop</code><span class="sig-paren">(</span><em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Drop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Drop" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return sample without selected elements.</strong></p>
+<p>Sample has to be indexable object (has <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method implemented).</p>
+<p><strong>Important:</strong></p>
+<ul class="simple">
+<li><p>Negative indexing is supported if supported by sample object.</p></li>
+<li><p>This function is <strong>slower</strong> than <a class="reference internal" href="#torchdata.maps.Select" title="torchdata.maps.Select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></a> and the latter should be preffered.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="c1"># Zeroth and last samples dropped</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Drop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*indices</strong> (<em>int</em>) – Indices of objects to remove from the sample. If left empty, tuple containing
+all elements will be returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple without selected elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[samples]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.Except">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Except</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Except"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Except" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function to all elements sample of sample except the ones specified.</strong></p>
+<p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="c1"># Every element increased by one except the first one</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Except</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.maps.Except.function">
+<code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.Except.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to apply to chosen elements of sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">*indices</code></dt>
+<dd><p>Indices of objects to which function will not be applied. If left empty,
+function will be applied to every element of sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple with subsamples where some have the function applied.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[function(subsample)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.Flatten">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Flatten</code><span class="sig-paren">(</span><em class="sig-param">types: Tuple = (&lt;class 'list'&gt;</em>, <em class="sig-param">&lt;class 'tuple'&gt;)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Flatten arbitrarily nested sample.</strong></p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nest elements</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">),))</span>
+<span class="c1"># Flatten no matter how deep</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Flatten</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) – Types to be considered non-flat. Those will be recursively flattened.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">(list,</span> <span class="pre">tuple)</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple with elements flattened</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[samples]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.OnSignal">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">OnSignal</code><span class="sig-paren">(</span><em class="sig-param">signal: Callable[[...], bool], function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#OnSignal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.OnSignal" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function based on boolean output of signalling function.</strong></p>
+<p>Useful for introducing data augmentation after an initial warm-up period.
+You can use it to turn on/off specific augmentation with respect to outer world,
+for example turning on image rotations after 5 epochs and turning off 5 epochs
+before the end in order to fine-tune your network.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="kn">import</span> <span class="nn">torchdata</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+
+<span class="c1"># Image loading dataset</span>
+<span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">FilesDataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+
+<span class="k">class</span> <span class="nc">Handle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+<span class="c1"># you can change handle.value to switch whether mapping should be applied</span>
+<span class="n">handle</span> <span class="o">=</span> <span class="n">Handle</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ImageDataset</span><span class="o">.</span><span class="n">from_folder</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+    <span class="c1"># If handle returns True, mapping will be applied</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span>
+        <span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">OnSignal</span><span class="p">(</span>
+            <span class="n">handle</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">image</span><span class="p">:</span> <span class="n">image</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand_like</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>Callable</em>) – No argument callable returning boolean, indicating whether to apply function.</p></li>
+<li><p><strong>function</strong> (<em>Callable</em>) – Function to apply to sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Either unchanged sample of function(sample)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[sample, function(sample)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.Repeat">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param">n: int</em>, <em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function repeatedly to the sample.</strong></p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase each value by 10 * 1</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – How many times the function will be applied.</p></li>
+<li><p><strong>function</strong> (<em>Callable</em>) – Function to apply.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function(sample) applied n times.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function(sample)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.Select">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Select" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Select elements from sample.</strong></p>
+<p>Sample has to be indexable object (has <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method implemented).</p>
+<p><strong>Important:</strong></p>
+<ul class="simple">
+<li><p>Negative indexing is supported if supported by sample object.</p></li>
+<li><p>This function is <strong>faster</strong> than <a class="reference internal" href="#torchdata.maps.Drop" title="torchdata.maps.Drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Drop</span></code></a> and should be used if possible.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="c1"># Only second (first index) element will be taken</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*indices</strong> (<em>int</em>) – Indices of objects to select from the sample. If left empty, empty tuple will be returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuple with selected elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[samples]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.To">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">To</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#To"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.To" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function to specified elements of sample.</strong></p>
+<p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="c1"># Zero and first subsamples will be increased by one, last one left untouched</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">To</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.maps.To.function">
+<code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.To.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to apply to specified elements of sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">*indices</code></dt>
+<dd><p>Indices to which function will be applied. If left empty,
+function will not be applied to anything.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple consisting of subsamples with some having the function applied.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[function(subsample)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.maps.ToAll">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">ToAll</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#ToAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.ToAll" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function to each element of sample.</strong></p>
+<p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="c1"># Each concatenated sample will be increased by 1</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">ToAll</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.maps.ToAll.function">
+<code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.ToAll.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to apply to each element of sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple consisting of subsamples with function applied.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[function(subsample)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="torchdata.modifiers.html" class="btn btn-neutral float-right" title="torchdata.modifiers" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="torchdata.cachers.html" class="btn btn-neutral" title="torchdata.cachers" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">torchdata.maps</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../_static/jquery.js"></script>
+         <script type="text/javascript" src="../_static/underscore.js"></script>
+         <script type="text/javascript" src="../_static/doctools.js"></script>
+         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchdata">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="#">GitHub</a>
+          </li>
+
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

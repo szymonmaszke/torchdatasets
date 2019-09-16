@@ -1,0 +1,3 @@
+sphinx
+-e git+https://github.com/hagenw/sphinxcontrib-katex.git#egg=sphinxcontrib.katex
+-e git+https://github.com/szymonmaszke/torchstar-docs.git#egg=pytorch_sphinx_theme

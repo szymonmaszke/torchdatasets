@@ -1,0 +1,663 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchdata.modifiers &mdash; torchdata  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchdata/_modules/torchdata/modifiers.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchdata">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.html">torchdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.maps.html">torchdata.maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.modifiers.html">torchdata.modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.samplers.html">torchdata.samplers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../index.html">
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../torchdata.html">torchdata</a> &gt;</li>
+        
+      <li>torchdata.modifiers</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for torchdata.modifiers</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;**This module allows you to modify behaviour of** `torchdata.cachers`.</span>
+
+<span class="sd">To cache in `memory` only `20` first samples you could do (assuming you have already created</span>
+<span class="sd">`torchdata.Dataset` instance named `dataset`)::</span>
+
+<span class="sd">    dataset.cache(torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 20))</span>
+
+<span class="sd">Modifers could be mixed intuitvely as well using logical operators `|` (or) and</span>
+<span class="sd">`&amp;` (and).</span>
+
+<span class="sd">**Example** (cache to disk `20` first or samples with index `1000` and upwards)::</span>
+
+<span class="sd">    dataset.cache(</span>
+<span class="sd">        torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 20)</span>
+<span class="sd">        | torchdata.modifiers.FromIndex(torchdata.cachers.Memory(), 1000)</span>
+<span class="sd">    )</span>
+
+<span class="sd">You can mix provided modifiers or extend them by inheriting from `Modifier`</span>
+<span class="sd">and implementing `condition` method (interface described below).</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span>
+
+
+<div class="viewcode-block" id="Modifier"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier">[docs]</a><span class="k">class</span> <span class="nc">Modifier</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Interface for all modifiers.**</span>
+
+<span class="sd">    Most methods are pre-configured, so user should not override them.</span>
+<span class="sd">    In-fact only `condition` has to be overriden and `__init__` implemented.</span>
+<span class="sd">    Constructor should assign `cacher` to `self` in order for everything</span>
+<span class="sd">    to work, see example below.</span>
+
+<span class="sd">    Example implementation of `modifier` caching only elements `0` to `100`</span>
+<span class="sd">    of any `torchdata.cacher.Cacher`::</span>
+
+<span class="sd">        class ExampleModifier(Modifier):</span>
+
+<span class="sd">            # You have to assign cacher to self.cacher so modifier works.</span>
+<span class="sd">            def __init__(self, cacher):</span>
+<span class="sd">                self.cacher = cacher</span>
+
+<span class="sd">            def condition(self, index):</span>
+<span class="sd">                return index &lt; 100 # Cache if index smaller than 100</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Modifier.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.condition">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Based on index, decide whether cache should interact with the sample.**</span>
+
+<span class="sd">        Only this function should be implemented by user.</span>
+<span class="sd">        If `True` returned, `cacher` will act on sample normally (e.g. saving it or loading).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">                Index of sample</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">                Whether to act on sample with given index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Modifier.__contains__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__contains__">[docs]</a>    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Acts as invisible proxy for** `cacher`&#39;s `__contains__` **method.**</span>
+
+<span class="sd">        **User should not override this method.**</span>
+<span class="sd">        For more information check `torchdata.cacher.Cacher` interface.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">                Index of sample</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Modifier.__setitem__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__setitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Acts as invisible proxy for** `cacher`&#39;s `__setitem__` **method.**</span>
+
+<span class="sd">        **User should not override this method.**</span>
+<span class="sd">        For more information check `torchdata.cacher.Cacher` interface.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">                Index of sample</span>
+<span class="sd">        data : Any</span>
+<span class="sd">                Data generated by dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="Modifier.__getitem__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Acts as invisible proxy for** `cacher`&#39;s `__getitem__` **method.**</span>
+
+<span class="sd">        **User should not override this method.**</span>
+<span class="sd">        For more information check `torchdata.cacher.Cacher` interface.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">                Index of sample</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Modifier.__or__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__or__">[docs]</a>    <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**If self or other returns True, then use** `cacher`.</span>
+
+<span class="sd">        User should not override this method.</span>
+
+<span class="sd">        **Important:** `self` and `other` should have the same `cacher` wrapped.</span>
+<span class="sd">        Otherwise exception is thrown. Cacher of first modifier is used in such case.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Modifier</span>
+<span class="sd">                Another modifier</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        torchdata.modifiers.Any</span>
+<span class="sd">                Modifier concatenating both modifiers.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Modifier.__and__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__and__">[docs]</a>    <span class="k">def</span> <span class="nf">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**If self and other returns True, then use** `cacher`.</span>
+
+<span class="sd">        **Important:** `self` and `other` should have the same `cacher` wrapped.</span>
+<span class="sd">        Otherwise exception is thrown. Cacher of first modifier is used in such case.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : Modifier</span>
+<span class="sd">                Another modifier</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        torchdata.modifiers.All</span>
+<span class="sd">                Modifier concatenating both modifiers.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">All</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">_Mix</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**{}**</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    *modifiers: List[torchdata.modifiers.Modifier]</span>
+<span class="sd">            List of modifiers</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modifiers</span><span class="p">):</span>
+        <span class="n">first_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">modifiers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span> <span class="o">=</span> <span class="n">modifiers</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">checker</span><span class="p">,</span> <span class="n">first_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">checker</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All checkers have to be of same type&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">modifiers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cacher</span>
+
+
+<div class="viewcode-block" id="All"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.All">[docs]</a><span class="k">class</span> <span class="nc">All</span><span class="p">(</span><span class="n">_Mix</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Mix</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;Return True if all modifiers return True on given sample.&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="All.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.All.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">()</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Any"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Any">[docs]</a><span class="k">class</span> <span class="nc">Any</span><span class="p">(</span><span class="n">_Mix</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Mix</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;Return True if any modifier returns True on given sample.&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="Any.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Any.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">()</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">_Percent</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**{}**</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cacher : torchdata.cacher.Cacher</span>
+<span class="sd">            Instance of cacher</span>
+<span class="sd">    p : float</span>
+<span class="sd">            Percentage specified as flow between `[0, 1]`.</span>
+<span class="sd">    length : int</span>
+<span class="sd">            How many samples are in dataset. You can pass `len(dataset)`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Percentage has to be between 0 and 1, but got </span><span class="si">{p}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
+
+
+<div class="viewcode-block" id="UpToPercentage"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToPercentage">[docs]</a><span class="k">class</span> <span class="nc">UpToPercentage</span><span class="p">(</span><span class="n">_Percent</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Percent</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache up to percentage of samples leaving the rest untouched.&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="UpToPercentage.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToPercentage.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div></div>
+
+
+<div class="viewcode-block" id="FromPercentage"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromPercentage">[docs]</a><span class="k">class</span> <span class="nc">FromPercentage</span><span class="p">(</span><span class="n">_Percent</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Percent</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache from specified percentage of samples leaving the rest untouched.&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="FromPercentage.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromPercentage.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">_Index</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**{}**</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cacher : torchdata.cacher.Cacher</span>
+<span class="sd">            Instance of cacher</span>
+<span class="sd">    index : int</span>
+<span class="sd">            Index of sample</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">index</span>
+
+
+<div class="viewcode-block" id="UpToIndex"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToIndex">[docs]</a><span class="k">class</span> <span class="nc">UpToIndex</span><span class="p">(</span><span class="n">_Index</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Index</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache up to samples of specified index leaving the rest untouched.&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="UpToIndex.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToIndex.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div></div>
+
+
+<div class="viewcode-block" id="FromIndex"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromIndex">[docs]</a><span class="k">class</span> <span class="nc">FromIndex</span><span class="p">(</span><span class="n">_Index</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">_Index</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache samples from specified index leaving the rest untouched.&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="FromIndex.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromIndex.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div></div>
+
+
+<div class="viewcode-block" id="Indices"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Indices">[docs]</a><span class="k">class</span> <span class="nc">Indices</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Cache samples if index is one of specified.**</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cacher : List[torchdata.modifiers.Modifier]</span>
+<span class="sd">            List of modifiers</span>
+<span class="sd">    index : int</span>
+<span class="sd">            Index of sample</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Indices.__init__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Indices.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span></div>
+
+<div class="viewcode-block" id="Indices.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Indices.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span></div></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../_static/doctools.js"></script>
+         <script type="text/javascript" src="../../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchdata">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="#">GitHub</a>
+          </li>
+
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

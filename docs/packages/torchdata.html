@@ -1,0 +1,844 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchdata &mdash; torchdata  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchdata/packages/torchdata.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="torchdata.cachers" href="torchdata.cachers.html" />
+    <link rel="prev" title="torchdata" href="../index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchdata">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">torchdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.maps.html">torchdata.maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.modifiers.html">torchdata.modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchdata.samplers.html">torchdata.samplers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+        </a> &gt;
+      </li>
+
+        
+      <li>torchdata</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/packages/torchdata.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-torchdata">
+<span id="torchdata"></span><h1>torchdata<a class="headerlink" href="#module-torchdata" title="Permalink to this headline">¶</a></h1>
+<p><strong>This module contains PyTorch compatible datasets with extended capabilities.</strong></p>
+<p>To quickly start with <a class="reference internal" href="#module-torchdata" title="torchdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata</span></code></a>, just inherit from <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> and create
+your dataset as you normally would, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="c1"># Image loading dataset (use torchdata.Files for even less typing :D )</span>
+<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> just by issuing appropriate functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map PIL to Tensor and cache dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="c1"># You can create DataLoader as well</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For custom caching routines and how to use them see <a class="reference internal" href="torchdata.cachers.html#module-torchdata.cachers" title="torchdata.cachers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cachers</span></code></a>, to check available
+general <a class="reference internal" href="torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code></a> see <a class="reference internal" href="torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code></a>. <a class="reference internal" href="torchdata.modifiers.html#module-torchdata.modifiers" title="torchdata.modifiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modifiers</span></code></a> can further modify <a class="reference internal" href="torchdata.cachers.html#module-torchdata.cachers" title="torchdata.cachers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cachers</span></code></a>, you should
+see it’s respective docs as well.</p>
+<dl class="class">
+<dt id="torchdata.ChainDataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">ChainDataset</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#ChainDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.ChainDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Concrete</strong> <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>responsible for chaining multiple datasets.</strong></p>
+<p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> (logical or operator) is used on instance
+of <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> can be used as well).
+Acts just like PyTorch’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> and <a class="reference internal" href="#torchdata.ConcatDataset" title="torchdata.ConcatDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConcatDataset</span></code></a>, see <a class="reference external" href="https://pytorch.org/docs/stable/data.html">https://pytorch.org/docs/stable/data.html</a></p>
+<p>Behaves the same as <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> otherwise.</p>
+<p><strong>Important:</strong> This class is meant to be more of a proxy for <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> operator,
+you can use it directly though.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate over 3 datasets consecutively</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">torchdata</span><span class="o">.</span><span class="n">ChainDataset</span><span class="p">([</span><span class="n">dataset1</span><span class="p">,</span> <span class="n">dataset2</span><span class="p">,</span> <span class="n">dataset3</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.ChainDataset.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.ChainDataset.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of datasets to be chained.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Union[<a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset">torchdata.Dataset</a>, torch.utils.data.Dataset]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.ChainIterable">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">ChainIterable</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#ChainIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.ChainIterable" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Concrete</strong> <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> <strong>responsible for chaining multiple datasets.</strong></p>
+<p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> (logical or operator) is used on instance
+of <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Iterable</span></code> can be used as well).
+Acts just like PyTorch’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> and <a class="reference internal" href="#torchdata.ChainDataset" title="torchdata.ChainDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChainDataset</span></code></a>, see <a class="reference external" href="https://pytorch.org/docs/stable/data.html">https://pytorch.org/docs/stable/data.html</a></p>
+<p>Behaves the same as <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> otherwise.</p>
+<p><strong>Important:</strong> This class is meant to be more of a proxy for <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> operator,
+you can use it directly though.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate over 3 iterable datasets consecutively</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">torchdata</span><span class="o">.</span><span class="n">ChainDataset</span><span class="p">([</span><span class="n">dataset1</span><span class="p">,</span> <span class="n">dataset2</span><span class="p">,</span> <span class="n">dataset3</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.ChainIterable.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.ChainIterable.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of datasets to be chained.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Union[<a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable">torchdata.Iterable</a>, torch.utils.data.IterableDataset]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.ConcatDataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">ConcatDataset</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#ConcatDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.ConcatDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Concrete</strong> <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>responsible for sample-wise concatenation.</strong></p>
+<p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> (logical or operator) is used on instance
+of <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> can be used as well).</p>
+<p>Behaves the same as <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> otherwise.</p>
+<p><strong>Important:</strong> This class is meant to be more of a proxy for <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> operator,
+you can use it directly though.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">torchdata</span><span class="o">.</span><span class="n">ConcatDataset</span><span class="p">([</span><span class="n">dataset1</span><span class="p">,</span> <span class="n">dataset2</span><span class="p">,</span> <span class="n">dataset3</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.ConcatDataset.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.ConcatDataset.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of datasets to be concatenated sample-wise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Union[<a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset">torchdata.Dataset</a>, torch.utils.data.Dataset]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.ConcatIterable">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">ConcatIterable</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#ConcatIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.ConcatIterable" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Concrete</strong> <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> <strong>responsible for sample-wise concatenation.</strong></p>
+<p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> (logical or operator) is used on instance
+of <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.IterableDataset</span></code> can be used as well).</p>
+<p>Behaves the same as <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> otherwise.</p>
+<p><strong>Important:</strong> This class is meant to be more of a proxy for <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> operator,
+you can use it directly though.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">torchdata</span><span class="o">.</span><span class="n">ConcatIterable</span><span class="p">([</span><span class="n">dataset1</span><span class="p">,</span> <span class="n">dataset2</span><span class="p">,</span> <span class="n">dataset3</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchdata.ConcatIterable.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.ConcatIterable.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of datasets to be concatenated sample-wise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Union[<a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable">torchdata.Iterable</a>, torch.utils.data.IterableDataset]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.Dataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">Dataset</code><a class="reference internal" href="../_modules/torchdata.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> <strong>with</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">map`**,**</span> <span class="pre">`cache</span></code> <strong>and</strong> <a class="reference internal" href="#torchdata.Dataset.apply" title="torchdata.Dataset.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a> <strong>support</strong></p>
+<p>This class inherits from <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code>, so can be used exactly
+the same. To get it’s capabilities, inherit from this class, see example below.</p>
+<p>It allows user to perform the following operations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#torchdata.Dataset.cache" title="torchdata.Dataset.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code></a> - cache all/part of data in memory or on disk</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> - apply function to each element of dataset</p></li>
+<li><p><a class="reference internal" href="#torchdata.Dataset.apply" title="torchdata.Dataset.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a> - apply function to <strong>all</strong> elements of dataset</p></li>
+</ul>
+<p><strong>Important:</strong> Last cache which is able to hold sample is used.
+Does not matter whether it’s in-memory or on-disk or user-specified.</p>
+<p><strong>Important:</strong> Although multiple cache calls in different parts of <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code>
+should work, users are encouraged to use it as rare as possible and possibly
+as late as possible for best performance.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="c1"># Image loading dataset (use Files for more serious business)</span>
+<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
+
+<span class="c1"># Map PIL to Tensor and cache dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="c1"># Create DataLoader as normally</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="torchdata.Dataset.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#Dataset.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Dataset.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Apply function to every element of the dataset.</strong></p>
+<p>Specified function has to take Python generator as first argument.
+This generator yields consecutive samples from the dataset and the function is free
+to do whatever it wants with them.</p>
+<p>Other arguments will be forwarded to function.</p>
+<p><strong>WARNING:</strong></p>
+<p>This function returns anything that’s returned from function
+and it’s up to user to ensure correct pipeline functioning
+after using this transformation.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">range</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">summation</span><span class="p">(</span><span class="n">generator</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">)</span>
+
+<span class="n">summed_dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">summation</span><span class="p">)</span> <span class="c1"># Returns 5050</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>typing.Callable</em>) – Function (or functional object) taking item generator as first object
+and variable list of other arguments (if necessary).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Value returned by function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>typing.Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchdata.Dataset.cache">
+<code class="sig-name descname">cache</code><span class="sig-paren">(</span><em class="sig-param">cacher: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#Dataset.cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Dataset.cache" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Cache data in memory, disk or specify custom caching.</strong></p>
+<p>By default all samples are cached in memory. To change this behaviour specify <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>
+argument. Some <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> implementations can be found in <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher</span></code> module or you can
+provide your own by inheriting from <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Cacher</span></code> and implementing
+appropriate methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cacher</strong> (<em>torchdata.cacher.Cacher</em><em>, </em><em>optional</em>) – Instance of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Cacher</span></code> (or any other object with compatible interface).
+Check <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> module documentation for more information.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Memory</span></code> which caches data in-memory</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns self</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset">Dataset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchdata.Dataset.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">cache: bool = True</em>, <em class="sig-param">maps: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#Dataset.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Dataset.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Reset dataset state.</strong></p>
+<p><a class="reference internal" href="#torchdata.Dataset.cache" title="torchdata.Dataset.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code></a> and <a class="reference internal" href="torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code></a> can be resetted separately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cache</strong> (<em>bool</em><em>, </em><em>optional</em>) – Reset current cache. Default: True</p></li>
+<li><p><strong>maps</strong> (<em>bool</em><em>, </em><em>optional</em>) – Reset current disk cache. Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.FilesDataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">FilesDataset</code><span class="sig-paren">(</span><em class="sig-param">files: List[pathlib.Path], *args, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#FilesDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.FilesDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Create</strong> <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a> <strong>from list of files.</strong></p>
+<p>Each file is a separate sample. After inheritance, user has to specify
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method responsible for file indexing.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+
+<span class="c1"># Image loading dataset</span>
+<span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">FilesDataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+<span class="c1"># Useful class methods are inherited as well</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ImageDataset</span><span class="o">.</span><span class="n">from_folder</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s2">&quot;*.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#torchdata.FilesDataset.from_folder" title="torchdata.FilesDataset.from_folder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_folder</span></code></a> class method is available for common case of creating dataset
+from files in folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>files</strong> (<em>List</em><em>[</em><em>pathlib.Path</em><em>]</em>) – List of files to be used.</p></li>
+<li><p><strong>regex</strong> (<em>str</em><em>, </em><em>optional</em>) – Regex to be used  for filtering. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">*</span></code> (all files)</p></li>
+<li><p><strong>*args</strong> – Arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code></p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="torchdata.FilesDataset.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">predicate: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#FilesDataset.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.FilesDataset.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Remove files for which predicate returns</strong> <a href="#id1"><span class="problematic" id="id2">`</span></a>False`**.**</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>predicate</strong> (<em>Callable</em>) – Function-like object taking file as argument and returning boolean
+indicating whether to keep a file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Modified self</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#torchdata.FilesDataset" title="torchdata.FilesDataset">FilesDataset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchdata.FilesDataset.from_folder">
+<em class="property">classmethod </em><code class="sig-name descname">from_folder</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">regex: str = '*'</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#FilesDataset.from_folder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.FilesDataset.from_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Create dataset from</strong> <a href="#id3"><span class="problematic" id="id4">`</span></a>pathlib.Path`**-like object.**</p>
+<p>Path should be a directory and will be extended via <code class="xref py py-obj docutils literal notranslate"><span class="pre">glob</span></code> method taking <code class="xref py py-obj docutils literal notranslate"><span class="pre">regex</span></code>
+(if specified). Varargs and kwargs will be saved for use for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path object (directory) containing samples.</p></li>
+<li><p><strong>regex</strong> (<em>str</em><em>, </em><em>optional</em>) – Regex to be used  for filtering. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">*</span></code> (all files)</p></li>
+<li><p><strong>*args</strong> – Arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Instance of your file based dataset.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#torchdata.FilesDataset" title="torchdata.FilesDataset">FilesDataset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchdata.FilesDataset.sort">
+<code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param">key=None</em>, <em class="sig-param">reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#FilesDataset.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.FilesDataset.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Sort files using Python’s built-in</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted</span></code> <strong>method.</strong></p>
+<p>Arguments are passed directly to <code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>Callable</em><em>, </em><em>optional</em>) – Specifies a function of one argument that is used to extract a comparison key from each element.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> (compare the elements directly).</p></li>
+<li><p><strong>reverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether <code class="xref py py-obj docutils literal notranslate"><span class="pre">sorting</span></code> should be descending. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Modified self</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#torchdata.FilesDataset" title="torchdata.FilesDataset">FilesDataset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.FilesIterable">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">FilesIterable</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">regex: str = '*'</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#FilesIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.FilesIterable" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Create</strong> <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code></a> <strong>from folder.</strong></p>
+<p>Should be used instead of FilesDataset when there is too many files in the folder
+to be kept in the memory.</p>
+<p>Each file is a separate sample. After inheritance, user has to specify
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code> method responsible for iterating over files.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleFilesIterable</span><span class="p">(</span><span class="n">FilesIterable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">file</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path object (directory) containing samples.</p></li>
+<li><p><strong>regex</strong> (<em>str</em><em>, </em><em>optional</em>) – Regex to be used  for filtering. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">*</span></code> (all files)</p></li>
+<li><p><strong>*args</strong> – Arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments saved for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.Generator">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">Generator</code><span class="sig-paren">(</span><em class="sig-param">expression</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#Generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Generator" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Iterable wrapping any generator expression.</strong></p>
+<dl class="simple">
+<dt><a href="#id5"><span class="problematic" id="id6">*</span></a>expression: Generator expression</dt><dd><p>Generator from which one can <code class="xref py py-obj docutils literal notranslate"><span class="pre">yield</span></code> via <code class="xref py py-obj docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> syntax.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.Iterable">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">Iterable</code><a class="reference internal" href="../_modules/torchdata.html#Iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.Iterable" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.IterableDataset</span></code> <strong>dataset with</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> <strong>capabilities</strong>.</p>
+<p>This class inherits from <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Iterable</span></code>, so can be used exactly
+the same. To get it’s capabilities, inherit from this class, see example below.</p>
+<p>It allows user to perform following operations:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> - apply function to each element of dataset</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Based on original PyTorch example</span>
+<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+
+<span class="c1"># range(1,25) originally, mapped to range(13, 37)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Sample-wise concatenation, yields range(13, 37) and range(1, 25)</span>
+<span class="k">for</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="ow">in</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">Dataset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span> <span class="c1"># 13 1 up to 37 25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.TensorDataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.</code><code class="sig-name descname">TensorDataset</code><span class="sig-paren">(</span><em class="sig-param">*tensors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata.html#TensorDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.TensorDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Dataset wrapping</strong> <a href="#id7"><span class="problematic" id="id8">`</span></a>torch.tensors`**.**</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> etc. enabled version of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.TensorDataset</span></code></p>
+<dl class="simple">
+<dt><a href="#id9"><span class="problematic" id="id10">*</span></a>tensors<span class="classifier">torch.Tensor</span></dt><dd><p>List of <code class="xref py py-obj docutils literal notranslate"><span class="pre">tensors</span></code> to be wrapped.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="torchdata.cachers.html" class="btn btn-neutral float-right" title="torchdata.cachers" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="torchdata" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">torchdata</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../_static/jquery.js"></script>
+         <script type="text/javascript" src="../_static/underscore.js"></script>
+         <script type="text/javascript" src="../_static/doctools.js"></script>
+         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchdata">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="#">GitHub</a>
+          </li>
+
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>
