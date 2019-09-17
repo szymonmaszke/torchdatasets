@@ -1,7 +1,7 @@
 ---
 name: test
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
   test:
@@ -29,5 +29,9 @@ jobs:
           pip install -r environments/requirements.txt
       - name: Test
         run: |
-          pip install pytest
-          pytest
+          pip install pytest pytest-cov
+          pytest --cov=./
+      - name: Upload coverage
+        run: >
+          bash <(curl -s https://codecov.io/bash) -cF python
+          -t ${{ secrets.CODECOV_TOKEN }}

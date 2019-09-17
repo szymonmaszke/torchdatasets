@@ -1,0 +1,6 @@
+[run]
+source=torchdata
+branch=True
+omit=
+  *tests*
+  setup.py
