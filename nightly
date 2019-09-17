@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
 # Setup METADATA to correct form for nightly releases
-echo "torchfunc-nightly" >METADATA
+echo "torchdata-nightly" >METADATA
 date +%s >>METADATA
