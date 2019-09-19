@@ -10,16 +10,18 @@
 
 It extends `torch.utils.data.Dataset` and equips it with
 functionalities known from [tensorflow.data](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
-like `map` or `cache` (with some additions unavailable in aforementioned) .
+like `map` or `cache` (with some additions unavailable in aforementioned).
+
 All of that with minimal interference (single call to `super().__init__()`) in original
 PyTorch's datasets.
 
 ### Functionalities overview:
 
 * `map` or `apply` arbitrary functions to dataset
-* `cache` allows you to cache data in memory or on disk (even partially, say first `20%`)
+* `cache` data in RAM or on disk
+* `cache` partially of in any way you want using `torchdata.modifiers` module
 * Full `torch.utils.data.IterableDataset` and `torch.utils.data.Dataset` support
-* Easy to create custom methods of caching, choosing elements to cache, maps and datasets
+* General `torchdata.maps` like `Flatten` or `Select`
 * Concrete and base classes designed for file reading and other general tasks
 
 # Quick examples
@@ -27,35 +29,29 @@ PyTorch's datasets.
 - Create image dataset, convert it to Tensors, cache and concatenate with smoothed labels:
 
 ```python
-# Imports assumed
-# Example dataset return all 1 labels
-class Labels(torchdata.Dataset):
-    def __init__(self, length):
-        self.length = length
-        super().__init__()
+import torchdata
+import torchvision
 
-    def __getitem__(self, _):
-        return 1
+class Images(torchdata.Dataset): # Different inheritance
+    def __init__(self, path: str):
+        super().__init__() # This is the only change
+        self.files = [file for file in pathlib.Path(path).glob("*")]
 
-    def __len__(self):
-        return len(length)
-
-
-# Convenience class based on torchdata.Dataset
-class ImageDataset(torchdata.Files):
     def __getitem__(self, index):
         return Image.open(self.files[index])
 
+    def __len__(self):
+        return len(self.files)
 
-images = (
-    ImageDataset.from_folder("./data").map(torchvision.transforms.ToTensor()).cache()
-)
 
-smoothed_labels = Labels(len(images)).map(lambda label: label - 0.1)
+images = Images("./data").map(torchvision.transforms.ToTensor()).cache()
+```
 
-# That's how you concatenate sample-wise
-for image, label in images | smoothed_labels:
-    pass
+You can concatenate above dataset with another (say `labels`) and iterate over them as per usual:
+
+```python
+for data, label in images | labels:
+    # Do whatever you want with your data
 ```
 
 - Cache first `1000` samples in memory, save the rest on disk in folder `./cache`:
@@ -64,7 +60,7 @@ for image, label in images | smoothed_labels:
 images = (
     ImageDataset.from_folder("./data").map(torchvision.transforms.ToTensor())
     # First 1000 samples in memory
-    .cache(torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 1000))
+    .cache(torchdata.modifiers.UpToIndex(1000, torchdata.cachers.Memory()))
     # Sample from 1000 to the end saved with Pickle on disk
     .cache(torchdata.modifiers.FromIndex(torchdata.cachers.Pickle("./cache"), 1000))
     # You can define your own cachers, modifiers, see docs
