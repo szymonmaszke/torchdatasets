@@ -42,7 +42,7 @@ from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import IterableDataset as TorchIterable
 from torch.utils.data import TensorDataset as TorchTensorDataset
 
-from . import cachers, maps, samplers
+from . import cachers, maps, modifiers, samplers
 from ._base import Base, MetaDataset, MetaIterable
 
 
