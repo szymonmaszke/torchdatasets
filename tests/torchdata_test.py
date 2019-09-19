@@ -1,9 +1,12 @@
 import time
 
+import torch
+
 import torchdata
 import torchfunc
 
 from .datasets import ExampleDataset, ExampleIterable
+from .utils import artificial_slowdown, index_is_sample
 
 
 def test_basic_iterable():
@@ -39,19 +42,11 @@ def test_dataset_multiple_cache():
 
 
 def test_dataset_cache_speedup():
-    def artificial_slowdown(sample):
-        time.sleep(1)
-        return sample
-
-    def pass_through_dataset(dataset):
-        for correct, sample in enumerate(dataset):
-            assert correct == sample
-
     dataset = ExampleDataset(0, 5).map(artificial_slowdown).cache()
     with torchfunc.Timer() as timer:
-        pass_through_dataset(dataset)
+        index_is_sample(dataset)
         assert timer.checkpoint() > 5
-        pass_through_dataset(dataset)
+        index_is_sample(dataset)
         assert timer.checkpoint() < 0.2
 
 
@@ -92,3 +87,20 @@ def test_repr():
         repr(ExampleDataset(0, 5))
         == "tests.datasets.ExampleDataset(values=[0, 1, 2, 3, 4])"
     )
+
+
+def test_dataset_dataloader():
+    # Range-like Dataset mapped to item ** 3
+    dataset = (
+        ExampleDataset(0, 25)
+        .cache()
+        .map(lambda sample: (sample + sample, sample))
+        .cache()
+        .map(lambda sample: sample[0] - sample[-1])
+        .cache()
+        .map(lambda sample: sample ** 3)
+        .cache()
+    )
+    # Iterate through dataset
+    for element in torch.utils.data.DataLoader(dataset, shuffle=True, batch_size=3):
+        print(element)
