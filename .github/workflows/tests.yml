@@ -28,5 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r environments/requirements.txt
           pip install tox
-      - name: Test and publish
-        run: tox -- -t ${{ secrets.CODECOV_TOKEN }}
+      - name: Perform tests
+        run: tox -e test
+      - name: Publish coverage
+        run: tox -e publish -- -t ${{ secrets.CODECOV_TOKEN }}
