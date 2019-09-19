@@ -1,6 +1,10 @@
 import time
 import typing
 
+import torchdata
+
+from .datasets import ExampleDataset
+
 
 def artificial_slowdown(sample):
     time.sleep(1)
@@ -10,5 +14,12 @@ def artificial_slowdown(sample):
 def index_is_sample(dataset, modifier: typing.Callable = None):
     if modifier is None:
         modifier = lambda x: x
-    for correct, sample in enumerate(dataset):
-        assert correct == modifier(sample)
+    for index, sample in enumerate(dataset):
+        assert modifier(index) == sample
+
+
+def create_dataset_many_samples(samples):
+    dataset = ExampleDataset(0, 25)
+    for _ in range(samples-1):
+        dataset |= dataset
+    return dataset.map(torchdata.maps.Flatten())
