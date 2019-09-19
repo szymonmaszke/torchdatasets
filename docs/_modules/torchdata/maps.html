@@ -422,7 +422,19 @@
         <span class="k">return</span> <span class="n">sample</span></div>
 
 
-<div class="viewcode-block" id="Select"><a class="viewcode-back" href="../../packages/torchdata.maps.html#torchdata.maps.Select">[docs]</a><span class="k">class</span> <span class="nc">Select</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_Choice</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_magic_unpack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">iterable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">iterable</span>
+
+
+<div class="viewcode-block" id="Select"><a class="viewcode-back" href="../../packages/torchdata.maps.html#torchdata.maps.Select">[docs]</a><span class="k">class</span> <span class="nc">Select</span><span class="p">(</span><span class="n">_Choice</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Select elements from sample.**</span>
 
 <span class="sd">    Sample has to be indexable object (has `__getitem__` method implemented).</span>
@@ -431,11 +443,13 @@
 
 <span class="sd">    - Negative indexing is supported if supported by sample object.</span>
 <span class="sd">    - This function is **faster** than `Drop` and should be used if possible.</span>
+<span class="sd">    - If you want to select sample from nested `tuple`, please use `Flatten` first</span>
+<span class="sd">    - Returns single element if only one element is left</span>
 
 <span class="sd">    Example::</span>
 
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
-<span class="sd">        new_dataset = dataset | dataset | dataset</span>
+<span class="sd">        new_dataset = dataset | dataset</span>
 <span class="sd">        # Only second (first index) element will be taken</span>
 <span class="sd">        selected = new_dataset.map(torchdata.maps.Select(1))</span>
 
@@ -451,14 +465,11 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_magic_unpack</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="Drop"><a class="viewcode-back" href="../../packages/torchdata.maps.html#torchdata.maps.Drop">[docs]</a><span class="k">class</span> <span class="nc">Drop</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="Drop"><a class="viewcode-back" href="../../packages/torchdata.maps.html#torchdata.maps.Drop">[docs]</a><span class="k">class</span> <span class="nc">Drop</span><span class="p">(</span><span class="n">_Choice</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return sample without selected elements.**</span>
 
 <span class="sd">    Sample has to be indexable object (has `__getitem__` method implemented).</span>
@@ -467,6 +478,9 @@
 
 <span class="sd">    - Negative indexing is supported if supported by sample object.</span>
 <span class="sd">    - This function is **slower** than `Select` and the latter should be preffered.</span>
+<span class="sd">    - If you want to select sample from nested `tuple`, please use `Flatten` first</span>
+<span class="sd">    - Returns single element if only one element is left</span>
+<span class="sd">    - Returns `None` if all elements are dropped</span>
 
 <span class="sd">    Example::</span>
 
@@ -488,12 +502,13 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
-            <span class="n">sample</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_magic_unpack</span><span class="p">(</span>
+            <span class="nb">tuple</span><span class="p">(</span>
+                <span class="n">sample</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span>
+            <span class="p">)</span>
         <span class="p">)</span></div>
 
 
@@ -501,6 +516,11 @@
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to each element of sample.**</span>
 
 <span class="sd">    Sample has to be `iterable` object.</span>
+
+<span class="sd">    **Important:**</span>
+
+<span class="sd">    If you want to apply function to all nested elements (e.g. in nested `tuple`),</span>
+<span class="sd">    please use `torchdata.maps.Flatten` object first.</span>
 
 <span class="sd">    Example::</span>
 
@@ -532,6 +552,11 @@
     <span class="sd">&quot;&quot;&quot;**Apply function to specified elements of sample.**</span>
 
 <span class="sd">    Sample has to be `iterable` object.</span>
+
+<span class="sd">    **Important:**</span>
+
+<span class="sd">    If you want to apply function to all nested elements (e.g. in nested `tuple`),</span>
+<span class="sd">    please use `torchdata.maps.Flatten` object first.</span>
 
 <span class="sd">    Example::</span>
 
@@ -568,14 +593,19 @@
 
 
 <div class="viewcode-block" id="Except"><a class="viewcode-back" href="../../packages/torchdata.maps.html#torchdata.maps.Except">[docs]</a><span class="k">class</span> <span class="nc">Except</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to all elements sample of sample except the ones specified.**</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to all elements of sample except the ones specified.**</span>
 
 <span class="sd">    Sample has to be `iterable` object.</span>
+
+<span class="sd">    **Important:**</span>
+
+<span class="sd">    If you want to apply function to all nested elements (e.g. in nested `tuple`),</span>
+<span class="sd">    please use `torchdata.maps.Flatten` object first.</span>
 
 <span class="sd">    Example::</span>
 
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
-<span class="sd">        new_dataset = dataset | dataset | dataset</span>
+<span class="sd">        dataset |= dataset</span>
 <span class="sd">        # Every element increased by one except the first one</span>
 <span class="sd">        selected = new_dataset.map(torchdata.maps.Except(lambda x: x+1, 0))</span>
 
@@ -601,7 +631,7 @@
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
-            <span class="n">subsample</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">subsample</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">subsample</span><span class="p">)</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="k">else</span> <span class="n">subsample</span>
             <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">subsample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
         <span class="p">)</span></div>
 </pre></div>

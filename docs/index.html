@@ -224,15 +224,16 @@
 <p><strong>torchdata</strong> is PyTorch oriented library focused on data processing and input pipelines in general.</p>
 <p>It extends <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> and equips it with
 functionalities known from <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/data/Dataset">tensorflow.data</a>
-like <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code>.
-All of that with minimal interference (single call to <code class="xref py py-obj docutils literal notranslate"><span class="pre">super().__init__()</span></code>) with original
+like <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code>.</p>
+<p>All of that with minimal interference (single call to <code class="xref py py-obj docutils literal notranslate"><span class="pre">super().__init__()</span></code>) in original
 PyTorch’s datasets.</p>
-<p>Some functionalities:</p>
+<p><strong>Functionalities Overview:</strong></p>
 <ul class="simple">
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> arbitrary functions to dataset</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> allows you to cache data in memory or on disk (even partially, say first <code class="xref py py-obj docutils literal notranslate"><span class="pre">20%</span></code>)</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> data in RAM or on disk</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> partially of in any way you want using <a class="reference internal" href="packages/torchdata.modifiers.html#module-torchdata.modifiers" title="torchdata.modifiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.modifiers</span></code></a> module</p></li>
 <li><p>Full <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.IterableDataset</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> support</p></li>
-<li><p>Easy to create custom methods of caching, choosing elements to cache, maps and datasets</p></li>
+<li><p>General <a class="reference internal" href="packages/torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.maps</span></code></a> like <code class="xref py py-obj docutils literal notranslate"><span class="pre">Flatten</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></p></li>
 <li><p>Concrete and base classes designed for file reading and other general tasks</p></li>
 </ul>
 <p>If you are looking for ecosystem of supporting
@@ -268,7 +269,7 @@ functions around PyTorch check <a class="reference external" href="https://githu
 <div class="section" id="docker">
 <h3><a class="reference external" href="https://cloud.docker.com/repository/docker/szymonmaszke/torchdata">Docker:</a><a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <p>Various <a class="reference internal" href="packages/torchdata.html#module-torchdata" title="torchdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata</span></code></a> images are available both CPU and GPU-enabled.
-You can find them in Docker Cloud at <code class="xref py py-obj docutils literal notranslate"><span class="pre">szymonmaszke/torchdata</span></code></p>
+You can find them at Docker Cloud at <code class="xref py py-obj docutils literal notranslate"><span class="pre">szymonmaszke/torchdata</span></code></p>
 <div class="section" id="cpu">
 <h4>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h4>
 <p>CPU image is based on <a class="reference external" href="https://hub.docker.com/_/ubuntu">ubuntu:18.04</a> and
@@ -314,6 +315,13 @@ like this:</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>If you find any issue or you think some functionality may be useful to others and fits here well, please <a class="reference external" href="https://help.github.com/en/articles/creating-an-issue">open new Issue</a>
+or <a class="reference external" href="https://help.github.com/en/articles/creating-a-pull-request-from-a-fork">create Pull Request</a>.</p>
+<p>To get an overview of things on can do to help this project, please see
+<a class="reference external" href="https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md">Roadmap</a>.</p>
 </div>
 </div>
 
@@ -369,6 +377,7 @@ like this:</p>
 <li><a class="reference internal" href="#conda">conda:</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
 </ul>
 </li>
 </ul>

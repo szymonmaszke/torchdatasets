@@ -219,24 +219,35 @@
 <span class="sd">To cache in `memory` only `20` first samples you could do (assuming you have already created</span>
 <span class="sd">`torchdata.Dataset` instance named `dataset`)::</span>
 
-<span class="sd">    dataset.cache(torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 20))</span>
+<span class="sd">    dataset.cache(torchdata.modifiers.UpToIndex(20, torchdata.cachers.Memory()))</span>
 
-<span class="sd">Modifers could be mixed intuitvely as well using logical operators `|` (or) and</span>
+<span class="sd">Modifers could be mixed intuitively as well using logical operators `|` (or) and</span>
 <span class="sd">`&amp;` (and).</span>
 
 <span class="sd">**Example** (cache to disk `20` first or samples with index `1000` and upwards)::</span>
 
 <span class="sd">    dataset.cache(</span>
-<span class="sd">        torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 20)</span>
-<span class="sd">        | torchdata.modifiers.FromIndex(torchdata.cachers.Memory(), 1000)</span>
+<span class="sd">        torchdata.modifiers.UpToIndex(20, torchdata.cachers.Memory())</span>
+<span class="sd">        | torchdata.modifiers.FromIndex(1000, torchdata.cachers.Memory())</span>
 <span class="sd">    )</span>
 
 <span class="sd">You can mix provided modifiers or extend them by inheriting from `Modifier`</span>
 <span class="sd">and implementing `condition` method (interface described below).</span>
 
+<span class="sd">For most of cases `Lambda` modifier should be sufficient, for example::</span>
+
+<span class="sd">    # Only element up to `25th` and those which are divisible by `2`</span>
+<span class="sd">    dataset = dataset.cache(</span>
+<span class="sd">        torchdata.modifiers.UpToIndex(25, cacher)</span>
+<span class="sd">        &amp; torchdata.modifiers.Lambda(lambda index: index % 2 == 0, cacher)</span>
+<span class="sd">    )</span>
+
+
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span>
 
@@ -263,7 +274,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Modifier.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.condition">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Based on index, decide whether cache should interact with the sample.**</span>
 
@@ -281,7 +292,6 @@
 <span class="sd">                Whether to act on sample with given index</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="Modifier.__contains__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Modifier.__contains__">[docs]</a>    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Acts as invisible proxy for** `cacher`&#39;s `__contains__` **method.**</span>
@@ -343,7 +353,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        torchdata.modifiers.Any</span>
+<span class="sd">        Any</span>
 <span class="sd">                Modifier concatenating both modifiers.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -353,7 +363,7 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**If self and other returns True, then use** `cacher`.</span>
 
 <span class="sd">        **Important:** `self` and `other` should have the same `cacher` wrapped.</span>
-<span class="sd">        Otherwise exception is thrown. Cacher of first modifier is used in such case.</span>
+<span class="sd">        Cacher of first modifier is used no matter what.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -362,7 +372,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        torchdata.modifiers.All</span>
+<span class="sd">        All</span>
 <span class="sd">                Modifier concatenating both modifiers.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -380,11 +390,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modifiers</span><span class="p">):</span>
-        <span class="n">first_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">modifiers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span> <span class="o">=</span> <span class="n">modifiers</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">checker</span><span class="p">,</span> <span class="n">first_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">checker</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All checkers have to be of same type&quot;</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">modifiers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cacher</span>
 
 
@@ -393,8 +399,8 @@
         <span class="sa">r</span><span class="s2">&quot;Return True if all modifiers return True on given sample.&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="All.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.All.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">()</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Any"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Any">[docs]</a><span class="k">class</span> <span class="nc">Any</span><span class="p">(</span><span class="n">_Mix</span><span class="p">):</span>
@@ -402,8 +408,8 @@
         <span class="sa">r</span><span class="s2">&quot;Return True if any modifier returns True on given sample.&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="Any.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Any.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">()</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modifiers</span><span class="p">)</span></div>
 
 
 <span class="k">class</span> <span class="nc">_Percent</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
@@ -411,12 +417,12 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    cacher : torchdata.cacher.Cacher</span>
-<span class="sd">            Instance of cacher</span>
 <span class="sd">    p : float</span>
 <span class="sd">            Percentage specified as flow between `[0, 1]`.</span>
 <span class="sd">    length : int</span>
 <span class="sd">            How many samples are in dataset. You can pass `len(dataset)`.</span>
+<span class="sd">    cacher : torchdata.cacher.Cacher</span>
+<span class="sd">            Instance of cacher</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -424,7 +430,7 @@
     <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cacher</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Percentage has to be between 0 and 1, but got </span><span class="si">{p}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
@@ -436,8 +442,8 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache up to percentage of samples leaving the rest untouched.&quot;&quot;&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="UpToPercentage.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToPercentage.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div>
 
 
 <div class="viewcode-block" id="FromPercentage"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromPercentage">[docs]</a><span class="k">class</span> <span class="nc">FromPercentage</span><span class="p">(</span><span class="n">_Percent</span><span class="p">):</span>
@@ -445,8 +451,8 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache from specified percentage of samples leaving the rest untouched.&quot;&quot;&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="FromPercentage.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromPercentage.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span></div>
 
 
 <span class="k">class</span> <span class="nc">_Index</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
@@ -454,10 +460,10 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    cacher : torchdata.cacher.Cacher</span>
-<span class="sd">            Instance of cacher</span>
 <span class="sd">    index : int</span>
 <span class="sd">            Index of sample</span>
+<span class="sd">    cacher : torchdata.cacher.Cacher</span>
+<span class="sd">            Instance of cacher</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -465,9 +471,9 @@
     <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cacher</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
 
 
 <div class="viewcode-block" id="UpToIndex"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToIndex">[docs]</a><span class="k">class</span> <span class="nc">UpToIndex</span><span class="p">(</span><span class="n">_Index</span><span class="p">):</span>
@@ -475,8 +481,8 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache up to samples of specified index leaving the rest untouched.&quot;&quot;&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="UpToIndex.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.UpToIndex.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div>
 
 
 <div class="viewcode-block" id="FromIndex"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromIndex">[docs]</a><span class="k">class</span> <span class="nc">FromIndex</span><span class="p">(</span><span class="n">_Index</span><span class="p">):</span>
@@ -484,8 +490,8 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Cache samples from specified index leaving the rest untouched.&quot;&quot;&quot;</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="FromIndex.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.FromIndex.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span></div>
 
 
 <div class="viewcode-block" id="Indices"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Indices">[docs]</a><span class="k">class</span> <span class="nc">Indices</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
@@ -504,8 +510,28 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span></div>
 
-<div class="viewcode-block" id="Indices.condition"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Indices.condition">[docs]</a>    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span></div></div>
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span></div>
+
+
+<div class="viewcode-block" id="Lambda"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Lambda">[docs]</a><span class="k">class</span> <span class="nc">Lambda</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Cache samples if specified function returns** `True`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    function: Callable</span>
+<span class="sd">            Single-element callable, if `True` returned, cache this sample.</span>
+<span class="sd">            Number of sample is passed as an argument.</span>
+<span class="sd">    cacher : torchdata.cacher.Cacher</span>
+<span class="sd">            Instance of cacher</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Lambda.__init__"><a class="viewcode-back" href="../../packages/torchdata.modifiers.html#torchdata.modifiers.Lambda.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span> <span class="n">cacher</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">function</span></div>
+
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
 </pre></div>
 
              </article>

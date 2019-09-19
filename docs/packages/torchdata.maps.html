@@ -217,7 +217,7 @@
               
   <div class="section" id="module-torchdata.maps">
 <span id="torchdata-maps"></span><h1>torchdata.maps<a class="headerlink" href="#module-torchdata.maps" title="Permalink to this headline">¶</a></h1>
-<p><strong>This module provides functions one can use with</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset.map</span></code> <strong>method.</strong></p>
+<p><strong>This module provides functions one can use with</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset.map" title="torchdata.Dataset.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset.map</span></code></a> <strong>method.</strong></p>
 <p>Following <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset</span></code> object will be used throughout documentation for brevity (if not defined explicitly):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image loading dataset</span>
 <span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
@@ -271,6 +271,9 @@ please use <code class="xref py py-obj docutils literal notranslate"><span class
 <ul class="simple">
 <li><p>Negative indexing is supported if supported by sample object.</p></li>
 <li><p>This function is <strong>slower</strong> than <a class="reference internal" href="#torchdata.maps.Select" title="torchdata.maps.Select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></a> and the latter should be preffered.</p></li>
+<li><p>If you want to select sample from nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>, please use <a class="reference internal" href="#torchdata.maps.Flatten" title="torchdata.maps.Flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Flatten</span></code></a> first</p></li>
+<li><p>Returns single element if only one element is left</p></li>
+<li><p>Returns <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> if all elements are dropped</p></li>
 </ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
@@ -296,11 +299,14 @@ all elements will be returned.</p>
 <dl class="class">
 <dt id="torchdata.maps.Except">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Except</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Except"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Except" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Apply function to all elements sample of sample except the ones specified.</strong></p>
+<dd><p><strong>Apply function to all elements of sample except the ones specified.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p><strong>Important:</strong></p>
+<p>If you want to apply function to all nested elements (e.g. in nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>),
+please use <a class="reference internal" href="#torchdata.maps.Flatten" title="torchdata.maps.Flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.maps.Flatten</span></code></a> object first.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
-<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="n">dataset</span> <span class="o">|=</span> <span class="n">dataset</span>
 <span class="c1"># Every element increased by one except the first one</span>
 <span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Except</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
@@ -457,10 +463,12 @@ before the end in order to fine-tune your network.</p>
 <ul class="simple">
 <li><p>Negative indexing is supported if supported by sample object.</p></li>
 <li><p>This function is <strong>faster</strong> than <a class="reference internal" href="#torchdata.maps.Drop" title="torchdata.maps.Drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Drop</span></code></a> and should be used if possible.</p></li>
+<li><p>If you want to select sample from nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>, please use <a class="reference internal" href="#torchdata.maps.Flatten" title="torchdata.maps.Flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Flatten</span></code></a> first</p></li>
+<li><p>Returns single element if only one element is left</p></li>
 </ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
-<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
+<span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
 <span class="c1"># Only second (first index) element will be taken</span>
 <span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
@@ -483,6 +491,9 @@ before the end in order to fine-tune your network.</p>
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">To</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#To"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.To" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to specified elements of sample.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p><strong>Important:</strong></p>
+<p>If you want to apply function to all nested elements (e.g. in nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>),
+please use <a class="reference internal" href="#torchdata.maps.Flatten" title="torchdata.maps.Flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.maps.Flatten</span></code></a> object first.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
@@ -528,6 +539,9 @@ function will not be applied to anything.</p>
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">ToAll</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#ToAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.ToAll" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to each element of sample.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
+<p><strong>Important:</strong></p>
+<p>If you want to apply function to all nested elements (e.g. in nested <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>),
+please use <a class="reference internal" href="#torchdata.maps.Flatten" title="torchdata.maps.Flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.maps.Flatten</span></code></a> object first.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>

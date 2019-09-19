@@ -217,7 +217,7 @@
 <span class="sd">To quickly start with `torchdata`, just inherit from `torchdata.Dataset` and create</span>
 <span class="sd">your dataset as you normally would, for example::</span>
 
-<span class="sd">    import torchvision</span>
+<span class="sd">    import torchdata</span>
 <span class="sd">    from PIL import Image</span>
 
 <span class="sd">    # Image loading dataset (use torchdata.Files for even less typing :D )</span>
@@ -229,20 +229,24 @@
 <span class="sd">        def __getitem__(self, index):</span>
 <span class="sd">            return Image.open(self.files[index])</span>
 
-<span class="sd">        def __len__(self, index):</span>
+<span class="sd">        def __len__(self):</span>
 <span class="sd">            return len(self.files)</span>
 
 
 <span class="sd">Now you can use `cache`, `map` and `apply` just by issuing appropriate functions::</span>
+
+<span class="sd">    import torchvision</span>
 
 <span class="sd">    # Map PIL to Tensor and cache dataset</span>
 <span class="sd">    dataset = Dataset(&quot;data&quot;).map(torchvision.transforms.ToTensor()).cache()</span>
 <span class="sd">    # You can create DataLoader as well</span>
 <span class="sd">    dataloader = torch.utils.data.DataLoader(dataset)</span>
 
-<span class="sd">For custom caching routines and how to use them see `cachers`, to check available</span>
-<span class="sd">general `maps` see `maps`. `modifiers` can further modify `cachers`, you should</span>
-<span class="sd">see it&#39;s respective docs as well.</span>
+<span class="sd">For custom caching routines and how to use them see `cachers` and their `modifiers`.</span>
+<span class="sd">To check available general `map` related functions see `maps`.</span>
+
+<span class="sd">Custom sampling techniques useful with `torch.utils.data.DataLoader &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader&gt;`__</span>
+<span class="sd">are located inside `samplers`.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -256,7 +260,7 @@
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">IterableDataset</span> <span class="k">as</span> <span class="n">TorchIterable</span>
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">TensorDataset</span> <span class="k">as</span> <span class="n">TorchTensorDataset</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cachers</span><span class="p">,</span> <span class="n">maps</span><span class="p">,</span> <span class="n">samplers</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cachers</span><span class="p">,</span> <span class="n">maps</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">,</span> <span class="n">samplers</span>
 <span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">MetaDataset</span><span class="p">,</span> <span class="n">MetaIterable</span>
 
 
@@ -270,7 +274,8 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to each element of dataset.**</span>
 
 <span class="sd">        Function has no specified signature; it is user&#39;s responsibility to ensure</span>
-<span class="sd">        it is taking correct arguments as returned from `__getitem__`.</span>
+<span class="sd">        it is taking correct arguments as returned from `__getitem__` (in case of `Dataset`)</span>
+<span class="sd">        or `__iter__` (in case of `Iterable`).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -504,9 +509,9 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        cache : bool, optional</span>
-<span class="sd">                Reset current cache. Default: True</span>
+<span class="sd">                Reset current cache. Default: `True`</span>
 <span class="sd">        maps : bool, optional</span>
-<span class="sd">                Reset current disk cache. Default: True</span>
+<span class="sd">                Reset current disk cache. Default: `True`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -527,9 +532,8 @@
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `torchdata.Dataset` **responsible for sample-wise concatenation.**</span>
 
 <span class="sd">    This class is returned when `|` (logical or operator) is used on instance</span>
-<span class="sd">    of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).</span>
-
-<span class="sd">    Behaves the same as `torchdata.Dataset` otherwise.</span>
+<span class="sd">    of `torchdata.Dataset` (original `torch.utils.data.Dataset</span>
+<span class="sd">    &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset&gt;`__ can be used as well).</span>
 
 <span class="sd">    **Important:** This class is meant to be more of a proxy for `|` operator,</span>
 <span class="sd">    you can use it directly though.</span>
@@ -538,9 +542,10 @@
 
 <span class="sd">        dataset = (</span>
 <span class="sd">            torchdata.ConcatDataset([dataset1, dataset2, dataset3])</span>
-<span class="sd">            .map(lambda x, y, z: (x + y, z))</span>
-<span class="sd">            .cache()</span>
+<span class="sd">            .map(lambda sample: sample[0] + sample[1] + sample[2]))</span>
 <span class="sd">        )</span>
+
+<span class="sd">    Any `Dataset` methods can be used normally.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -561,12 +566,11 @@
 
 
 <div class="viewcode-block" id="ConcatIterable"><a class="viewcode-back" href="../packages/torchdata.html#torchdata.ConcatIterable">[docs]</a><span class="k">class</span> <span class="nc">ConcatIterable</span><span class="p">(</span><span class="n">Iterable</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `torchdata.Iterable` **responsible for sample-wise concatenation.**</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `Iterable` **responsible for sample-wise concatenation.**</span>
 
 <span class="sd">    This class is returned when `|` (logical or operator) is used on instance</span>
-<span class="sd">    of `torchdata.Iterable` (original `torch.utils.data.IterableDataset` can be used as well).</span>
-
-<span class="sd">    Behaves the same as `torchdata.Iterable` otherwise.</span>
+<span class="sd">    of `Iterable` (original `torch.utils.data.IterableDataset</span>
+<span class="sd">    &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset&gt;`__ can be used as well).</span>
 
 <span class="sd">    **Important:** This class is meant to be more of a proxy for `|` operator,</span>
 <span class="sd">    you can use it directly though.</span>
@@ -576,8 +580,9 @@
 <span class="sd">        dataset = (</span>
 <span class="sd">            torchdata.ConcatIterable([dataset1, dataset2, dataset3])</span>
 <span class="sd">            .map(lambda x, y, z: (x + y, z))</span>
-<span class="sd">            .cache()</span>
 <span class="sd">        )</span>
+
+<span class="sd">    Any `IterableDataset` methods can be used normally.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -605,9 +610,7 @@
 
 <span class="sd">    This class is returned when `+` (logical or operator) is used on instance</span>
 <span class="sd">    of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).</span>
-<span class="sd">    Acts just like PyTorch&#39;s `+` and `ConcatDataset`, see https://pytorch.org/docs/stable/data.html</span>
-
-<span class="sd">    Behaves the same as `torchdata.Dataset` otherwise.</span>
+<span class="sd">    Acts just like PyTorch&#39;s `+` or rather `torch.utils.data.ConcatDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.ConcatDataset&gt;`__</span>
 
 <span class="sd">    **Important:** This class is meant to be more of a proxy for `+` operator,</span>
 <span class="sd">    you can use it directly though.</span>
@@ -615,11 +618,9 @@
 <span class="sd">    **Example**::</span>
 
 <span class="sd">        # Iterate over 3 datasets consecutively</span>
-<span class="sd">        dataset = (</span>
-<span class="sd">            torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
-<span class="sd">            .map(lambda x: x**2)</span>
-<span class="sd">            .cache()</span>
-<span class="sd">        )</span>
+<span class="sd">        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
+
+<span class="sd">    Any `Dataset` methods can be used normally.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -638,9 +639,7 @@
 
 <span class="sd">    This class is returned when `+` (logical or operator) is used on instance</span>
 <span class="sd">    of `torchdata.Iterable` (original `torch.utils.data.Iterable` can be used as well).</span>
-<span class="sd">    Acts just like PyTorch&#39;s `+` and `ChainDataset`, see https://pytorch.org/docs/stable/data.html</span>
-
-<span class="sd">    Behaves the same as `torchdata.Iterable` otherwise.</span>
+<span class="sd">    Acts just like PyTorch&#39;s `+` and `ChainDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.ChainDataset&gt;`__.</span>
 
 <span class="sd">    **Important:** This class is meant to be more of a proxy for `+` operator,</span>
 <span class="sd">    you can use it directly though.</span>
@@ -648,11 +647,9 @@
 <span class="sd">    **Example**::</span>
 
 <span class="sd">        # Iterate over 3 iterable datasets consecutively</span>
-<span class="sd">        dataset = (</span>
-<span class="sd">            torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
-<span class="sd">            .map(lambda x: x**2)</span>
-<span class="sd">            .cache()</span>
-<span class="sd">        )</span>
+<span class="sd">        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
+
+<span class="sd">    Any `Iterable` methods can be used normally.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -707,15 +704,15 @@
 <span class="sd">    regex : str, optional</span>
 <span class="sd">            Regex to be used  for filtering. Default: `*` (all files)</span>
 <span class="sd">    *args</span>
-<span class="sd">            Arguments saved for `__iter__`</span>
+<span class="sd">            Arguments saved for `__getitem__`</span>
 <span class="sd">    **kwargs</span>
-<span class="sd">            Keyword arguments saved for `__iter__`</span>
+<span class="sd">            Keyword arguments saved for `__getitem__`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="FilesDataset.from_folder"><a class="viewcode-back" href="../packages/torchdata.html#torchdata.FilesDataset.from_folder">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_folder</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Create dataset from** `pathlib.Path`**-like object.**</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Create dataset from** `pathlib.Path` **-like object.**</span>
 
 <span class="sd">        Path should be a directory and will be extended via `glob` method taking `regex`</span>
 <span class="sd">        (if specified). Varargs and kwargs will be saved for use for `__getitem__` method.</span>
@@ -835,9 +832,9 @@
 
 
 <div class="viewcode-block" id="TensorDataset"><a class="viewcode-back" href="../packages/torchdata.html#torchdata.TensorDataset">[docs]</a><span class="k">class</span> <span class="nc">TensorDataset</span><span class="p">(</span><span class="n">TorchTensorDataset</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Dataset wrapping** `torch.tensors`**.**</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Dataset wrapping** `torch.tensors` **.**</span>
 
-<span class="sd">    `cache`, `map` etc. enabled version of `torch.utils.data.TensorDataset`</span>
+<span class="sd">    `cache`, `map` etc. enabled version of `torch.utils.data.TensorDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.TensorDataset&gt;`__.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    -----------</span>
@@ -855,7 +852,7 @@
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    -----------</span>
-<span class="sd">    *expression: Generator expression</span>
+<span class="sd">    expression: Generator expression</span>
 <span class="sd">            Generator from which one can `yield` via `yield from` syntax.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
