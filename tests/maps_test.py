@@ -3,7 +3,7 @@ import typing
 import torchdata
 
 from .datasets import ExampleDataset
-from .utils import create_dataset_many_samples, index_is_sample
+from .utils import create_dataset_many_samples, index_is_sample, is_none
 
 
 def test_after():
@@ -45,8 +45,40 @@ def test_select():
     index_is_sample(create_dataset_many_samples(2).map(torchdata.maps.Select(0)))
 
 
+def test_select_none():
+    is_none(create_dataset_many_samples(2).map(torchdata.maps.Select()))
+
+
+def test_select_multiple():
+    index_is_sample(
+        create_dataset_many_samples(3)
+        .map(torchdata.maps.Select(0, 1))
+        .map(torchdata.maps.Select(1))
+    )
+
+
+def test_flatten_flattened():
+    index_is_sample(create_dataset_many_samples(1).map(torchdata.maps.Flatten()))
+
+
+def test_flatten_signle():
+    index_is_sample(ExampleDataset(0, 10).map(torchdata.maps.Flatten()))
+
+
 def test_drop():
     index_is_sample(create_dataset_many_samples(2).map(torchdata.maps.Drop(0)))
+
+
+def test_drop_all():
+    is_none(create_dataset_many_samples(2).map(torchdata.maps.Drop(0, 1)))
+
+
+def test_drop_multiple():
+    index_is_sample(
+        create_dataset_many_samples(3)
+        .map(torchdata.maps.Drop(0, 2))
+        .map(torchdata.maps.Select(1))
+    )
 
 
 def test_to_all():
