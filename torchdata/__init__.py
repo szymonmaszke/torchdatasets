@@ -15,7 +15,7 @@ your dataset as you normally would, for example::
         def __getitem__(self, index):
             return Image.open(self.files[index])
 
-        def __len__(self, index):
+        def __len__(self):
             return len(self.files)
 
 
