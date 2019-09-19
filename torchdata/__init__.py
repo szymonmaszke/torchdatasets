@@ -3,7 +3,7 @@ r"""**This module contains PyTorch compatible datasets with extended capabilitie
 To quickly start with `torchdata`, just inherit from `torchdata.Dataset` and create
 your dataset as you normally would, for example::
 
-    import torchvision
+    import torchdata
     from PIL import Image
 
     # Image loading dataset (use torchdata.Files for even less typing :D )
@@ -21,14 +21,18 @@ your dataset as you normally would, for example::
 
 Now you can use `cache`, `map` and `apply` just by issuing appropriate functions::
 
+    import torchvision
+
     # Map PIL to Tensor and cache dataset
     dataset = Dataset("data").map(torchvision.transforms.ToTensor()).cache()
     # You can create DataLoader as well
     dataloader = torch.utils.data.DataLoader(dataset)
 
-For custom caching routines and how to use them see `cachers`, to check available
-general `maps` see `maps`. `modifiers` can further modify `cachers`, you should
-see it's respective docs as well.
+For custom caching routines and how to use them see `cachers` and their `modifiers`.
+To check available general `map` related functions see `maps`.
+
+Custom sampling techniques useful with `torch.utils.data.DataLoader <https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader>`__
+are located inside `samplers`.
 
 """
 
@@ -56,7 +60,8 @@ class _DatasetBase(Base):
         r"""**Apply function to each element of dataset.**
 
         Function has no specified signature; it is user's responsibility to ensure
-        it is taking correct arguments as returned from `__getitem__`.
+        it is taking correct arguments as returned from `__getitem__` (in case of `Dataset`)
+        or `__iter__` (in case of `Iterable`).
 
         Parameters
         ----------
@@ -290,9 +295,9 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDataset):
         Parameters
         ----------
         cache : bool, optional
-                Reset current cache. Default: True
+                Reset current cache. Default: `True`
         maps : bool, optional
-                Reset current disk cache. Default: True
+                Reset current disk cache. Default: `True`
 
         """
 
@@ -313,9 +318,8 @@ class ConcatDataset(Dataset):
     r"""**Concrete** `torchdata.Dataset` **responsible for sample-wise concatenation.**
 
     This class is returned when `|` (logical or operator) is used on instance
-    of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).
-
-    Behaves the same as `torchdata.Dataset` otherwise.
+    of `torchdata.Dataset` (original `torch.utils.data.Dataset
+    <https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset>`__ can be used as well).
 
     **Important:** This class is meant to be more of a proxy for `|` operator,
     you can use it directly though.
@@ -324,9 +328,10 @@ class ConcatDataset(Dataset):
 
         dataset = (
             torchdata.ConcatDataset([dataset1, dataset2, dataset3])
-            .map(lambda x, y, z: (x + y, z))
-            .cache()
+            .map(lambda sample: sample[0] + sample[1] + sample[2]))
         )
+
+    Any `Dataset` methods can be used normally.
 
     Attributes
     ----------
@@ -347,12 +352,11 @@ class ConcatDataset(Dataset):
 
 
 class ConcatIterable(Iterable):
-    r"""**Concrete** `torchdata.Iterable` **responsible for sample-wise concatenation.**
+    r"""**Concrete** `Iterable` **responsible for sample-wise concatenation.**
 
     This class is returned when `|` (logical or operator) is used on instance
-    of `torchdata.Iterable` (original `torch.utils.data.IterableDataset` can be used as well).
-
-    Behaves the same as `torchdata.Iterable` otherwise.
+    of `Iterable` (original `torch.utils.data.IterableDataset
+    <https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset>`__ can be used as well).
 
     **Important:** This class is meant to be more of a proxy for `|` operator,
     you can use it directly though.
@@ -362,8 +366,9 @@ class ConcatIterable(Iterable):
         dataset = (
             torchdata.ConcatIterable([dataset1, dataset2, dataset3])
             .map(lambda x, y, z: (x + y, z))
-            .cache()
         )
+
+    Any `IterableDataset` methods can be used normally.
 
     Attributes
     ----------
@@ -391,9 +396,7 @@ class ChainDataset(TorchConcatDataset, Dataset):
 
     This class is returned when `+` (logical or operator) is used on instance
     of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).
-    Acts just like PyTorch's `+` and `ConcatDataset`, see https://pytorch.org/docs/stable/data.html
-
-    Behaves the same as `torchdata.Dataset` otherwise.
+    Acts just like PyTorch's `+` or rather `torch.utils.data.ConcatDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ConcatDataset>`__
 
     **Important:** This class is meant to be more of a proxy for `+` operator,
     you can use it directly though.
@@ -401,11 +404,9 @@ class ChainDataset(TorchConcatDataset, Dataset):
     **Example**::
 
         # Iterate over 3 datasets consecutively
-        dataset = (
-            torchdata.ChainDataset([dataset1, dataset2, dataset3])
-            .map(lambda x: x**2)
-            .cache()
-        )
+        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])
+
+    Any `Dataset` methods can be used normally.
 
     Attributes
     ----------
@@ -424,9 +425,7 @@ class ChainIterable(TorchChain, Iterable):
 
     This class is returned when `+` (logical or operator) is used on instance
     of `torchdata.Iterable` (original `torch.utils.data.Iterable` can be used as well).
-    Acts just like PyTorch's `+` and `ChainDataset`, see https://pytorch.org/docs/stable/data.html
-
-    Behaves the same as `torchdata.Iterable` otherwise.
+    Acts just like PyTorch's `+` and `ChainDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ChainDataset>`__.
 
     **Important:** This class is meant to be more of a proxy for `+` operator,
     you can use it directly though.
@@ -434,11 +433,9 @@ class ChainIterable(TorchChain, Iterable):
     **Example**::
 
         # Iterate over 3 iterable datasets consecutively
-        dataset = (
-            torchdata.ChainDataset([dataset1, dataset2, dataset3])
-            .map(lambda x: x**2)
-            .cache()
-        )
+        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])
+
+    Any `Iterable` methods can be used normally.
 
     Attributes
     ----------
@@ -493,15 +490,15 @@ class FilesDataset(Dataset):
     regex : str, optional
             Regex to be used  for filtering. Default: `*` (all files)
     *args
-            Arguments saved for `__iter__`
+            Arguments saved for `__getitem__`
     **kwargs
-            Keyword arguments saved for `__iter__`
+            Keyword arguments saved for `__getitem__`
 
     """
 
     @classmethod
     def from_folder(cls, path: pathlib.Path, regex: str = "*", *args, **kwargs):
-        r"""**Create dataset from** `pathlib.Path`**-like object.**
+        r"""**Create dataset from** `pathlib.Path` **-like object.**
 
         Path should be a directory and will be extended via `glob` method taking `regex`
         (if specified). Varargs and kwargs will be saved for use for `__getitem__` method.
@@ -621,9 +618,9 @@ class FilesIterable(Iterable):
 
 
 class TensorDataset(TorchTensorDataset, Dataset):
-    r"""**Dataset wrapping** `torch.tensors`**.**
+    r"""**Dataset wrapping** `torch.tensors` **.**
 
-    `cache`, `map` etc. enabled version of `torch.utils.data.TensorDataset`
+    `cache`, `map` etc. enabled version of `torch.utils.data.TensorDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.TensorDataset>`__.
 
     Parameters:
     -----------
@@ -641,7 +638,7 @@ class Generator(Iterable):
 
     Parameters:
     -----------
-    *expression: Generator expression
+    expression: Generator expression
             Generator from which one can `yield` via `yield from` syntax.
     """
 
