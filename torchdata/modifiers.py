@@ -5,7 +5,7 @@ To cache in `memory` only `20` first samples you could do (assuming you have alr
 
     dataset.cache(torchdata.modifiers.UpToIndex(torchdata.cachers.Memory(), 20))
 
-Modifers could be mixed intuitvely as well using logical operators `|` (or) and
+Modifers could be mixed intuitively as well using logical operators `|` (or) and
 `&` (and).
 
 **Example** (cache to disk `20` first or samples with index `1000` and upwards)::
@@ -18,9 +18,20 @@ Modifers could be mixed intuitvely as well using logical operators `|` (or) and
 You can mix provided modifiers or extend them by inheriting from `Modifier`
 and implementing `condition` method (interface described below).
 
+For most of cases `Lambda` modifier should be sufficient, for example::
+
+    dataset = dataset.cache(
+        torchdata.modifiers.UpToIndex(25, cacher)
+        & torchdata.modifiers.Lambda(lambda index: index % 2 == 0, cacher)
+    )
+
+Only element up to `25th` and those which are divisible by `2`
+
+
 """
 
 import abc
+import typing
 
 from ._base import Base
 
@@ -65,7 +76,6 @@ class Modifier(Base):
                 Whether to act on sample with given index
 
         """
-        pass
 
     def __contains__(self, index: int) -> bool:
         r"""**Acts as invisible proxy for** `cacher`'s `__contains__` **method.**
@@ -137,7 +147,7 @@ class Modifier(Base):
         r"""**If self and other returns True, then use** `cacher`.
 
         **Important:** `self` and `other` should have the same `cacher` wrapped.
-        Otherwise exception is thrown. Cacher of first modifier is used in such case.
+        Cacher of first modifier is used no matter what.
 
         Parameters
         ----------
@@ -164,11 +174,7 @@ class _Mix(Modifier):
     """
 
     def __init__(self, *modifiers):
-        first_type = type(modifiers[0])
         self.modifiers = modifiers
-        if not all(isinstance(checker, first_type) for checker in self.modifiers):
-            raise ValueError("All checkers have to be of same type")
-
         self.cacher = modifiers[0].cacher
 
 
@@ -178,7 +184,7 @@ class All(_Mix):
     )
 
     def condition(self, index):
-        return all(modifier.condition() for modifier in self.modifiers)
+        return all(modifier.condition(index) for modifier in self.modifiers)
 
 
 class Any(_Mix):
@@ -187,7 +193,7 @@ class Any(_Mix):
     )
 
     def condition(self, index):
-        return any(modifier.condition() for modifier in self.modifiers)
+        return any(modifier.condition(index) for modifier in self.modifiers)
 
 
 class _Percent(Modifier):
@@ -195,12 +201,12 @@ class _Percent(Modifier):
 
     Parameters
     ----------
-    cacher : torchdata.cacher.Cacher
-            Instance of cacher
     p : float
             Percentage specified as flow between `[0, 1]`.
     length : int
             How many samples are in dataset. You can pass `len(dataset)`.
+    cacher : torchdata.cacher.Cacher
+            Instance of cacher
 
     """
 
@@ -208,7 +214,7 @@ class _Percent(Modifier):
     def condition(self, index):
         pass
 
-    def __init__(self, cacher, p: float, length: int):
+    def __init__(self, p: float, length: int, cacher):
         if not 0 < p < 1:
             raise ValueError(f"Percentage has to be between 0 and 1, but got {p}")
         self.threshold: int = int(length * p)
@@ -238,10 +244,10 @@ class _Index(Modifier):
 
     Parameters
     ----------
-    cacher : torchdata.cacher.Cacher
-            Instance of cacher
     index : int
             Index of sample
+    cacher : torchdata.cacher.Cacher
+            Instance of cacher
 
     """
 
@@ -249,9 +255,9 @@ class _Index(Modifier):
     def condition(self, index):
         pass
 
-    def __init__(self, cacher, index: int):
-        self.cacher = cacher
+    def __init__(self, index: int, cacher):
         self.index: int = index
+        self.cacher = cacher
 
 
 class UpToIndex(_Index):
@@ -290,3 +296,23 @@ class Indices(Modifier):
 
     def condition(self, index):
         return index in self.indices
+
+
+class Lambda(Modifier):
+    r"""**Cache samples if specified function returns** `True`.
+
+    Parameters
+    ----------
+    function: Callable
+            Single-element callable, if `True` returned, cache this sample.
+            Number of sample is passed as an argument.
+    cacher : torchdata.cacher.Cacher
+            Instance of cacher
+
+    """
+
+    def __init__(self, function: typing.Callable, cacher):
+        self.function = function
+
+    def condition(self, index):
+        return self.function(index)
