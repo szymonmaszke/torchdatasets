@@ -215,11 +215,12 @@ class Select(Base):
 
     - Negative indexing is supported if supported by sample object.
     - This function is **faster** than `Drop` and should be used if possible.
+    - If you want to select sample from nested `tuple`, please use `Flatten` first
 
     Example::
 
         # Sample-wise concatenate dataset three times
-        new_dataset = dataset | dataset | dataset
+        new_dataset = dataset | dataset
         # Only second (first index) element will be taken
         selected = new_dataset.map(torchdata.maps.Select(1))
 
@@ -251,6 +252,7 @@ class Drop(Base):
 
     - Negative indexing is supported if supported by sample object.
     - This function is **slower** than `Select` and the latter should be preffered.
+    - If you want to select sample from nested `tuple`, please use `Flatten` first
 
     Example::
 
@@ -286,6 +288,11 @@ class ToAll(Base):
 
     Sample has to be `iterable` object.
 
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
+
     Example::
 
         # Sample-wise concatenate dataset three times
@@ -316,6 +323,11 @@ class To(Base):
     """**Apply function to specified elements of sample.**
 
     Sample has to be `iterable` object.
+
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
 
     Example::
 
@@ -355,6 +367,11 @@ class Except(Base):
     r"""**Apply function to all elements sample of sample except the ones specified.**
 
     Sample has to be `iterable` object.
+
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
 
     Example::
 
