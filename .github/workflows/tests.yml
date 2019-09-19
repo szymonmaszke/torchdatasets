@@ -28,9 +28,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r environments/requirements.txt
           pip install tox
-      - name: Test
-        run: tox
-      - name: Upload coverage
-        run: >
-          bash <(curl -s https://codecov.io/bash) -cF python
-          -t ${{ secrets.CODECOV_TOKEN }}
+      - name: Test and publish
+        run: tox -- -t ${{ secrets.CODECOV_TOKEN }}

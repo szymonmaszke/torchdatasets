@@ -2,6 +2,7 @@
 source=torchdata
 branch=True
 omit=
+  *tox*
   *test*
   *tests*
   setup.py
