@@ -85,3 +85,10 @@ def test_apply():
         return sum(value for value in generator)
 
     assert ExampleDataset(0, 101).apply(summation) == 5050  # Returns 5050
+
+
+def test_repr():
+    assert (
+        repr(ExampleDataset(0, 5))
+        == "tests.datasets.ExampleDataset(values=[0, 1, 2, 3, 4])"
+    )
