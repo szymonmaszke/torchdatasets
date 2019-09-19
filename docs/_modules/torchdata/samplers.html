@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -218,8 +218,8 @@
 
 <span class="sd">Those can be used just like PyTorch&#39;s `torch.utils.data.Sampler` instances.</span>
 
-<span class="sd">See https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler</span>
-<span class="sd">for more information.</span>
+<span class="sd">See `PyTorch tutorial &lt;https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler&gt;`__</span>
+<span class="sd">for more examples and information.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -245,7 +245,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    indices : Iterable</span>
+<span class="sd">    indices : typing.Iterable</span>
 <span class="sd">            A sequence of indices</span>
 <span class="sd">    replacement : bool, optional</span>
 <span class="sd">            Samples are drawn with replacement if `True`. Default: `False`</span>
@@ -287,7 +287,6 @@
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples_per_label</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samplers</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
-                <span class="c1"># yield index</span>
                 <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samplers</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

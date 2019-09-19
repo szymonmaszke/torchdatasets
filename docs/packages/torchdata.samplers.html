@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -219,8 +219,8 @@
 <span id="torchdata-samplers"></span><h1>torchdata.samplers<a class="headerlink" href="#module-torchdata.samplers" title="Permalink to this headline">¶</a></h1>
 <p><strong>This module implements samplers to be used in conjunction with</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader</span></code> <strong>instances</strong>.</p>
 <p>Those can be used just like PyTorch’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Sampler</span></code> instances.</p>
-<p>See <a class="reference external" href="https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler">https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler</a>
-for more information.</p>
+<p>See <a class="reference external" href="https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler">PyTorch tutorial</a>
+for more examples and information.</p>
 <dl class="class">
 <dt id="torchdata.samplers.Distribution">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">Distribution</code><span class="sig-paren">(</span><em class="sig-param">distribution: torch.distributions.distribution.Distribution</em>, <em class="sig-param">num_samples: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.Distribution" title="Permalink to this definition">¶</a></dt>
@@ -258,7 +258,7 @@ If with replacement, then user can specify <code class="xref py py-attr docutils
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>indices</strong> (<a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><em>Iterable</em></a>) – A sequence of indices</p></li>
+<li><p><strong>indices</strong> (<em>typing.Iterable</em>) – A sequence of indices</p></li>
 <li><p><strong>replacement</strong> (<em>bool</em><em>, </em><em>optional</em>) – Samples are drawn with replacement if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
 <li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to draw, default=`len(dataset)`. This argument
 is supposed to be specified only when <code class="xref py py-obj docutils literal notranslate"><span class="pre">replacement</span></code> is <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.
