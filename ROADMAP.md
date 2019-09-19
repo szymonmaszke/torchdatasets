@@ -15,7 +15,6 @@ Please use label `roadmap` and `improvement` and describe the task you are willi
 (or describe new task you would consider an improvement).
 
 - Check and test support for multiprocessing and PyTorch's workers
-- Highly increase test coverage (`modifiers`, `maps` and `cachers`)
 - Fix documentation and make it more readable
 - Testing with [Hypothesis](https://github.com/HypothesisWorks/hypothesis)
 - Tutorials creation
