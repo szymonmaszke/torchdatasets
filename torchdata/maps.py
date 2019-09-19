@@ -206,7 +206,19 @@ class Repeat(Base):
         return sample
 
 
-class Select(Base):
+class _Choice(Base):
+    def __init__(self, *indices):
+        self.indices = set(indices)
+
+    def _magic_unpack(self, iterable):
+        if len(iterable) == 1:
+            return iterable[0]
+        if len(iterable) == 0:
+            return None
+        return iterable
+
+
+class Select(_Choice):
     r"""**Select elements from sample.**
 
     Sample has to be indexable object (has `__getitem__` method implemented).
@@ -215,11 +227,13 @@ class Select(Base):
 
     - Negative indexing is supported if supported by sample object.
     - This function is **faster** than `Drop` and should be used if possible.
+    - If you want to select sample from nested `tuple`, please use `Flatten` first
+    - Returns single element if only one element is left
 
     Example::
 
         # Sample-wise concatenate dataset three times
-        new_dataset = dataset | dataset | dataset
+        new_dataset = dataset | dataset
         # Only second (first index) element will be taken
         selected = new_dataset.map(torchdata.maps.Select(1))
 
@@ -235,14 +249,11 @@ class Select(Base):
 
     """
 
-    def __init__(self, *indices):
-        self.indices = set(indices)
-
     def __call__(self, sample):
-        return tuple(sample[i] for i in self.indices)
+        return self._magic_unpack(tuple(sample[i] for i in self.indices))
 
 
-class Drop(Base):
+class Drop(_Choice):
     r"""**Return sample without selected elements.**
 
     Sample has to be indexable object (has `__getitem__` method implemented).
@@ -251,6 +262,9 @@ class Drop(Base):
 
     - Negative indexing is supported if supported by sample object.
     - This function is **slower** than `Select` and the latter should be preffered.
+    - If you want to select sample from nested `tuple`, please use `Flatten` first
+    - Returns single element if only one element is left
+    - Returns `None` if all elements are dropped
 
     Example::
 
@@ -272,12 +286,13 @@ class Drop(Base):
 
     """
 
-    def __init__(self, *indices):
-        self.indices = set(indices)
-
     def __call__(self, sample):
-        return tuple(
-            sample[index] for index, _ in enumerate(sample) if index not in self.indices
+        return self._magic_unpack(
+            tuple(
+                sample[index]
+                for index, _ in enumerate(sample)
+                if index not in self.indices
+            )
         )
 
 
@@ -285,6 +300,11 @@ class ToAll(Base):
     r"""**Apply function to each element of sample.**
 
     Sample has to be `iterable` object.
+
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
 
     Example::
 
@@ -316,6 +336,11 @@ class To(Base):
     """**Apply function to specified elements of sample.**
 
     Sample has to be `iterable` object.
+
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
 
     Example::
 
@@ -352,14 +377,19 @@ class To(Base):
 
 
 class Except(Base):
-    r"""**Apply function to all elements sample of sample except the ones specified.**
+    r"""**Apply function to all elements of sample except the ones specified.**
 
     Sample has to be `iterable` object.
+
+    **Important:**
+
+    If you want to apply function to all nested elements (e.g. in nested `tuple`),
+    please use `torchdata.maps.Flatten` object first.
 
     Example::
 
         # Sample-wise concatenate dataset three times
-        new_dataset = dataset | dataset | dataset
+        dataset |= dataset
         # Every element increased by one except the first one
         selected = new_dataset.map(torchdata.maps.Except(lambda x: x+1, 0))
 
@@ -385,6 +415,6 @@ class Except(Base):
 
     def __call__(self, sample):
         return tuple(
-            subsample if index in self.indices else self.function(subsample)
+            self.function(subsample) if index not in self.indices else subsample
             for index, subsample in enumerate(sample)
         )

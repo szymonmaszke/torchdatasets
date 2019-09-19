@@ -1,79 +1,67 @@
+import time
+
+import torch
+
 import torchdata
+import torchfunc
+
+from .datasets import ExampleDataset, ExampleIterable
+from .utils import artificial_slowdown, index_is_sample
 
 
-class IterableDataset(torchdata.Iterable):
-    def __init__(self, start: int, end: int):
-        super().__init__()
-        self.start: int = start
-        self.end: int = end
-
-    def __iter__(self):
-        return iter(range(self.start, self.end))
+def test_basic_iterable():
+    dataset = ExampleIterable(0, 100).map(lambda value: value + 12)
+    for index, item in enumerate(dataset):
+        assert index + 12 == item
 
 
-class Dataset(torchdata.Dataset):
-    def __init__(self, start: int, end: int):
-        super().__init__()
-        self.values = list(range(start, end))
-
-    def __getitem__(self, index):
-        return self.values[index]
-
-    def __len__(self):
-        return len(self.values)
-
-
-def test_iterable_or():
-    # range(1,25) originally, mapped to range(13, 37)
-    dataset = IterableDataset(0, 25).map(lambda value: value + 12)
-    # Sample-wise concatenation, yields range(13, 37) and range(1, 25)
-    for index, (first, second) in enumerate(dataset | IterableDataset(0, 25)):
-        assert index + 12 == first
-        assert index == second
-
-
-def test_dataset_add():
-    # range(1,25) originally, mapped to range(13, 37)
-    dataset = (
-        (Dataset(0, 25) | Dataset(0, 25))
-        .map(lambda sample: sample[0] * sample[1])
-        .cache()
-    )
-    # Sample-wise concatenation, yields range(13, 37) and range(1, 25)
+def test_basic_dataset():
+    dataset = ExampleDataset(0, 25).map(lambda sample: sample * sample).cache()
     for index, value in enumerate(dataset):
         assert index ** 2 == value
 
 
-def test_dataset_cache():
-    # range(1,25) originally, mapped to range(13, 37)
+def test_dataset_multiple_cache():
+    # Range-like Dataset mapped to item ** 3
     dataset = (
-        Dataset(0, 25)
+        ExampleDataset(0, 25)
         .cache()
-        .map(lambda sample: sample + sample)
+        .map(lambda sample: (sample + sample, sample))
         .cache()
-        .map(lambda sample: sample + sample)
+        .map(lambda sample: sample[0] - sample[-1])
+        .cache()
+        .map(lambda sample: sample ** 3)
         .cache()
     )
-    # Sample-wise concatenation, yields range(13, 37) and range(1, 25)
-    for _ in range(3):
-        for _ in dataset:
-            pass
+    # Iterate through dataset
+    for _ in dataset:
+        pass
 
     for index, value in enumerate(dataset):
-        smth = index + index
-        assert smth + smth == value
+        assert index ** 3 == value
+
+
+def test_dataset_cache_speedup():
+    dataset = ExampleDataset(0, 5).map(artificial_slowdown).cache()
+    with torchfunc.Timer() as timer:
+        index_is_sample(dataset)
+        assert timer.checkpoint() > 5
+        index_is_sample(dataset)
+        assert timer.checkpoint() < 0.2
 
 
 def test_dataset_complicated_cache():
-    # range(1,25) originally, mapped to range(13, 37)
     dataset = (
         (
-            (Dataset(0, 25) | Dataset(0, 25).map(lambda value: value * -1))
+            (
+                ExampleDataset(0, 25)
+                | ExampleDataset(0, 25).map(lambda value: value * -1)
+            )
             .cache()
             .map(lambda sample: sample[0] + sample[1] + sample[0])
             .cache()
             .map(lambda sample: sample + sample)
-            | Dataset(0, 25)
+            | ExampleDataset(0, 25)
         )
         .cache()
         .map(lambda values: ((values, values), values))
@@ -82,30 +70,37 @@ def test_dataset_complicated_cache():
         .map(lambda values: values[1])
         .map(lambda value: value ** 2)
     )
-    # Sample-wise concatenation, yields range(13, 37) and range(1, 25)
-    for _ in range(3):
-        for _ in dataset:
-            pass
 
     for index, value in enumerate(dataset):
         assert index ** 2 == value
 
 
-class CountingDataset(torchdata.Dataset):
-    def __init__(self, max: int):
-        super().__init__()  # This is necessary
-        self.range = list(range(max))
-
-    def __getitem__(self, index):
-        return self.range[index]
-
-    def __len__(self):
-        return len(self.range)
-
-
-def summation(generator):
-    return sum(value for value in generator)
-
-
 def test_apply():
-    assert CountingDataset(101).apply(summation) == 5050  # Returns 5050
+    def summation(generator):
+        return sum(value for value in generator)
+
+    assert ExampleDataset(0, 101).apply(summation) == 5050  # Returns 5050
+
+
+def test_repr():
+    assert (
+        repr(ExampleDataset(0, 5))
+        == "tests.datasets.ExampleDataset(values=[0, 1, 2, 3, 4])"
+    )
+
+
+def test_dataset_dataloader():
+    # Range-like Dataset mapped to item ** 3
+    dataset = (
+        ExampleDataset(0, 25)
+        .cache()
+        .map(lambda sample: (sample + sample, sample))
+        .cache()
+        .map(lambda sample: sample[0] - sample[-1])
+        .cache()
+        .map(lambda sample: sample ** 3)
+        .cache()
+    )
+    # Iterate through dataset
+    for element in torch.utils.data.DataLoader(dataset, shuffle=True, batch_size=3):
+        print(element)
