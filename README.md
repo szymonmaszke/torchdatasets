@@ -62,7 +62,7 @@ images = (
     # First 1000 samples in memory
     .cache(torchdata.modifiers.UpToIndex(1000, torchdata.cachers.Memory()))
     # Sample from 1000 to the end saved with Pickle on disk
-    .cache(torchdata.modifiers.FromIndex(torchdata.cachers.Pickle("./cache"), 1000))
+    .cache(torchdata.modifiers.FromIndex(1000, torchdata.cachers.Pickle("./cache")))
     # You can define your own cachers, modifiers, see docs
 )
 ```
@@ -102,4 +102,4 @@ Nightly builds are also available, just prefix tag with `nightly_`. If you are g
 
 If you find any issue or you think some functionality may be useful to others and fits this library, please [open new Issue](https://help.github.com/en/articles/creating-an-issue) or [create Pull Request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
 
-To get an overview of something which one can done to help this project, see [Roadmap](https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md)
+To get an overview of thins one can do to help this project, see [Roadmap](https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md)
