@@ -32,10 +32,11 @@ class RandomSubsetSampler(Base, RandomSampler):
     indices : Iterable
             A sequence of indices
     replacement : bool, optional
-            Samples are drawn with replacement if ``True``. Default: ``False``
+            Samples are drawn with replacement if `True`. Default: `False`
     num_samples : int, optional
-            number of samples to draw, default=`len(dataset)`. This argument
-            is supposed to be specified only when `replacement` is ``True``.
+            Number of samples to draw, default=`len(dataset)`. This argument
+            is supposed to be specified only when `replacement` is `True`.
+            Default: `None`
     """
 
     def __init__(self, indices, replacement=False, num_samples=None):
@@ -51,20 +52,27 @@ class _Equalizer(Sampler):
         tensors = [torch.nonzero(labels == i).flatten() for i in torch.unique(labels)]
         self.samples_per_label = getattr(builtins, function)(map(len, tensors))
         self.samplers = [
-            RandomSubsetSampler(
-                tensor, replacement=True, num_samples=self.samples_per_label
+            iter(
+                RandomSubsetSampler(
+                    tensor,
+                    replacement=len(tensor) < self.samples_per_label,
+                    num_samples=self.samples_per_label
+                    if len(tensor) < self.samples_per_label
+                    else None,
+                )
             )
             for tensor in tensors
         ]
 
     @property
     def num_samples(self):
-        return torch.cumsum([len(sampler) for sampler in self.samplers])
+        return self.samples_per_label * len(self.samplers)
 
     def __iter__(self):
-        for indices in zip(self.samplers):
-            for index in indices:
-                yield index
+        for _ in range(self.samples_per_label):
+            for index in torch.randperm(len(self.samplers)).tolist():
+                # yield index
+                yield next(self.samplers[index])
 
     def __len__(self):
         return self.num_samples
