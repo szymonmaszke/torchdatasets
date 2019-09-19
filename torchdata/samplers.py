@@ -2,8 +2,8 @@ r"""**This module implements samplers to be used in conjunction with** `torch.ut
 
 Those can be used just like PyTorch's `torch.utils.data.Sampler` instances.
 
-See https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler
-for more information.
+See `PyTorch tutorial <https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler>`__
+for more examples and information.
 
 """
 
@@ -29,7 +29,7 @@ class RandomSubsetSampler(Base, RandomSampler):
 
     Parameters
     ----------
-    indices : Iterable
+    indices : typing.Iterable
             A sequence of indices
     replacement : bool, optional
             Samples are drawn with replacement if `True`. Default: `False`
@@ -71,7 +71,6 @@ class _Equalizer(Sampler):
     def __iter__(self):
         for _ in range(self.samples_per_label):
             for index in torch.randperm(len(self.samplers)).tolist():
-                # yield index
                 yield next(self.samplers[index])
 
     def __len__(self):

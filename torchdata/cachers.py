@@ -1,7 +1,6 @@
-r"""**This module contains interface needed for cachers and basic memory and disk implementations.**
+r"""**This module contains interface needed for** `cachers` **(used in** `cache` **method of** `torchdata.Dataset` **) .**
 
-
-To cache on disk all samples using Python's `pickle` in folder `cache`
+To cache on disk all samples using Python's `pickle <https://docs.python.org/3/library/pickle.html>`__ in folder `cache`
 (assuming you have already created `torchdata.Dataset` instance named `dataset`)::
 
     dataset.cache(torchdata.cachers.Pickle("./cache"))
@@ -21,7 +20,7 @@ from ._base import Base
 
 
 class Cacher(Base):
-    r"""**Interface defining interface to be compatible with** `torchdata.Dataset.cache` **method.**
+    r"""**Interface to fulfil to make object compatible with** `torchdata.Dataset.cache` **method.**
 
     If you want to implement your own `caching` functionality, inherit from
     this class and implement methods described below.
@@ -88,12 +87,12 @@ class Pickle(Cacher):
     Data will be saved as `.pkl` in specified path. If path does not exist,
     it will be created.
 
-    **This object can be used as a** `context manager` ** and it will delete files at the end of block::**
+    **This object can be used as a** `context manager` **and it will delete** `path` **at the end of block**::
 
         with torchdata.cachers.Pickle(pathlib.Path("./disk")) as pickler:
             dataset = dataset.map(lambda x: x+1).cache(pickler)
             ... # Do something with dataset
-        ... # Files on disk will be removed
+        ... # Folder removed
 
     You can also issue `clean()` method manually for the same effect
     (though it's discouraged as you might crash `__setitem__` method).
@@ -119,20 +118,36 @@ class Pickle(Cacher):
         self.extension: str = extension
 
     def __contains__(self, index: int) -> bool:
+        """**Check whether file exists on disk.**
+
+        If file is available it is considered cached, hence you can cache data
+        between multiple runs (if you ensure repeatable sampling).
+
+        """
         return pathlib.Path(
             (self.path / str(index)).with_suffix(self.extension)
         ).is_file()
 
     def __setitem__(self, index: int, data: int):
+        """**Save** `data` **in specified folder.**
+
+        Name of the item will be equal to `{self.path}/{index}{extension}`.
+
+        """
         with open((self.path / str(index)).with_suffix(self.extension), "wb") as file:
             pickle.dump(data, file)
 
     def __getitem__(self, index: int):
+        """**Retrieve** `data` **specified by** `index`.
+
+        Name of the item will be equal to `{self.path}/{index}{extension}`.
+
+        """
         with open((self.path / str(index)).with_suffix(self.extension), "rb") as file:
             return pickle.load(file)
 
     def clean(self) -> None:
-        """**Remove (non-recursively) files residing in** `self.path`.
+        """**Remove recursively folder** `self.path`.
 
         Behaves just like `shutil.rmtree`, but won't act if directory does not exist.
         """
@@ -158,10 +173,13 @@ class Memory(Cacher):
         self.cache = {}
 
     def __contains__(self, index: int) -> bool:
+        """True if index in dictionary."""
         return index in self.cache
 
     def __setitem__(self, index: int, data: int):
+        """Adds data to dictionary."""
         self.cache[index] = data
 
     def __getitem__(self, index: int):
+        """Retrieve data from dictionary."""
         return self.cache[index]
