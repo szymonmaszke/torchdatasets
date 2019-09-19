@@ -14,11 +14,19 @@ def create_example(over: bool):
 
 def test_random_oversampler():
     oversampled = create_example(True)
-    assert len(oversampled) == 2 * 5
     assert (oversampled == 0).sum() == (oversampled == 1).sum()
+
+
+def test_random_oversampler_length():
+    oversampled = create_example(True)
+    assert len(oversampled) == 2 * 5
 
 
 def test_random_undersampler():
     undersampled = create_example(False)
-    assert len(undersampled) == 2 * 2
     assert (undersampled == 0).sum() == (undersampled == 1).sum()
+
+
+def test_random_undersampler_length():
+    undersampled = create_example(False)
+    assert len(undersampled) == 2 * 2
