@@ -6,6 +6,11 @@ import torchdata
 from .datasets import ExampleDataset
 
 
+def pass_through_dataset(dataset):
+    for elem in dataset:
+        pass
+
+
 def artificial_slowdown(sample):
     time.sleep(1)
     return sample
