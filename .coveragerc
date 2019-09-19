@@ -2,5 +2,6 @@
 source=torchdata
 branch=True
 omit=
+  *test*
   *tests*
   setup.py
