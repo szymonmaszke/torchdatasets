@@ -9,15 +9,17 @@ torchdata
 It extends `torch.utils.data.Dataset` and equips it with
 functionalities known from `tensorflow.data <https://www.tensorflow.org/api_docs/python/tf/data/Dataset>`__
 like `map` or `cache`.
-All of that with minimal interference (single call to `super().__init__()`) with original
+
+All of that with minimal interference (single call to `super().__init__()`) in original
 PyTorch's datasets.
 
-Some functionalities:
+**Functionalities Overview:**
 
 * `map` or `apply` arbitrary functions to dataset
-* `cache` allows you to cache data in memory or on disk (even partially, say first `20%`)
+* `cache` data in RAM or on disk
+* `cache` partially of in any way you want using `torchdata.modifiers` module
 * Full `torch.utils.data.IterableDataset` and `torch.utils.data.Dataset` support
-* Easy to create custom methods of caching, choosing elements to cache, maps and datasets
+* General `torchdata.maps` like `Flatten` or `Select`
 * Concrete and base classes designed for file reading and other general tasks
 
 If you are looking for ecosystem of supporting
@@ -63,7 +65,7 @@ To install `nightly` version:
 ===============================================================================
 
 Various `torchdata` images are available both CPU and GPU-enabled.
-You can find them in Docker Cloud at `szymonmaszke/torchdata`
+You can find them at Docker Cloud at `szymonmaszke/torchdata`
 
 CPU
 ---
@@ -121,3 +123,12 @@ like this:
 .. code-block:: shell
 
   conda install -c conda-forge torchdata
+
+Contributing
+############
+
+If you find any issue or you think some functionality may be useful to others and fits here well, please `open new Issue <https://help.github.com/en/articles/creating-an-issue>`__
+or `create Pull Request <https://help.github.com/en/articles/creating-a-pull-request-from-a-fork>`__.
+
+To get an overview of things on can do to help this project, please see 
+`Roadmap <https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md>`__.
