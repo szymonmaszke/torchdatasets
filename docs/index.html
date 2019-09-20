@@ -141,6 +141,7 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.html">torchdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchdata.datasets.html">torchdata.datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.maps.html">torchdata.maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.modifiers.html">torchdata.modifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.samplers.html">torchdata.samplers</a></li>
@@ -229,12 +230,11 @@ like <code class="xref py py-obj docutils literal notranslate"><span class="pre"
 PyTorch’s datasets.</p>
 <p><strong>Functionalities Overview:</strong></p>
 <ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> arbitrary functions to dataset</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> data in RAM or on disk</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> partially of in any way you want using <a class="reference internal" href="packages/torchdata.modifiers.html#module-torchdata.modifiers" title="torchdata.modifiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.modifiers</span></code></a> module</p></li>
+<li><p>Use <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code> data in RAM or on disk (even partially, say first <code class="xref py py-obj docutils literal notranslate"><span class="pre">20%</span></code>)</p></li>
 <li><p>Full <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.IterableDataset</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> support</p></li>
 <li><p>General <a class="reference internal" href="packages/torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.maps</span></code></a> like <code class="xref py py-obj docutils literal notranslate"><span class="pre">Flatten</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Select</span></code></p></li>
-<li><p>Concrete and base classes designed for file reading and other general tasks</p></li>
+<li><p>Concrete <a class="reference internal" href="packages/torchdata.datasets.html#module-torchdata.datasets" title="torchdata.datasets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.datasets</span></code></a> designed for file reading and other general tasks</p></li>
 </ul>
 <p>If you are looking for ecosystem of supporting
 functions around PyTorch check <a class="reference external" href="https://github.com/szymonmaszke/torchfunc">torchfunc</a>.</p>
@@ -244,6 +244,7 @@ functions around PyTorch check <a class="reference external" href="https://githu
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.html">torchdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchdata.datasets.html">torchdata.datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.maps.html">torchdata.maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.modifiers.html">torchdata.modifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchdata.samplers.html">torchdata.samplers</a></li>
