@@ -6,9 +6,11 @@ import torch
 from torch.utils.data import ConcatDataset as TorchConcatDataset
 from torch.utils.data import Dataset as TorchDataset
 
+from ._dev_utils import apply_mapping, reversed_enumerate
+
 ################################################################################
 #
-#                               META CLASSES
+#                               METACLASSES
 #
 ################################################################################
 
@@ -35,24 +37,23 @@ class MetaIterable(type):
 
     @staticmethod
     def create__iter__(iter_function):
-        """Override default __getitem__ to enable caching and mapping.
-
-        To see implementation check _dev_utils/base.py.
-        """
+        """Override default __iter__ to enable filtering and mapping."""
 
         @functools.wraps(iter_function)
         def __iter__(self):
-            for data in iter_function(self):
-                mapped_data = data
-                for mapping in self._maps:
-                    mapped_data = mapping(mapped_data)
-                yield mapped_data
+            for sample in iter_function(self):
+                for i, filter_function in enumerate(self._filters, 1):
+                    sample = apply_mapping(
+                        sample, self._maps, self._which[i - 1], self._which[i]
+                    )
+                    if not filter_function(sample):
+                        break
+                else:
+                    yield apply_mapping(
+                        sample, self._maps, self._which[-1], len(self._maps)
+                    )
 
         return __iter__
-
-
-def reversed_enumerate(iterable):
-    return zip(range(len(iterable) - 1, -1, -1), reversed(iterable))
 
 
 class MetaDataset(type):
@@ -82,11 +83,6 @@ class MetaDataset(type):
 
         To see implementation check _dev_utils/base.py.
         """
-
-        def apply_mapping(sample, mappings, start, end):
-            for mapping in mappings[start:end]:
-                sample = mapping(sample)
-            return sample
 
         def get_sample(self, index, original_getitem):
             # Check whether available in cache, going from latest
