@@ -92,6 +92,14 @@ def test_apply():
     assert ExampleDataset(0, 101).apply(summation) == 5050  # Returns 5050
 
 
+def test_reduce():
+    assert ExampleDataset(0, 10).reduce(lambda x, y: x + y) == 45
+
+
+def test_reduce_initializer():
+    assert ExampleDataset(0, 10).reduce(lambda x, y: x + y, 10) == 55
+
+
 def test_repr():
     assert (
         repr(ExampleDataset(0, 5))
