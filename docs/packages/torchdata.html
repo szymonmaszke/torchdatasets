@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.1.2
                 </div>
               
             
@@ -260,9 +260,12 @@ which allows the user to use <code class="xref py py-obj docutils literal notran
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+
+<span class="c1"># Only elements divisible by 2</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="n">value</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Concrete implementations of datasets described above is located inside <a class="reference internal" href="torchdata.datasets.html#module-torchdata.datasets" title="torchdata.datasets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datasets</span></code></a> module.</p>
+<p>Concrete implementations of datasets described above are located inside <a class="reference internal" href="torchdata.datasets.html#module-torchdata.datasets" title="torchdata.datasets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datasets</span></code></a> module.</p>
 <p>For custom caching routines and how to use them see <a class="reference internal" href="torchdata.cachers.html#module-torchdata.cachers" title="torchdata.cachers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cachers</span></code></a> and their <a class="reference internal" href="torchdata.modifiers.html#module-torchdata.modifiers" title="torchdata.modifiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modifiers</span></code></a>.
 To check available general <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> related functions see <a class="reference internal" href="torchdata.maps.html#module-torchdata.maps" title="torchdata.maps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code></a>.</p>
 <p>Custom sampling techniques useful with <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">torch.utils.data.DataLoader</a>
@@ -310,7 +313,7 @@ It allows user to perform the following operations:</p>
 </div>
 <dl class="method">
 <dt id="torchdata.Dataset.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Dataset.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Dataset.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to every element of the dataset.</strong></p>
 <p>Specified function has to take Python generator as first argument.
 This generator yields consecutive samples from the dataset and the function is free
@@ -378,7 +381,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 <dl class="method">
 <dt id="torchdata.Dataset.map">
 <code class="sig-name descname">map</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Dataset.map" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Apply function to each element of dataset.</strong></p>
+<dd><p><strong>Map function to each element of dataset.</strong></p>
 <p>Function has no specified signature; it is user’s responsibility to ensure
 it is taking correct arguments as returned from <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> (in case of <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a>)
 or <code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code> (in case of <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code></a>).</p>
@@ -431,7 +434,7 @@ co can be used in the same manner after inheritance.</p>
 </div>
 <dl class="method">
 <dt id="torchdata.Iterable.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Iterable.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Iterable.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to every element of the dataset.</strong></p>
 <p>Specified function has to take Python generator as first argument.
 This generator yields consecutive samples from the dataset and the function is free
@@ -476,7 +479,7 @@ and variable list of other arguments (if necessary).</p>
 <dl class="method">
 <dt id="torchdata.Iterable.map">
 <code class="sig-name descname">map</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchdata.Iterable.map" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Apply function to each element of dataset.</strong></p>
+<dd><p><strong>Map function to each element of dataset.</strong></p>
 <p>Function has no specified signature; it is user’s responsibility to ensure
 it is taking correct arguments as returned from <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> (in case of <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code></a>)
 or <code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code> (in case of <a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code></a>).</p>
