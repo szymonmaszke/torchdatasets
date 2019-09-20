@@ -1,0 +1,963 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchdata.datasets &mdash; torchdata  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchdata/_modules/torchdata/datasets.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchdata/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchdata">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.1
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.html">torchdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.cachers.html">torchdata.cachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.datasets.html">torchdata.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.maps.html">torchdata.maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.modifiers.html">torchdata.modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchdata.samplers.html">torchdata.samplers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../index.html">
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../index.html">Module code</a> &gt;</li>
+        
+      <li>torchdata.datasets</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for torchdata.datasets</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">ChainDataset</span> <span class="k">as</span> <span class="n">TorchChain</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">ConcatDataset</span> <span class="k">as</span> <span class="n">TorchConcatDataset</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">Dataset</span> <span class="k">as</span> <span class="n">TorchDataset</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">IterableDataset</span> <span class="k">as</span> <span class="n">TorchIterable</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">TensorDataset</span> <span class="k">as</span> <span class="n">TorchTensorDataset</span>
+
+<span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">MetaDataset</span><span class="p">,</span> <span class="n">MetaIterable</span>
+<span class="kn">from</span> <span class="nn">.cachers</span> <span class="k">import</span> <span class="n">Memory</span>
+
+
+<span class="k">class</span> <span class="nc">_DatasetBase</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concat_object</span><span class="p">,</span> <span class="n">chain_object</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_concat_object</span> <span class="o">=</span> <span class="n">concat_object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chain_object</span> <span class="o">=</span> <span class="n">chain_object</span>
+
+    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to each element of dataset.**</span>
+
+<span class="sd">        Function has no specified signature; it is user&#39;s responsibility to ensure</span>
+<span class="sd">        it is taking correct arguments as returned from `__getitem__` (in case of `Dataset`)</span>
+<span class="sd">        or `__iter__` (in case of `Iterable`).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function: typing.Callable</span>
+<span class="sd">                Function (or functor) taking arguments returned from `__getitem__`</span>
+<span class="sd">                and returning anything.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to every element of the dataset.**</span>
+
+<span class="sd">        Specified function has to take Python generator as first argument.</span>
+<span class="sd">        This generator yields consecutive samples from the dataset and the function is free</span>
+<span class="sd">        to do whatever it wants with them.</span>
+
+<span class="sd">        Other arguments will be forwarded to function.</span>
+
+<span class="sd">        **WARNING:**</span>
+
+<span class="sd">        This function returns anything that&#39;s returned from function</span>
+<span class="sd">        and it&#39;s up to user to ensure correct pipeline functioning</span>
+<span class="sd">        after using this transformation.</span>
+
+<span class="sd">        **Example**::</span>
+
+<span class="sd">            class Dataset(torchdata.Dataset):</span>
+<span class="sd">                def __init__(self, max: int):</span>
+<span class="sd">                    super().__init__() # This is necessary</span>
+<span class="sd">                    self.range = list(range(max))</span>
+
+<span class="sd">                def __getitem__(self, index):</span>
+<span class="sd">                    return self.range[index]</span>
+
+<span class="sd">                def __len__(self):</span>
+<span class="sd">                    return len(self.range)</span>
+
+<span class="sd">            def summation(generator):</span>
+<span class="sd">                return sum(value for value in generator)</span>
+
+<span class="sd">            summed_dataset = Dataset(101).apply(summation) # Returns 5050</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function : typing.Callable</span>
+<span class="sd">                Function (or functional object) taking item generator as first object</span>
+<span class="sd">                and variable list of other arguments (if necessary).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        typing.Any</span>
+<span class="sd">                Value returned by function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">function</span><span class="p">((</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">rf</span><span class="s2">&quot;&quot;&quot;**Concatenate </span><span class="si">{self}</span><span class="s2"> and another </span><span class="si">{self}</span><span class="s2"> compatible object.**</span>
+
+<span class="s2">        During iteration, items from both dataset will be returned as `tuple`.</span>
+<span class="s2">        Another object could be PyTorch&#39;s base class of this object.</span>
+
+<span class="s2">        Length of resulting dataset is equal to `min(len(self), len(other))`</span>
+
+<span class="s2">        Parameters</span>
+<span class="s2">        ----------</span>
+<span class="s2">        other : </span><span class="si">{self}</span><span class="s2"> or PyTorch&#39;s base counterpart</span>
+<span class="s2">                Dataset instance whose sample will be iterated over together</span>
+
+<span class="s2">        Returns</span>
+<span class="s2">        -------</span>
+<span class="s2">        </span><span class="si">{self._concat_object}</span><span class="s2"></span>
+<span class="s2">                Proxy object responsible for concatenation between samples.</span>
+<span class="s2">                Can be used in the same manner as this object.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concat_object</span><span class="p">((</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">rf</span><span class="s2">&quot;&quot;&quot;**Chain </span><span class="si">{self}</span><span class="s2"> and another </span><span class="si">{self}</span><span class="s2"> compatible object.**</span>
+
+<span class="s2">        During iteration, items from self will be returned first and items</span>
+<span class="s2">        from other dataset after those.</span>
+
+<span class="s2">        Length of such dataset is equal to `len(self) + len(other)`</span>
+
+<span class="s2">        Parameters</span>
+<span class="s2">        ----------</span>
+<span class="s2">        other : </span><span class="si">{self}</span><span class="s2"> or PyTorch&#39;s base counterpart</span>
+<span class="s2">                Dataset whose sample will be yielded after this dataset.</span>
+
+<span class="s2">        Returns</span>
+<span class="s2">        -------</span>
+<span class="s2">        </span><span class="si">{self._chain_object}</span><span class="s2"></span>
+<span class="s2">                Proxy object responsible for chaining datasets.</span>
+<span class="s2">                Can be used in the same manner as this object.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_object</span><span class="p">((</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="Iterable"><a class="viewcode-back" href="../../packages/torchdata.html#torchdata.Iterable">[docs]</a><span class="k">class</span> <span class="nc">Iterable</span><span class="p">(</span><span class="n">TorchIterable</span><span class="p">,</span> <span class="n">_DatasetBase</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">MetaIterable</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;`torch.utils.data.IterableDataset` **dataset with extended capabilities**.</span>
+
+<span class="sd">    This class inherits from</span>
+<span class="sd">    `torch.utils.data.IterableDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset&gt;`__,</span>
+<span class="sd">    co can be used in the same manner after inheritance.</span>
+
+<span class="sd">    It allows user to perform following operations:</span>
+
+<span class="sd">    - `map` - apply function to each element of dataset</span>
+<span class="sd">    - `apply` - apply function to **all** elements of dataset</span>
+<span class="sd">    - `filter` - return elements for which `predicate` returns `True`</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        # Based on original PyTorch example</span>
+<span class="sd">        class Dataset(torchdata.Iterable):</span>
+<span class="sd">            def __init__(self, start: int, end: int):</span>
+<span class="sd">                super().__init__() # This is necessary</span>
+<span class="sd">                self.start: int = start</span>
+<span class="sd">                self.end: int = end</span>
+
+<span class="sd">            def __iter__(self):</span>
+<span class="sd">                return iter(range(self.start, self.end))</span>
+
+<span class="sd">        # range(1,25) originally, mapped to range(13, 37)</span>
+<span class="sd">        dataset = Dataset(1, 25).map(lambda value: value + 12)</span>
+<span class="sd">        # Sample-wise concatenation, yields range(13, 37) and range(1, 25)</span>
+<span class="sd">        for first, second in dataset | Dataset(1, 25):</span>
+<span class="sd">            print(first, second) # 13 1 up to 37 25</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_DatasetBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ConcatIterable</span><span class="p">,</span> <span class="n">ChainIterable</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../packages/torchdata.html#torchdata.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">TorchDataset</span><span class="p">,</span> <span class="n">_DatasetBase</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">MetaDataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;`torch.utils.data.Dataset` **with extended capabilities.**</span>
+
+<span class="sd">    This class inherits from</span>
+<span class="sd">    `torch.utils.data.Dataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset&gt;`__,</span>
+<span class="sd">    co can be used in the same manner after inheritance.</span>
+<span class="sd">    It allows user to perform the following operations:</span>
+
+<span class="sd">    - `cache` - cache all/part of data in memory or on disk</span>
+<span class="sd">    - `map` - apply function to each element of dataset</span>
+<span class="sd">    - `apply` - apply function to **all** elements of dataset</span>
+<span class="sd">    - `reduce` - reduce dataset to single value with specified function</span>
+
+<span class="sd">    **Important:**</span>
+
+<span class="sd">    - Last cache which is able to hold sample is used. Does not matter whether it&#39;s in-memory or on-disk or user-specified.</span>
+
+<span class="sd">    - Although multiple cache calls in different parts of `map` should work, users are encouraged to use it as rare as possible and possibly as late as possible for best performance.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        import torchvision</span>
+<span class="sd">        from PIL import Image</span>
+
+<span class="sd">        # Image loading dataset (use Files for more serious business)</span>
+<span class="sd">        class Dataset(torchdata.Dataset):</span>
+<span class="sd">            def __init__(self, path: pathlib.Path):</span>
+<span class="sd">                super().__init__() # This is necessary</span>
+<span class="sd">                self.files = [file for file in path.glob(&quot;*&quot;)]</span>
+
+<span class="sd">            def __getitem__(self, index):</span>
+<span class="sd">                return Image.open(self.files[index])</span>
+
+<span class="sd">            def __len__(self, index):</span>
+<span class="sd">                return len(self.files)</span>
+
+<span class="sd">        # Map PIL to Tensor and cache dataset</span>
+<span class="sd">        dataset = Dataset(&quot;data&quot;).map(torchvision.transforms.ToTensor()).cache()</span>
+<span class="sd">        # Create DataLoader as normally</span>
+<span class="sd">        dataloader = torch.utils.data.DataLoader(dataset)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_DatasetBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ConcatDataset</span><span class="p">,</span> <span class="n">ConcatIterable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cachers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_which</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Dataset.cache"><a class="viewcode-back" href="../../packages/torchdata.html#torchdata.Dataset.cache">[docs]</a>    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Cache data in memory, disk or specify custom caching.**</span>
+
+<span class="sd">        By default all samples are cached in memory. To change this behaviour specify `cacher`</span>
+<span class="sd">        argument. Some `cacher` implementations can be found in `torchdata.cacher` module or you can</span>
+<span class="sd">        provide your own by inheriting from `torchdata.cacher.Cacher` and implementing</span>
+<span class="sd">        appropriate methods.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cacher : torchdata.cacher.Cacher, optional</span>
+<span class="sd">                Instance of `torchdata.cacher.Cacher` (or any other object with compatible interface).</span>
+<span class="sd">                Check `cacher` module documentation for more information.</span>
+<span class="sd">                Default: `torchdata.cacher.Memory` which caches data in-memory</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Dataset</span>
+<span class="sd">                Returns self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">cacher</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cacher</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cachers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cacher</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_which</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maps</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">maps</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Reset dataset state.**</span>
+
+<span class="sd">        `cache` and `maps` can be resetted separately.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cache : bool, optional</span>
+<span class="sd">                Reset current cache. Default: `True`</span>
+<span class="sd">        maps : bool, optional</span>
+<span class="sd">                Reset current disk cache. Default: `True`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cachers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">maps</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_maps</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">#</span>
+<span class="c1">#                           Dataset Concatenations</span>
+<span class="c1">#</span>
+<span class="c1">################################################################################</span>
+
+
+<div class="viewcode-block" id="ConcatDataset"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ConcatDataset">[docs]</a><span class="k">class</span> <span class="nc">ConcatDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `torchdata.Dataset` **responsible for sample-wise concatenation.**</span>
+
+<span class="sd">    This class is returned when `|` (logical or operator) is used on instance</span>
+<span class="sd">    of `torchdata.Dataset` (original `torch.utils.data.Dataset</span>
+<span class="sd">    &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset&gt;`__ can be used as well).</span>
+
+<span class="sd">    **Important:** This class is meant to be more of a proxy for `|` operator,</span>
+<span class="sd">    you can use it directly though.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        dataset = (</span>
+<span class="sd">            torchdata.ConcatDataset([dataset1, dataset2, dataset3])</span>
+<span class="sd">            .map(lambda sample: sample[0] + sample[1] + sample[2]))</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Any `Dataset` methods can be used normally.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasets : List[Union[torchdata.Dataset, torch.utils.data.Dataset]]</span>
+<span class="sd">            List of datasets to be concatenated sample-wise.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ConcatDataset.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ConcatDataset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span> <span class="o">=</span> <span class="n">datasets</span></div>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConcatIterable"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ConcatIterable">[docs]</a><span class="k">class</span> <span class="nc">ConcatIterable</span><span class="p">(</span><span class="n">Iterable</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `Iterable` **responsible for sample-wise concatenation.**</span>
+
+<span class="sd">    This class is returned when `|` (logical or operator) is used on instance</span>
+<span class="sd">    of `Iterable` (original `torch.utils.data.IterableDataset</span>
+<span class="sd">    &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset&gt;`__ can be used as well).</span>
+
+<span class="sd">    **Important:** This class is meant to be more of a proxy for `|` operator,</span>
+<span class="sd">    you can use it directly though.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        dataset = (</span>
+<span class="sd">            torchdata.ConcatIterable([dataset1, dataset2, dataset3])</span>
+<span class="sd">            .map(lambda x, y, z: (x + y, z))</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Any `IterableDataset` methods can be used normally.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasets : List[Union[torchdata.Iterable, torch.utils.data.IterableDataset]]</span>
+<span class="sd">            List of datasets to be concatenated sample-wise.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ConcatIterable.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ConcatIterable.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span> <span class="o">=</span> <span class="n">datasets</span></div>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ChainDataset"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ChainDataset">[docs]</a><span class="k">class</span> <span class="nc">ChainDataset</span><span class="p">(</span><span class="n">TorchConcatDataset</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `torchdata.Dataset` **responsible for chaining multiple datasets.**</span>
+
+<span class="sd">    This class is returned when `+` (logical or operator) is used on instance</span>
+<span class="sd">    of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).</span>
+<span class="sd">    Acts just like PyTorch&#39;s `+` or rather `torch.utils.data.ConcatDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.ConcatDataset&gt;`__</span>
+
+<span class="sd">    **Important:** This class is meant to be more of a proxy for `+` operator,</span>
+<span class="sd">    you can use it directly though.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        # Iterate over 3 datasets consecutively</span>
+<span class="sd">        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
+
+<span class="sd">    Any `Dataset` methods can be used normally.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasets : List[Union[torchdata.Dataset, torch.utils.data.Dataset]]</span>
+<span class="sd">            List of datasets to be chained.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ChainDataset.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ChainDataset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="n">Dataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">TorchConcatDataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ChainIterable"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ChainIterable">[docs]</a><span class="k">class</span> <span class="nc">ChainIterable</span><span class="p">(</span><span class="n">TorchChain</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Concrete** `torchdata.Iterable` **responsible for chaining multiple datasets.**</span>
+
+<span class="sd">    This class is returned when `+` (logical or operator) is used on instance</span>
+<span class="sd">    of `torchdata.Iterable` (original `torch.utils.data.Iterable` can be used as well).</span>
+<span class="sd">    Acts just like PyTorch&#39;s `+` and `ChainDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.ChainDataset&gt;`__.</span>
+
+<span class="sd">    **Important:** This class is meant to be more of a proxy for `+` operator,</span>
+<span class="sd">    you can use it directly though.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        # Iterate over 3 iterable datasets consecutively</span>
+<span class="sd">        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])</span>
+
+<span class="sd">    Any `Iterable` methods can be used normally.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasets : List[Union[torchdata.Iterable, torch.utils.data.IterableDataset]]</span>
+<span class="sd">            List of datasets to be chained.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ChainIterable.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.ChainIterable.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="n">Iterable</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">TorchChain</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">)</span></div></div>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#</span>
+<span class="c1">#                               CONCRETE CLASSES</span>
+<span class="c1">#</span>
+<span class="c1">###############################################################################</span>
+
+
+<div class="viewcode-block" id="Files"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Files">[docs]</a><span class="k">class</span> <span class="nc">Files</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Create** `Dataset` **from list of files.**</span>
+
+<span class="sd">    Each file is a separate sample. User can use this class directly</span>
+<span class="sd">    as all necessary methods are implemented.</span>
+
+<span class="sd">    `__getitem__` uses Python&#39;s `open &lt;https://docs.python.org/3/library/functions.html#open&gt;`__</span>
+<span class="sd">    and returns file. It&#39;s implementation looks like::</span>
+
+<span class="sd">        # You can modify open behaviour by passing args nad kwargs to __init__</span>
+<span class="sd">        with open(self.files[index], *self.args, **self.kwargs) as file:</span>
+<span class="sd">            return file</span>
+
+<span class="sd">    you can use `map` method in order to modify returned `file` or you can overload</span>
+<span class="sd">    `__getitem__` (image opening example below)::</span>
+
+<span class="sd">        import torchdata</span>
+<span class="sd">        import torchvision</span>
+
+<span class="sd">        from PIL import Image</span>
+
+
+<span class="sd">        # Image loading dataset</span>
+<span class="sd">        class ImageDataset(torchdata.datasets.FilesDataset):</span>
+<span class="sd">            def __getitem__(self, index):</span>
+<span class="sd">                return Image.open(self.files[index])</span>
+
+<span class="sd">        # Useful class methods are inherited as well</span>
+<span class="sd">        dataset = ImageDataset.from_folder(&quot;./data&quot;, regex=&quot;*.png&quot;).map(</span>
+<span class="sd">            torchvision.transforms.ToTensor()</span>
+<span class="sd">        )</span>
+
+<span class="sd">    `from_folder` class method is available for common case of creating dataset</span>
+<span class="sd">    from files in folder.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    files : List[pathlib.Path]</span>
+<span class="sd">            List of files to be used.</span>
+<span class="sd">    regex : str, optional</span>
+<span class="sd">            Regex to be used  for filtering. Default: `*` (all files)</span>
+<span class="sd">    *args</span>
+<span class="sd">            Arguments saved for `__getitem__`</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">            Keyword arguments saved for `__getitem__`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Files.from_folder"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Files.from_folder">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_folder</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Create dataset from** `pathlib.Path` **-like object.**</span>
+
+<span class="sd">        Path should be a directory and will be extended via `glob` method taking `regex`</span>
+<span class="sd">        (if specified). Varargs and kwargs will be saved for use for `__getitem__` method.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : pathlib.Path</span>
+<span class="sd">                Path object (directory) containing samples.</span>
+<span class="sd">        regex : str, optional</span>
+<span class="sd">                Regex to be used  for filtering. Default: `*` (all files)</span>
+<span class="sd">        *args</span>
+<span class="sd">                Arguments saved for `__getitem__`</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">                Keyword arguments saved for `__getitem__`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FilesDataset</span>
+<span class="sd">                Instance of your file based dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">regex</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Files.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Files.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span> <span class="o">=</span> <span class="n">files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span></div>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">file</span>
+
+<div class="viewcode-block" id="Files.filter"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Files.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Remove** `files` **for which predicate returns** `False`**.**</span>
+
+<span class="sd">        **Note:** This is different from `torchdata.Iterable`&#39;s `filter` method,</span>
+<span class="sd">        as the filtering is done when called, not during iteration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        predicate : Callable</span>
+<span class="sd">                Function-like object taking file as argument and returning boolean</span>
+<span class="sd">                indicating whether to keep a file.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FilesDataset</span>
+<span class="sd">                Modified self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">file</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Files.sort"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Files.sort">[docs]</a>    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Sort files using Python&#39;s built-in** `sorted` **method.**</span>
+
+<span class="sd">        Arguments are passed directly to `sorted`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key: Callable, optional</span>
+<span class="sd">            Specifies a function of one argument that is used to extract a comparison key from each element.</span>
+<span class="sd">            Default: `None` (compare the elements directly).</span>
+
+<span class="sd">        reverse: bool, optional</span>
+<span class="sd">            Whether `sorting` should be descending. Default: `False`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FilesDataset</span>
+<span class="sd">                Modified self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+
+
+<div class="viewcode-block" id="TensorDataset"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.TensorDataset">[docs]</a><span class="k">class</span> <span class="nc">TensorDataset</span><span class="p">(</span><span class="n">TorchTensorDataset</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Dataset wrapping** `torch.tensors` **.**</span>
+
+<span class="sd">    `cache`, `map` etc. enabled version of `torch.utils.data.TensorDataset &lt;https://pytorch.org/docs/stable/data.html#torch.utils.data.TensorDataset&gt;`__.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    *tensors : torch.Tensor</span>
+<span class="sd">            List of `tensors` to be wrapped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TensorDataset.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.TensorDataset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">tensors</span><span class="p">):</span>
+        <span class="n">Dataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">TorchTensorDataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">tensors</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Generator"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Generator">[docs]</a><span class="k">class</span> <span class="nc">Generator</span><span class="p">(</span><span class="n">Iterable</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Iterable wrapping any generator expression.**</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    expression: Generator expression</span>
+<span class="sd">            Generator from which one can `yield` via `yield from` syntax.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Generator.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.Generator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span></div>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../_static/doctools.js"></script>
+         <script type="text/javascript" src="../../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchdata">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#torchdata">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchdata/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="#">GitHub</a>
+          </li>
+
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>
