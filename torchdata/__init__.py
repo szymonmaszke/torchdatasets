@@ -47,7 +47,7 @@ which allows the user to use `map`, `apply` and `filter`, for example::
     # Only elements divisible by 2
     dataset = Dataset(100).filter(lambda value: value % 2 == 0)
 
-Concrete implementations of datasets described above is located inside `datasets` module.
+Concrete implementations of datasets described above are located inside `datasets` module.
 
 For custom caching routines and how to use them see `cachers` and their `modifiers`.
 To check available general `map` related functions see `maps`.

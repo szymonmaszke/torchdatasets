@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.1.2
                 </div>
               
             
@@ -213,7 +213,25 @@
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
   <h1>Source code for torchdata.datasets</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">abc</span>
+<span></span><span class="sd">&quot;&quot;&quot;**Concrete implementations of** `torchdata.Dataset` **and** `torchdata.Iterable`.</span>
+
+<span class="sd">Classes below extend and/or make it easier for user to implement common functionalities.</span>
+<span class="sd">To use standard PyTorch datasets defined by, for example, `torchvision`, you can</span>
+<span class="sd">use `WrapDataset` or `WrapIterable` like this::</span>
+
+<span class="sd">    import torchdata</span>
+<span class="sd">    import torchvision</span>
+
+<span class="sd">    dataset = torchdata.datasets.WrapDataset(</span>
+<span class="sd">        torchvision.datasets.MNIST(&quot;./data&quot;, download=True)</span>
+<span class="sd">    )</span>
+
+<span class="sd">After that you can use `map`, `apply` and other functionalities like you normally would with</span>
+<span class="sd">either `torchdata.Dataset` or `torchdata.Iterable`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">typing</span>
 
@@ -234,7 +252,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_chain_object</span> <span class="o">=</span> <span class="n">chain_object</span>
 
     <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to each element of dataset.**</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Map function to each element of dataset.**</span>
 
 <span class="sd">        Function has no specified signature; it is user&#39;s responsibility to ensure</span>
 <span class="sd">        it is taking correct arguments as returned from `__getitem__` (in case of `Dataset`)</span>
@@ -254,7 +272,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_maps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Apply function to every element of the dataset.**</span>
 
 <span class="sd">        Specified function has to take Python generator as first argument.</span>
@@ -300,7 +318,7 @@
 <span class="sd">                Value returned by function</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">function</span><span class="p">((</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">function</span><span class="p">((</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">rf</span><span class="s2">&quot;&quot;&quot;**Concatenate </span><span class="si">{self}</span><span class="s2"> and another </span><span class="si">{self}</span><span class="s2"> compatible object.**</span>
@@ -386,9 +404,39 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_DatasetBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ConcatIterable</span><span class="p">,</span> <span class="n">ChainIterable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_which</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Filtered  data according to** `predicate`.</span>
+
+<span class="sd">        Values are filtered based on value returned after every operation (including `map`)</span>
+<span class="sd">        specified before `filter`, for example::</span>
+
+<span class="sd">            dataset = (</span>
+<span class="sd">                    ExampleIterable(0, 100)</span>
+<span class="sd">                    .map(lambda value: value + 50)</span>
+<span class="sd">                    .filter(lambda elem: elem % 2 == 0)</span>
+<span class="sd">            )</span>
+
+<span class="sd">        Above will return elements `[50, 100]` divisible by `2`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        predicate: Callable -&gt; bool</span>
+<span class="sd">                Function returning bool and taking single argument (which is</span>
+<span class="sd">                whatever is returned from the dataset when `filter` is applied).</span>
+<span class="sd">                If `True`, sample will be returned, otherwise it is skipped.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Dataset</span>
+<span class="sd">                Returns self</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_which</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maps</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 
 <div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../packages/torchdata.html#torchdata.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">TorchDataset</span><span class="p">,</span> <span class="n">_DatasetBase</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">MetaDataset</span><span class="p">):</span>
@@ -473,6 +521,44 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_cachers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cacher</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_which</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maps</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span> <span class="n">initializer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Reduce dataset to single element with function.**</span>
+
+<span class="sd">        Works like `functools.reduce &lt;https://docs.python.org/3/library/functools.html#functools.reduce&gt;`__.</span>
+
+<span class="sd">        **Example**::</span>
+
+<span class="sd">            class Dataset(torchdata.Dataset):</span>
+<span class="sd">                def __init__(self, max: int):</span>
+<span class="sd">                    super().__init__() # This is necessary</span>
+<span class="sd">                    self.range = list(range(max))</span>
+
+<span class="sd">                def __getitem__(self, index):</span>
+<span class="sd">                    return self.range[index]</span>
+
+<span class="sd">                def __len__(self):</span>
+<span class="sd">                    return len(self.range)</span>
+
+<span class="sd">            summed_dataset = Dataset(10).reduce(lambda x, y: x + y) # Returns 45</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function : typing.Callable</span>
+<span class="sd">                Two argument function returning single value used to `reduce` dataset.</span>
+<span class="sd">        initializer: typing.Any, optional</span>
+<span class="sd">                Value with which reduction will start.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        typing.Any</span>
+<span class="sd">                Reduced value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">initializer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">),</span> <span class="n">initializer</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">maps</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Reset dataset state.**</span>
@@ -806,6 +892,58 @@
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span></div>
+
+
+<span class="k">class</span> <span class="nc">_Wrap</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="WrapDataset"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.WrapDataset">[docs]</a><span class="k">class</span> <span class="nc">WrapDataset</span><span class="p">(</span><span class="n">_Wrap</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Dataset wrapping standard** `torch.data.utils.Dataset` **and making it** `torchdata.Dataset` **compatible.**</span>
+
+<span class="sd">    All attributes of wrapped dataset can be used normally, for example::</span>
+
+<span class="sd">        dataset = torchdata.datasets.WrapDataset(</span>
+<span class="sd">            torchvision.datasets.MNIST(&quot;./data&quot;)</span>
+<span class="sd">        )</span>
+<span class="sd">        dataset.train # True, has all MNIST attributes</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    dataset: `torch.data.utils.Dataset`</span>
+<span class="sd">            Dataset to be wrapped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="WrapDataset.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.WrapDataset.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="n">Dataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WrapIterable"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.WrapIterable">[docs]</a><span class="k">class</span> <span class="nc">WrapIterable</span><span class="p">(</span><span class="n">_Wrap</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Iterable wrapping standard** `torch.data.utils.IterableDataset` **and making it** `torchdata.Iterable` **compatible.**</span>
+
+<span class="sd">    All attributes of wrapped dataset can be used normally as is the case for</span>
+<span class="sd">    `torchdata.datasets.WrapDataset`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    dataset: `torch.data.utils.Dataset`</span>
+<span class="sd">            Dataset to be wrapped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="WrapIterable.__init__"><a class="viewcode-back" href="../../packages/torchdata.datasets.html#torchdata.WrapIterable.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">Iterable</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span></div>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span></div>
 </pre></div>
 
              </article>

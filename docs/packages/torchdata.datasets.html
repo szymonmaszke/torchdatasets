@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.1.2
                 </div>
               
             
@@ -218,6 +218,20 @@
               
   <div class="section" id="module-torchdata.datasets">
 <span id="torchdata-datasets"></span><h1>torchdata.datasets<a class="headerlink" href="#module-torchdata.datasets" title="Permalink to this headline">¶</a></h1>
+<p><strong>Concrete implementations of</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>and</strong> <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a>.</p>
+<p>Classes below extend and/or make it easier for user to implement common functionalities.
+To use standard PyTorch datasets defined by, for example, <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchvision</span></code>, you can
+use <a class="reference internal" href="#torchdata.datasets.WrapDataset" title="torchdata.datasets.WrapDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WrapDataset</span></code></a> or <a class="reference internal" href="#torchdata.datasets.WrapIterable" title="torchdata.datasets.WrapIterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WrapIterable</span></code></a> like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">torchdata</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">WrapDataset</span><span class="p">(</span>
+    <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>After that you can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> and other functionalities like you normally would with
+either <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> or <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a>.</p>
 <dl class="class">
 <dt id="torchdata.datasets.ChainDataset">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ChainDataset</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainDataset" title="Permalink to this definition">¶</a></dt>
@@ -502,6 +516,47 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 <dl class="method">
 <dt id="torchdata.datasets.TensorDataset.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*tensors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#TensorDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.TensorDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.datasets.WrapDataset">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapDataset</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Dataset wrapping standard</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code> <strong>and making it</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>compatible.</strong></p>
+<p>All attributes of wrapped dataset can be used normally, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">torchdata</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">WrapDataset</span><span class="p">(</span>
+    <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">train</span> <span class="c1"># True, has all MNIST attributes</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>dataset: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code></dt><dd><p>Dataset to be wrapped</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="torchdata.datasets.WrapDataset.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchdata.datasets.WrapIterable">
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapIterable</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Iterable wrapping standard</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.IterableDataset</span></code> <strong>and making it</strong> <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> <strong>compatible.</strong></p>
+<p>All attributes of wrapped dataset can be used normally as is the case for
+<a class="reference internal" href="#torchdata.datasets.WrapDataset" title="torchdata.datasets.WrapDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.datasets.WrapDataset</span></code></a>.</p>
+<dl class="simple">
+<dt>dataset: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code></dt><dd><p>Dataset to be wrapped</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="torchdata.datasets.WrapIterable.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
