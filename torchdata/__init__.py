@@ -44,6 +44,9 @@ which allows the user to use `map`, `apply` and `filter`, for example::
         def __iter__(self):
             return iter(range(self.start, self.end))
 
+    # Only elements divisible by 2
+    dataset = Dataset(100).filter(lambda value: value % 2 == 0)
+
 Concrete implementations of datasets described above is located inside `datasets` module.
 
 For custom caching routines and how to use them see `cachers` and their `modifiers`.
