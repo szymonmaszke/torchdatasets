@@ -1,3 +1,20 @@
+"""**Concrete implementations of** `torchdata.Dataset` **and** `torchdata.Iterable`.
+
+Classes below extend and/or make it easier for user to implement common functionalities.
+To use standard PyTorch datasets defined by, for example, `torchvision`, you can
+use `WrapDataset` or `WrapIterable` like this::
+
+    import torchdata
+    import torchvision
+
+    dataset = torchdata.datasets.WrapDataset(
+        torchvision.datasets.MNIST("./data", download=True)
+    )
+
+After that you can use `map`, `apply` and other functionalities like you normally would with
+either `torchdata.Dataset` or `torchdata.Iterable`.
+"""
+
 import abc
 import functools
 import pathlib
@@ -660,3 +677,55 @@ class Generator(Iterable):
 
     def __iter__(self):
         yield from self.expression
+
+
+class _Wrap:
+    def __getattr__(self, name):
+        return getattr(self.dataset, name)
+
+
+class WrapDataset(_Wrap, Dataset):
+    r"""**Dataset wrapping standard** `torch.data.utils.Dataset` **and making it** `torchdata.Dataset` **compatible.**
+
+    All attributes of wrapped dataset can be used normally, for example::
+
+        dataset = torchdata.datasets.WrapDataset(
+            torchvision.datasets.MNIST("./data")
+        )
+        dataset.train # True, has all MNIST attributes
+
+    Parameters:
+    -----------
+    dataset: `torch.data.utils.Dataset`
+            Dataset to be wrapped
+    """
+
+    def __init__(self, dataset):
+        self.dataset = dataset
+        Dataset.__init__(self)
+
+    def __getitem__(self, index):
+        return self.dataset[index]
+
+    def __len__(self):
+        return len(self)
+
+
+class WrapIterable(_Wrap, Iterable):
+    r"""**Iterable wrapping standard** `torch.data.utils.IterableDataset` **and making it** `torchdata.Iterable` **compatible.**
+
+    All attributes of wrapped dataset can be used normally as is the case for
+    `torchdata.datasets.WrapDataset`.
+
+    Parameters:
+    -----------
+    dataset: `torch.data.utils.Dataset`
+            Dataset to be wrapped
+    """
+
+    def __init__(self, dataset):
+        Iterable.__init__(self)
+        self.dataset = dataset
+
+    def __iter__(self):
+        yield from self.dataset
