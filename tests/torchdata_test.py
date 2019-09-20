@@ -6,13 +6,23 @@ import torchdata
 import torchfunc
 
 from .datasets import ExampleDataset, ExampleIterable
-from .utils import artificial_slowdown, index_is_sample
+from .utils import artificial_slowdown, enumerate_step, index_is_sample
 
 
 def test_basic_iterable():
     dataset = ExampleIterable(0, 100).map(lambda value: value + 12)
     for index, item in enumerate(dataset):
         assert index + 12 == item
+
+
+def test_iterable_filter():
+    dataset = (
+        ExampleIterable(0, 100)
+        .map(lambda value: value + 12)
+        .filter(lambda elem: elem % 2 == 0)
+    )
+    for index, item in enumerate_step(dataset, start=12, step=2):
+        assert index == item
 
 
 def test_basic_dataset():
