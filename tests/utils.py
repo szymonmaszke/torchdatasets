@@ -6,6 +6,13 @@ import torchdata
 from .datasets import ExampleDataset
 
 
+# https://stackoverflow.com/questions/24290025/python-enumerate-downwards-or-with-a-custom-step
+def enumerate_step(iterable, start=0, step=1):
+    for elem in iterable:
+        yield (start, elem)
+        start += step
+
+
 def pass_through_dataset(dataset):
     for elem in dataset:
         pass
