@@ -1,4 +1,5 @@
 import abc
+import functools
 import pathlib
 import typing
 
@@ -19,7 +20,7 @@ class _DatasetBase(Base):
         self._chain_object = chain_object
 
     def map(self, function: typing.Callable):
-        r"""**Apply function to each element of dataset.**
+        r"""**Map function to each element of dataset.**
 
         Function has no specified signature; it is user's responsibility to ensure
         it is taking correct arguments as returned from `__getitem__` (in case of `Dataset`)
@@ -39,7 +40,7 @@ class _DatasetBase(Base):
         self._maps.append(function)
         return self
 
-    def apply(self, function: typing.Callable, *args, **kwargs):
+    def apply(self, function):
         r"""**Apply function to every element of the dataset.**
 
         Specified function has to take Python generator as first argument.
@@ -85,7 +86,7 @@ class _DatasetBase(Base):
                 Value returned by function
 
         """
-        return function((value for value in self), *args, **kwargs)
+        return function((value for value in self))
 
     def __or__(self, other):
         rf"""**Concatenate {self} and another {self} compatible object.**
@@ -288,6 +289,44 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDataset):
         self._cachers.append(cacher)
         self._which.append(len(self._maps))
         return self
+
+    def reduce(self, function: typing.Callable, initializer=None):
+        r"""**Reduce dataset to single element with function.**
+
+        Works like `functools.reduce <https://docs.python.org/3/library/functools.html#functools.reduce>`__.
+
+        **Example**::
+
+            class Dataset(torchdata.Dataset):
+                def __init__(self, max: int):
+                    super().__init__() # This is necessary
+                    self.range = list(range(max))
+
+                def __getitem__(self, index):
+                    return self.range[index]
+
+                def __len__(self):
+                    return len(self.range)
+
+            summed_dataset = Dataset(10).reduce(lambda x, y: x + y) # Returns 45
+
+
+        Parameters
+        ----------
+        function : typing.Callable
+                Two argument function returning single value used to `reduce` dataset.
+        initializer: typing.Any, optional
+                Value with which reduction will start.
+
+        Returns
+        -------
+        typing.Any
+                Reduced value
+
+        """
+        if initializer is None:
+            return functools.reduce(function, (item for item in self))
+        return functools.reduce(function, (item for item in self), initializer)
 
     def reset(self, cache: bool = True, maps: bool = True):
         r"""**Reset dataset state.**
