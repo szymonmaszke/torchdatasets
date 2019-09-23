@@ -18,9 +18,10 @@ PyTorch's datasets.
 ### Functionalities overview:
 
 * Use `map`, `apply`, `reduce` or `filter`
-* `cache` data in RAM or on disk (even partially, say first `20%`)
+* `cache` data in RAM/disk/your own method (even partially, say first `20%`)
 * Full PyTorch's [`Dataset`](https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset) and [`IterableDataset`](https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset>) support (including [`torchvision`](https://pytorch.org/docs/stable/torchvision/index.html))
 * General `torchdata.maps` like `Flatten` or `Select`
+* Extensible interface (your own cache methods, cache modifiers, maps etc.)
 * Concrete `torchdata.datasets` designed for file reading and other general tasks
 
 
