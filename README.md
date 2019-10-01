@@ -15,7 +15,7 @@ like `map` or `cache` (with some additions unavailable in aforementioned).
 All of that with minimal interference (single call to `super().__init__()`) in original
 PyTorch's datasets.
 
-### Functionalities overview:
+### :wrench: Functionalities
 
 * Use `map`, `apply`, `reduce` or `filter`
 * `cache` data in RAM/disk/your own method (even partially, say first `20%`)
@@ -25,7 +25,7 @@ PyTorch's datasets.
 * Concrete `torchdata.datasets` designed for file reading and other general tasks
 
 
-# Quick examples
+# :bulb: Mini examples
 
 - Create image dataset, convert it to Tensors, cache and concatenate with smoothed labels:
 
@@ -69,9 +69,9 @@ images = (
 ```
 To see what else you can do please check [**torchdata documentation**](https://szymonmaszke.github.io/torchdata/)
 
-# Installation
+# :unlock: Installation
 
-## [pip](<https://pypi.org/project/torchdata/>)
+## :snake: [pip](<https://pypi.org/project/torchdata/>)
 
 ### Latest release:
 
@@ -85,7 +85,7 @@ pip install --user torchdata
 pip install --user torchdata-nightly
 ```
 
-## [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchdata)
+## :whale2: [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchdata)
 
 __CPU standalone__ and various versions of __GPU enabled__ images are available
 at [dockerhub](https://cloud.docker.com/repository/docker/szymonmaszke/torchdata).
@@ -99,7 +99,7 @@ docker pull szymonmaszke/torchdata:18.04
 Nightly builds are also available, just prefix tag with `nightly_`. If you are going for `GPU` image make sure you have
 [nvidia/docker](https://github.com/NVIDIA/nvidia-docker) installed and it's runtime set.
 
-# Contributing
+# :question: Contributing
 
 If you find any issue or you think some functionality may be useful to others and fits this library, please [open new Issue](https://help.github.com/en/articles/creating-an-issue) or [create Pull Request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
 
