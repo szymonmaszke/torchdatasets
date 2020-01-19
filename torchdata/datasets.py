@@ -708,7 +708,7 @@ class WrapDataset(_Wrap, Dataset):
         return self.dataset[index]
 
     def __len__(self):
-        return len(self)
+        return len(self.dataset)
 
 
 class WrapIterable(_Wrap, Iterable):
