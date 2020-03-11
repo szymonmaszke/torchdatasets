@@ -85,10 +85,10 @@ pip install --user torchdata
 pip install --user torchdata-nightly
 ```
 
-## :whale2: [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchdata)
+## :whale2: [Docker](https://hub.docker.com/r/szymonmaszke/torchdata)
 
 __CPU standalone__ and various versions of __GPU enabled__ images are available
-at [dockerhub](https://cloud.docker.com/repository/docker/szymonmaszke/torchdata).
+at [dockerhub](https://hub.docker.com/r/szymonmaszke/torchdata/tags).
 
 For CPU quickstart, issue:
 
