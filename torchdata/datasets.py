@@ -591,7 +591,7 @@ class Files(Dataset):
 
     def __init__(self, files: typing.List[pathlib.Path], *args, **kwargs):
         super().__init__()
-        self.files: typing.List = files
+        self.files = files
         self.args = args
         self.kwargs = kwargs
 

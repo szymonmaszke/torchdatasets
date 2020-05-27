@@ -8,7 +8,6 @@ for more examples and information.
 """
 
 import builtins
-import dataclasses
 
 import torch
 from torch.utils.data import RandomSampler, Sampler, SubsetRandomSampler
@@ -49,7 +48,10 @@ class RandomSubsetSampler(Base, RandomSampler):
 
 class _Equalizer(Sampler):
     def __init__(self, labels: torch.tensor, function):
-        tensors = [torch.nonzero(labels == i).flatten() for i in torch.unique(labels)]
+        tensors = [
+            torch.nonzero(labels == i, as_tuple=False).flatten()
+            for i in torch.unique(labels)
+        ]
         self.samples_per_label = getattr(builtins, function)(map(len, tensors))
         self.samplers = [
             iter(
@@ -107,7 +109,6 @@ class RandomUnderSampler(_Equalizer):
         super().__init__(labels, "min")
 
 
-@dataclasses.dataclass
 class Distribution(Sampler):
     r"""**Sample** `num_samples` **indices from distribution object.**
 
@@ -120,8 +121,13 @@ class Distribution(Sampler):
 
     """
 
-    distribution: torch.distributions.distribution.Distribution
-    num_samples: int
+    def __init__(
+        self,
+        distribution: torch.distributions.distribution.Distribution,
+        num_samples: int,
+    ):
+        self.distribution = distribution
+        self.num_samples = num_samples
 
     def __iter__(self):
         for _ in range(self.num_samples):

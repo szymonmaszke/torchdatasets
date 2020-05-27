@@ -113,9 +113,9 @@ class Pickle(Cacher):
     """
 
     def __init__(self, path: pathlib.Path, extension: str = ".pkl"):
-        self.path: pathlib.Path = path
+        self.path = path
         self.path.mkdir(parents=True, exist_ok=True)
-        self.extension: str = extension
+        self.extension = extension
 
     def __contains__(self, index: int) -> bool:
         """**Check whether file exists on disk.**

@@ -52,9 +52,9 @@ class After(Base):
     """
 
     def __init__(self, samples: int, function: typing.Callable):
-        self.samples: int = samples
-        self.function: typing.Callable = function
-        self._elements_counter: int = -1
+        self.samples = samples
+        self.function = function
+        self._elements_counter = -1
 
     def __call__(self, sample):
         self._elements_counter += 1
@@ -123,8 +123,8 @@ class OnSignal(Base):
     """
 
     def __init__(self, signal: typing.Callable[..., bool], function: typing.Callable):
-        self.signal: typing.Callable = signal
-        self.function: typing.Callable = function
+        self.signal = signal
+        self.function = function
 
     def __call__(self, sample):
         if self.signal():
@@ -197,8 +197,8 @@ class Repeat(Base):
     """
 
     def __init__(self, n: int, function: typing.Callable):
-        self.n: int = n
-        self.function: typing.Callable = function
+        self.n = n
+        self.function = function
 
     def __call__(self, sample):
         for _ in range(self.n):
@@ -326,7 +326,7 @@ class ToAll(Base):
     """
 
     def __init__(self, function: typing.Callable):
-        self.function: typing.Callable = function
+        self.function = function
 
     def __call__(self, sample):
         return tuple(self.function(subsample) for subsample in sample)
@@ -366,7 +366,7 @@ class To(Base):
     """
 
     def __init__(self, function: typing.Callable, *indices):
-        self.function: typing.Callable = function
+        self.function = function
         self.indices = set(indices)
 
     def __call__(self, sample):
@@ -410,7 +410,7 @@ class Except(Base):
     """
 
     def __init__(self, function: typing.Callable, *indices):
-        self.function: typing.Callable = function
+        self.function = function
         self.indices = set(indices)
 
     def __call__(self, sample):

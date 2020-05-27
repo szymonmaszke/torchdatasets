@@ -217,7 +217,7 @@ class _Percent(Modifier):
     def __init__(self, p: float, length: int, cacher):
         if not 0 < p < 1:
             raise ValueError(f"Percentage has to be between 0 and 1, but got {p}")
-        self.threshold: int = int(length * p)
+        self.threshold = int(length * p)
         self.cacher = cacher
 
 
@@ -256,7 +256,7 @@ class _Index(Modifier):
         pass
 
     def __init__(self, index: int, cacher):
-        self.index: int = index
+        self.index = index
         self.cacher = cacher
 
 
