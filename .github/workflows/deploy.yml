@@ -5,7 +5,7 @@ on:
   release:
     types: [created]
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   docker-gpu:
@@ -61,9 +61,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Change metadata if nightly
+      - name: Change version and name if nightly
         if: github.event_name != 'release'
-        run: ./nightly
+        run: ./nightly.sh
       - uses: actions/setup-python@v1
         with:
           python-version: "3.7"

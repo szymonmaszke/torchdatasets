@@ -1,10 +1,20 @@
+import pathlib
+
 import setuptools
 
-name, version = open("METADATA").read().splitlines()
+
+def read(HERE: pathlib.Path, filename, variable):
+    namespace = {}
+
+    exec(open(HERE / "torchdata" / filename).read(), namespace)  # get version
+    return namespace[variable]
+
+
+HERE = pathlib.Path(__file__).resolve().parent
 
 setuptools.setup(
-    name=name,
-    version=version,
+    name=read(HERE, pathlib.Path("_name.py"), "_name"),
+    version=read(HERE, pathlib.Path("_version.py"), "__version__"),
     license="MIT",
     author="Szymon Maszke",
     author_email="szymon.maszke@protonmail.com",

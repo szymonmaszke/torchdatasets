@@ -58,4 +58,5 @@ are located inside `samplers`.
 """
 
 from . import cachers, datasets, maps, modifiers, samplers
+from ._version import __version__
 from .datasets import Dataset, Iterable
