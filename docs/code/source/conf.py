@@ -32,7 +32,6 @@ project = "torchdata"
 copyright = "2019, Szymon Maszke"
 author = "Szymon Maszke"
 version = get_version()
-print(version)
 
 
 # -- General configuration ---------------------------------------------------
