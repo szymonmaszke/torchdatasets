@@ -14,11 +14,12 @@ setuptools.setup(
     url="https://github.com/pypa/torchdata",
     packages=setuptools.find_packages(),
     install_requires=open("environments/requirements.txt").read().splitlines(),
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
