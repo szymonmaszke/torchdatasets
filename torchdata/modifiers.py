@@ -216,7 +216,9 @@ class _Percent(Modifier):
 
     def __init__(self, p: float, length: int, cacher):
         if not 0 < p < 1:
-            raise ValueError(f"Percentage has to be between 0 and 1, but got {p}")
+            raise ValueError(
+                "Percentage has to be between 0 and 1, but got {}".format(p)
+            )
         self.threshold = int(length * p)
         self.cacher = cacher
 

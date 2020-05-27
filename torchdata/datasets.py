@@ -106,7 +106,7 @@ class _DatasetBase(Base):
         return function((value for value in self))
 
     def __or__(self, other):
-        rf"""**Concatenate {self} and another {self} compatible object.**
+        r"""**Concatenate {self} and another {self} compatible object.**
 
         During iteration, items from both dataset will be returned as `tuple`.
         Another object could be PyTorch's base class of this object.
@@ -120,15 +120,17 @@ class _DatasetBase(Base):
 
         Returns
         -------
-        {self._concat_object}
+        {concat_object}
                 Proxy object responsible for concatenation between samples.
                 Can be used in the same manner as this object.
 
-        """
+        """.format(
+            self=self, concat_object=self._concat_object
+        )
         return self._concat_object((self, other))
 
     def __add__(self, other):
-        rf"""**Chain {self} and another {self} compatible object.**
+        r"""**Chain {self} and another {self} compatible object.**
 
         During iteration, items from self will be returned first and items
         from other dataset after those.
@@ -142,11 +144,13 @@ class _DatasetBase(Base):
 
         Returns
         -------
-        {self._chain_object}
+        {chain_object}
                 Proxy object responsible for chaining datasets.
                 Can be used in the same manner as this object.
 
-        """
+        """.format(
+            self=self, chain_object=self._chain_object
+        )
         return self._chain_object((self, other))
 
 
