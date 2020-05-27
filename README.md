@@ -4,7 +4,7 @@
 
 | Version | Docs | Tests | Coverage | Style | PyPI | Python | PyTorch | Docker | Roadmap |
 |---------|------|-------|----------|-------|------|--------|---------|--------|---------|
-| [![Version](https://img.shields.io/static/v1?label=&message=0.1.3&color=377EF0&style=for-the-badge)](https://github.com/szymonmaszke/torchdata/releases) | [![Documentation](https://img.shields.io/static/v1?label=&message=docs&color=EE4C2C&style=for-the-badge)](https://szymonmaszke.github.io/torchdata/)  | ![Tests](https://github.com/szymonmaszke/torchdata/workflows/test/badge.svg) | ![Coverage](https://img.shields.io/codecov/c/github/szymonmaszke/torchdata?label=%20&logo=codecov&style=for-the-badge) | [![codebeat](https://img.shields.io/static/v1?label=&message=CB&color=27A8E0&style=for-the-badge)](https://codebeat.co/projects/github-com-szymonmaszke-torchdata-master) | [![PyPI](https://img.shields.io/static/v1?label=&message=PyPI&color=377EF0&style=for-the-badge)](https://pypi.org/project/torchdata/) | [![Python](https://img.shields.io/static/v1?label=&message=3.7&color=377EF0&style=for-the-badge&logo=python&logoColor=F8C63D)](https://www.python.org/) | [![PyTorch](https://img.shields.io/static/v1?label=&message=>=1.2.0&color=EE4C2C&style=for-the-badge)](https://pytorch.org/) | [![Docker](https://img.shields.io/static/v1?label=&message=docker&color=309cef&style=for-the-badge)](https://hub.docker.com/r/szymonmaszke/torchdata) | [![Roadmap](https://img.shields.io/static/v1?label=&message=roadmap&color=009688&style=for-the-badge)](https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md) |
+| [![Version](https://img.shields.io/static/v1?label=&message=0.2.0&color=377EF0&style=for-the-badge)](https://github.com/szymonmaszke/torchdata/releases) | [![Documentation](https://img.shields.io/static/v1?label=&message=docs&color=EE4C2C&style=for-the-badge)](https://szymonmaszke.github.io/torchdata/)  | ![Tests](https://github.com/szymonmaszke/torchdata/workflows/test/badge.svg) | ![Coverage](https://img.shields.io/codecov/c/github/szymonmaszke/torchdata?label=%20&logo=codecov&style=for-the-badge) | [![codebeat](https://img.shields.io/static/v1?label=&message=CB&color=27A8E0&style=for-the-badge)](https://codebeat.co/projects/github-com-szymonmaszke-torchdata-master) | [![PyPI](https://img.shields.io/static/v1?label=&message=PyPI&color=377EF0&style=for-the-badge)](https://pypi.org/project/torchdata/) | [![Python](https://img.shields.io/static/v1?label=&message=3.6&color=377EF0&style=for-the-badge&logo=python&logoColor=F8C63D)](https://www.python.org/) | [![PyTorch](https://img.shields.io/static/v1?label=&message=>=1.2.0&color=EE4C2C&style=for-the-badge)](https://pytorch.org/) | [![Docker](https://img.shields.io/static/v1?label=&message=docker&color=309cef&style=for-the-badge)](https://hub.docker.com/r/szymonmaszke/torchdata) | [![Roadmap](https://img.shields.io/static/v1?label=&message=roadmap&color=009688&style=for-the-badge)](https://github.com/szymonmaszke/torchdata/blob/master/ROADMAP.md) |
 
 [__torchdata__](https://szymonmaszke.github.io/torchdata/) is [PyTorch](https://pytorch.org/) oriented library focused on data processing and input pipelines in general.
 
@@ -92,7 +92,7 @@ at [dockerhub](https://hub.docker.com/r/szymonmaszke/torchdata/tags).
 
 For CPU quickstart, issue:
 
-```shell  
+```shell
 docker pull szymonmaszke/torchdata:18.04
 ```
 
