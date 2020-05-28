@@ -218,7 +218,9 @@
 <span class="sd">Following `dataset` object will be used throughout documentation for brevity (if not defined explicitly)::</span>
 
 <span class="sd">    # Image loading dataset</span>
-<span class="sd">    class Example(torchdata.Dataset):</span>
+<span class="sd">    import torchdata as td</span>
+
+<span class="sd">    class Example(td.Dataset):</span>
 <span class="sd">        def __init__(self, max: int):</span>
 <span class="sd">            self.values = list(range(max))</span>
 
@@ -292,12 +294,12 @@
 <span class="sd">        import torch</span>
 <span class="sd">        from PIL import Image</span>
 
-<span class="sd">        import torchdata</span>
+<span class="sd">        import torchdata as td</span>
 <span class="sd">        import torchvision</span>
 
 
 <span class="sd">        # Image loading dataset</span>
-<span class="sd">        class ImageDataset(torchdata.FilesDataset):</span>
+<span class="sd">        class ImageDataset(td.datasets.Files):</span>
 <span class="sd">            def __getitem__(self, index):</span>
 <span class="sd">                return Image.open(self.files[index])</span>
 
@@ -317,7 +319,7 @@
 <span class="sd">            .cache()</span>
 <span class="sd">            # If handle returns True, mapping will be applied</span>
 <span class="sd">            .map(</span>
-<span class="sd">                torchdata.maps.OnSignal(</span>
+<span class="sd">                td.maps.OnSignal(</span>
 <span class="sd">                    handle, lambda image: image + torch.rand_like(image)</span>
 <span class="sd">                )</span>
 <span class="sd">            )</span>
@@ -394,8 +396,12 @@
 
 <span class="sd">    Example::</span>
 
+<span class="sd">        import torchdata as td</span>
+
+<span class="sd">        # Creating td.Dataset instance</span>
+<span class="sd">        ...</span>
 <span class="sd">        # Increase each value by 10 * 1</span>
-<span class="sd">        dataset = dataset.map(torchdata.maps.Repeat(10, lambda x: x+1))</span>
+<span class="sd">        dataset = dataset.map(td.maps.Repeat(10, lambda x: x+1))</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -450,7 +456,7 @@
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
 <span class="sd">        new_dataset = dataset | dataset</span>
 <span class="sd">        # Only second (first index) element will be taken</span>
-<span class="sd">        selected = new_dataset.map(torchdata.maps.Select(1))</span>
+<span class="sd">        selected = new_dataset.map(td.maps.Select(1))</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -486,7 +492,7 @@
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
 <span class="sd">        new_dataset = dataset | dataset | dataset</span>
 <span class="sd">        # Zeroth and last samples dropped</span>
-<span class="sd">        selected = new_dataset.map(torchdata.maps.Drop(0, 2))</span>
+<span class="sd">        selected = new_dataset.map(td.maps.Drop(0, 2))</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -526,7 +532,7 @@
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
 <span class="sd">        new_dataset = dataset | dataset | dataset</span>
 <span class="sd">        # Each concatenated sample will be increased by 1</span>
-<span class="sd">        selected = new_dataset.map(torchdata.maps.ToAll(lambda x: x+1))</span>
+<span class="sd">        selected = new_dataset.map(td.maps.ToAll(lambda x: x+1))</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -562,7 +568,7 @@
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
 <span class="sd">        new_dataset = dataset | dataset | dataset</span>
 <span class="sd">        # Zero and first subsamples will be increased by one, last one left untouched</span>
-<span class="sd">        selected = new_dataset.map(torchdata.maps.To(lambda x: x+1, 0, 1))</span>
+<span class="sd">        selected = new_dataset.map(td.maps.To(lambda x: x+1, 0, 1))</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -606,7 +612,7 @@
 <span class="sd">        # Sample-wise concatenate dataset three times</span>
 <span class="sd">        dataset |= dataset</span>
 <span class="sd">        # Every element increased by one except the first one</span>
-<span class="sd">        selected = new_dataset.map(torchdata.maps.Except(lambda x: x+1, 0))</span>
+<span class="sd">        selected = new_dataset.map(td.maps.Except(lambda x: x+1, 0))</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

@@ -221,11 +221,11 @@
 <p><strong>This module contains PyTorch compatible datasets with extended capabilities.</strong></p>
 <p>To quickly start with <a class="reference internal" href="#module-torchdata" title="torchdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata</span></code></a>, just inherit from <a class="reference internal" href="#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> and create
 your dataset as you normally would, for example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span> <span class="k">as</span> <span class="nn">td</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
-<span class="c1"># Image loading dataset (use torchdata.Files for even less typing :D )</span>
-<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="c1"># Image loading dataset (use td.datasets.Files for even less typing :D )</span>
+<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)]</span>
@@ -248,11 +248,11 @@ can still be used):</p>
 <span class="n">dataloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> is an extension of
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">td.Iterable</span></code> is an extension of
 <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset">torch.utils.data.IterableDataset</a>,
 which allows the user to use <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code>, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Based on original PyTorch example</span>
-<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># This is necessary</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">start</span>

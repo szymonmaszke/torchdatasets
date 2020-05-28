@@ -221,7 +221,9 @@
 <p><strong>This module provides functions one can use with</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset.map" title="torchdata.Dataset.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset.map</span></code></a> <strong>method.</strong></p>
 <p>Following <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset</span></code> object will be used throughout documentation for brevity (if not defined explicitly):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image loading dataset</span>
-<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="kn">import</span> <span class="nn">torchdata</span> <span class="k">as</span> <span class="nn">td</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
 
@@ -280,7 +282,7 @@ please use <code class="xref py py-obj docutils literal notranslate"><span class
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
 <span class="c1"># Zeroth and last samples dropped</span>
-<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Drop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Drop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -309,7 +311,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">dataset</span> <span class="o">|=</span> <span class="n">dataset</span>
 <span class="c1"># Every element increased by one except the first one</span>
-<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Except</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Except</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="py attribute">
@@ -382,12 +384,12 @@ before the end in order to fine-tune your network.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
-<span class="kn">import</span> <span class="nn">torchdata</span>
+<span class="kn">import</span> <span class="nn">torchdata</span> <span class="k">as</span> <span class="nn">td</span>
 <span class="kn">import</span> <span class="nn">torchvision</span>
 
 
 <span class="c1"># Image loading dataset</span>
-<span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">FilesDataset</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">Files</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
@@ -407,7 +409,7 @@ before the end in order to fine-tune your network.</p>
     <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
     <span class="c1"># If handle returns True, mapping will be applied</span>
     <span class="o">.</span><span class="n">map</span><span class="p">(</span>
-        <span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">OnSignal</span><span class="p">(</span>
+        <span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">OnSignal</span><span class="p">(</span>
             <span class="n">handle</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">image</span><span class="p">:</span> <span class="n">image</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand_like</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="p">)</span>
@@ -435,8 +437,12 @@ before the end in order to fine-tune your network.</p>
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Repeat" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function repeatedly to the sample.</strong></p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase each value by 10 * 1</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span> <span class="k">as</span> <span class="nn">td</span>
+
+<span class="c1"># Creating td.Dataset instance</span>
+<span class="o">...</span>
+<span class="c1"># Increase each value by 10 * 1</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -471,7 +477,7 @@ before the end in order to fine-tune your network.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
 <span class="c1"># Only second (first index) element will be taken</span>
-<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -499,7 +505,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
 <span class="c1"># Zero and first subsamples will be increased by one, last one left untouched</span>
-<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">To</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">To</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="py attribute">
@@ -547,7 +553,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample-wise concatenate dataset three times</span>
 <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span> <span class="o">|</span> <span class="n">dataset</span>
 <span class="c1"># Each concatenated sample will be increased by 1</span>
-<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">ToAll</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">ToAll</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="py attribute">

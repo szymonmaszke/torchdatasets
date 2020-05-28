@@ -213,12 +213,15 @@
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
   <h1>Source code for torchdata.cachers</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;**This module contains interface needed for** `cachers` **(used in** `cache` **method of** `torchdata.Dataset` **) .**</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;**This module contains interface needed for** `cachers` **(used in** `cache` **method of** `td.Dataset` **) .**</span>
 
 <span class="sd">To cache on disk all samples using Python&#39;s `pickle &lt;https://docs.python.org/3/library/pickle.html&gt;`__ in folder `cache`</span>
-<span class="sd">(assuming you have already created `torchdata.Dataset` instance named `dataset`)::</span>
+<span class="sd">(assuming you have already created `td.Dataset` instance named `dataset`)::</span>
 
-<span class="sd">    dataset.cache(torchdata.cachers.Pickle(&quot;./cache&quot;))</span>
+<span class="sd">    import torchdata as td</span>
+
+<span class="sd">    ...</span>
+<span class="sd">    dataset.cache(td.cachers.Pickle(&quot;./cache&quot;))</span>
 
 <span class="sd">Users are encouraged to write their custom `cachers` if the ones provided below</span>
 <span class="sd">are too slow or not good enough for their purposes (see `Cacher` abstract interface below).</span>
@@ -304,7 +307,7 @@
 
 <span class="sd">    **This object can be used as a** `context manager` **and it will delete** `path` **at the end of block**::</span>
 
-<span class="sd">        with torchdata.cachers.Pickle(pathlib.Path(&quot;./disk&quot;)) as pickler:</span>
+<span class="sd">        with td.cachers.Pickle(pathlib.Path(&quot;./disk&quot;)) as pickler:</span>
 <span class="sd">            dataset = dataset.map(lambda x: x+1).cache(pickler)</span>
 <span class="sd">            ... # Do something with dataset</span>
 <span class="sd">        ... # Folder removed</span>
