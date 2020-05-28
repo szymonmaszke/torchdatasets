@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -243,9 +243,9 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 <span class="p">)</span>
 </pre></div>
 </div>
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.All">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">All</code><span class="sig-paren">(</span><em class="sig-param">*modifiers</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#All"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.All" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">All</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">modifiers</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#All"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.All" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return True if all modifiers return True on given sample.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -254,9 +254,9 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.Any">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Any</code><span class="sig-paren">(</span><em class="sig-param">*modifiers</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Any"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Any" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Any</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">modifiers</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Any"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Any" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return True if any modifier returns True on given sample.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -265,9 +265,9 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.FromIndex">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">FromIndex</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#FromIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.FromIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">FromIndex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#FromIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.FromIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache samples from specified index leaving the rest untouched.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,9 +279,9 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.FromPercentage">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">FromPercentage</code><span class="sig-paren">(</span><em class="sig-param">p: float</em>, <em class="sig-param">length: int</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#FromPercentage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.FromPercentage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">FromPercentage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#FromPercentage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.FromPercentage" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache from specified percentage of samples leaving the rest untouched.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -294,9 +294,9 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.Indices">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Indices</code><span class="sig-paren">(</span><em class="sig-param">cacher</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Indices" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cacher</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Indices" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache samples if index is one of specified.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -306,17 +306,17 @@ and implementing <code class="xref py py-obj docutils literal notranslate"><span
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Indices.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">cacher</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Indices.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Indices.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cacher</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Indices.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Indices.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.Lambda">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Lambda</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Lambda" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Lambda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Lambda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Lambda" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache samples if specified function returns</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -327,15 +327,15 @@ Number of sample is passed as an argument.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Lambda.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Lambda.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Lambda.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Lambda.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Lambda.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.Modifier">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">Modifier</code><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Interface for all modifiers.</strong></p>
@@ -348,16 +348,16 @@ of any <code class="xref py py-obj docutils literal notranslate"><span class="pr
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExampleModifier</span><span class="p">(</span><span class="n">Modifier</span><span class="p">):</span>
 
     <span class="c1"># You have to assign cacher to self.cacher so modifier works.</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cacher</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cacher</span> <span class="o">=</span> <span class="n">cacher</span>
 
     <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="c1"># Cache if index smaller than 100</span>
 </pre></div>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Modifier.__and__">
-<code class="sig-name descname">__and__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__and__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__and__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__and__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__and__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__and__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>If self and other returns True, then use</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>.</p>
 <p><strong>Important:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">self</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">other</span></code> should have the same <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> wrapped.
 Cacher of first modifier is used no matter what.</p>
@@ -374,9 +374,9 @@ Cacher of first modifier is used no matter what.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Modifier.__contains__">
-<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__contains__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Acts as invisible proxy for</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>’s <a class="reference internal" href="#torchdata.modifiers.Modifier.__contains__" title="torchdata.modifiers.Modifier.__contains__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__contains__</span></code></a> <strong>method.</strong></p>
 <p><strong>User should not override this method.</strong>
 For more information check <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Cacher</span></code> interface.</p>
@@ -387,9 +387,9 @@ For more information check <code class="xref py py-obj docutils literal notransl
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Modifier.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Acts as invisible proxy for</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>’s <a class="reference internal" href="#torchdata.modifiers.Modifier.__getitem__" title="torchdata.modifiers.Modifier.__getitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></a> <strong>method.</strong></p>
 <p><strong>User should not override this method.</strong>
 For more information check <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Cacher</span></code> interface.</p>
@@ -400,9 +400,9 @@ For more information check <code class="xref py py-obj docutils literal notransl
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Modifier.__or__">
-<code class="sig-name descname">__or__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__or__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__or__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__or__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__or__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__or__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>If self or other returns True, then use</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>.</p>
 <p>User should not override this method.</p>
 <p><strong>Important:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">self</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">other</span></code> should have the same <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> wrapped.
@@ -420,9 +420,9 @@ Otherwise exception is thrown. Cacher of first modifier is used in such case.</p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.modifiers.Modifier.__setitem__">
-<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">data: Any</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__setitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchdata/modifiers.html#Modifier.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.Modifier.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Acts as invisible proxy for</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code>’s <a class="reference internal" href="#torchdata.modifiers.Modifier.__setitem__" title="torchdata.modifiers.Modifier.__setitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code></a> <strong>method.</strong></p>
 <p><strong>User should not override this method.</strong>
 For more information check <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.cacher.Cacher</span></code> interface.</p>
@@ -438,9 +438,9 @@ For more information check <code class="xref py py-obj docutils literal notransl
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.UpToIndex">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">UpToIndex</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#UpToIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.UpToIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">UpToIndex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#UpToIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.UpToIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache up to samples of specified index leaving the rest untouched.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -452,9 +452,9 @@ For more information check <code class="xref py py-obj docutils literal notransl
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.modifiers.UpToPercentage">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">UpToPercentage</code><span class="sig-paren">(</span><em class="sig-param">p: float</em>, <em class="sig-param">length: int</em>, <em class="sig-param">cacher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#UpToPercentage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.UpToPercentage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.modifiers.</code><code class="sig-name descname">UpToPercentage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">cacher</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/modifiers.html#UpToPercentage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.modifiers.UpToPercentage" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Cache up to percentage of samples leaving the rest untouched.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -525,13 +525,13 @@ For more information check <code class="xref py py-obj docutils literal notransl
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

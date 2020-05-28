@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -222,9 +222,9 @@
 <p>Those can be used just like PyTorch’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Sampler</span></code> instances.</p>
 <p>See <a class="reference external" href="https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler">PyTorch tutorial</a>
 for more examples and information.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.samplers.Distribution">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">Distribution</code><span class="sig-paren">(</span><em class="sig-param">distribution: torch.distributions.distribution.Distribution</em>, <em class="sig-param">num_samples: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.Distribution" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">Distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distribution</span><span class="p">:</span> <span class="n">torch.distributions.distribution.Distribution</span></em>, <em class="sig-param"><span class="n">num_samples</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.Distribution" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Sample</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">num_samples</span></code> <strong>indices from distribution object.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -236,9 +236,9 @@ for more examples and information.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.samplers.RandomOverSampler">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomOverSampler</code><span class="sig-paren">(</span><em class="sig-param">labels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomOverSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomOverSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomOverSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">labels</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomOverSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomOverSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Sample elements randomly with underrepresented classes upsampled.</strong></p>
 <p>Length is equal to <code class="xref py py-obj docutils literal notranslate"><span class="pre">max_samples_per_class</span> <span class="pre">*</span> <span class="pre">classes</span></code>.</p>
 <dl class="field-list simple">
@@ -248,9 +248,9 @@ for more examples and information.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.samplers.RandomSubsetSampler">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomSubsetSampler</code><span class="sig-paren">(</span><em class="sig-param">indices</em>, <em class="sig-param">replacement=False</em>, <em class="sig-param">num_samples=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomSubsetSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomSubsetSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomSubsetSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indices</span></em>, <em class="sig-param"><span class="n">replacement</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_samples</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomSubsetSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomSubsetSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Sample elements randomly from a given list of indices.</strong></p>
 <p>If without <code class="xref py py-obj docutils literal notranslate"><span class="pre">replacement</span></code>, then sample from a shuffled dataset.
 If with replacement, then user can specify <code class="xref py py-attr docutils literal notranslate"><span class="pre">num_samples</span></code> to draw.</p>
@@ -269,9 +269,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.samplers.RandomUnderSampler">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomUnderSampler</code><span class="sig-paren">(</span><em class="sig-param">labels: None._VariableFunctions.tensor</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomUnderSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomUnderSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.samplers.</code><code class="sig-name descname">RandomUnderSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">labels</span><span class="p">:</span> <span class="n">None._VariableFunctions.tensor</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/samplers.html#RandomUnderSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.samplers.RandomUnderSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Sample elements randomly with overrepresnted classes downsampled.</strong></p>
 <p>Length is equal to <code class="xref py py-obj docutils literal notranslate"><span class="pre">min_samples_per_class</span> <span class="pre">*</span> <span class="pre">classes</span></code>.</p>
 <dl class="field-list simple">
@@ -339,13 +339,13 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

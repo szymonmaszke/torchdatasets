@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -110,7 +110,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -218,17 +218,43 @@
   <div class="section" id="related-projects">
 <h1>Related projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h1>
 <p>Below you can find other projects started by the same author and based on <a class="reference external" href="https://pytorch.org/">PyTorch</a> as well:</p>
+<div class="section" id="torchlayers">
+<h2><a class="reference external" href="https://github.com/szymonmaszke/torchlayers">torchlayers:</a><a class="headerlink" href="#torchlayers" title="Permalink to this headline">¶</a></h2>
+<p><strong>torchlayers</strong> is a library based on PyTorch
+providing <strong>automatic shape and dimensionality inference of</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn</span></code> <strong>layers</strong> + additional
+building blocks featured in current SOTA architectures (e.g. <a class="reference external" href="https://arxiv.org/abs/1905.11946">Efficient-Net</a>).</p>
+<ul class="simple">
+<li><p>Shape inference for most of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn</span></code> module (convolutional, recurrent, transformer, attention and linear layers)</p></li>
+<li><p>Dimensionality inference (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchlayers.Conv</span></code> working as <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Conv1d/2d/3d</span></code> based on <code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span> <span class="pre">shape</span></code>)</p></li>
+<li><p>Shape inference of user created modules</p></li>
+<li><p>Additional <a class="reference external" href="https://www.tensorflow.org/guide/keras">Keras-like</a> layers (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchlayers.Reshape</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchlayers.StandardNormalNoise</span></code>)</p></li>
+<li><p>Additional SOTA layers mostly from ImageNet competitions (e.g. <a class="reference external" href="https://arxiv.org/abs/1608.06993">PolyNet</a>, <a class="reference external" href="https://arxiv.org/abs/1709.01507">Squeeze-And-Excitation</a>, <a class="reference external" href="www.arxiv.org/abs/1512.03385">StochasticDepth</a>.</p></li>
+<li><p>Useful defaults (<code class="xref py py-obj docutils literal notranslate"><span class="pre">same</span></code> padding and default <code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel_size=3</span></code> for <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv</span></code>, dropout rates etc.)</p></li>
+<li><p>Zero overhead and <a class="reference external" href="https://pytorch.org/docs/stable/jit.html">torchscript</a> support</p></li>
+</ul>
+<p>You can read documentation over at <a class="reference external" href="https://github.com/szymonmaszke/torchlayers">https://github.com/szymonmaszke/torchlayers</a>.</p>
+</div>
+<div class="section" id="torchlambda">
+<h2><a class="reference external" href="https://github.com/szymonmaszke/torchlambda">torchlambda:</a><a class="headerlink" href="#torchlambda" title="Permalink to this headline">¶</a></h2>
+<p><strong>torchlambda</strong> is a tool to deploy PyTorch models on Amazon’s AWS Lambda using AWS SDK for C++ and custom C++ runtime.</p>
+<ul class="simple">
+<li><p>Using statically compiled dependencies whole package is shrunk to only 30MB.</p></li>
+<li><p>Due to small size of compiled source code users can pass their models as AWS Lambda layers. Services like Amazon S3 are no longer necessary to load your model.</p></li>
+<li><p>torchlambda has it’s PyTorch &amp; AWS dependencies always up to date because of continuous deployment run at 03:00 a.m. every day.</p></li>
+</ul>
+<p>You can read project’s wiki over at <a class="reference external" href="https://github.com/szymonmaszke/torchlambda/wiki">https://github.com/szymonmaszke/torchlambda/wiki</a></p>
+</div>
 <div class="section" id="torchfunc">
 <h2><a class="reference external" href="https://github.com/szymonmaszke/torchfunc">torchfunc:</a><a class="headerlink" href="#torchfunc" title="Permalink to this headline">¶</a></h2>
-<p><strong>torchfunc</strong> is PyTorch oriented library with a goal to help you with:</p>
+<p><strong>torchfunc</strong> is a PyTorch oriented library with a goal to help you with:</p>
 <ul class="simple">
-<li><p>Improving and analysing performance of your neural network</p></li>
-<li><p>Plotting and visualizing modules</p></li>
-<li><p>Record neuron activity and tailor it to your specific task or target</p></li>
-<li><p>Get information about your host operating system, CUDA devices and others</p></li>
-<li><p>Day-to-day neural network related duties (model size, seeding, performance measurements etc.)</p></li>
+<li><p>Improve and analyse performance of your neural network</p></li>
+<li><p>Record/analyse internal state of torch.nn.Module as data passes through it</p></li>
+<li><p>Do the above based on external conditions (using single Callable to specify it)</p></li>
+<li><p>Day-to-day neural network related duties (model size, seeding, time measurements etc.)</p></li>
+<li><p>Get information about your host operating system, torch.nn.Module device, CUDA capabilities etc.</p></li>
 </ul>
-<p>It <strong>is not</strong> directly related with model creation but should be considered more of an environment
+<p>It <strong>is not</strong> directly related to model creation but should be considered more of an environment
 around this process.</p>
 <p>You can read documentation over at <a class="reference external" href="https://szymonmaszke.github.io/torchfunc">https://szymonmaszke.github.io/torchfunc</a>.</p>
 </div>
@@ -273,6 +299,8 @@ around this process.</p>
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Related projects</a><ul>
+<li><a class="reference internal" href="#torchlayers">torchlayers:</a></li>
+<li><a class="reference internal" href="#torchlambda">torchlambda:</a></li>
 <li><a class="reference internal" href="#torchfunc">torchfunc:</a></li>
 </ul>
 </li>
@@ -291,13 +319,13 @@ around this process.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="_static/katex_autorenderer.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="_static/katex_autorenderer.js"></script>
      
 
   

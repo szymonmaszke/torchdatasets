@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -222,22 +222,22 @@
 <p>Following <code class="xref py py-obj docutils literal notranslate"><span class="pre">dataset</span></code> object will be used throughout documentation for brevity (if not defined explicitly):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image loading dataset</span>
 <span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maps</span></code> below are general and can be used in various scenarios.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.After">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">After</code><span class="sig-paren">(</span><em class="sig-param">samples: int</em>, <em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#After"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.After" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">After</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#After"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.After" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function after specified number of samples passed.</strong></p>
 <p>Useful for introducing data augmentation after an initial warm-up period.
 If you want a direct control over when function will be applied to sample,
@@ -263,9 +263,9 @@ please use <code class="xref py py-obj docutils literal notranslate"><span class
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.Drop">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Drop</code><span class="sig-paren">(</span><em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Drop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Drop" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Drop</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Drop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Drop" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return sample without selected elements.</strong></p>
 <p>Sample has to be indexable object (has <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method implemented).</p>
 <p><strong>Important:</strong></p>
@@ -297,9 +297,9 @@ all elements will be returned.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.Except">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Except</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Except"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Except" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Except</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Except"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Except" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to all elements of sample except the ones specified.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
 <p><strong>Important:</strong></p>
@@ -312,7 +312,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">Except</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.maps.Except.function">
 <code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.Except.function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to apply to chosen elements of sample.</p>
@@ -323,9 +323,9 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt>
-<code class="sig-name descname">*indices</code></dt>
+<code class="sig-name descname">\*indices</code></dt>
 <dd><p>Indices of objects to which function will not be applied. If left empty,
 function will be applied to every element of sample.</p>
 <dl class="field-list simple">
@@ -345,7 +345,7 @@ function will be applied to every element of sample.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.Flatten">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Flatten</code><span class="sig-paren">(</span><em class="sig-param">types: Tuple = (&lt;class 'list'&gt;</em>, <em class="sig-param">&lt;class 'tuple'&gt;)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Flatten" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Flatten arbitrarily nested sample.</strong></p>
@@ -370,9 +370,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.OnSignal">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">OnSignal</code><span class="sig-paren">(</span><em class="sig-param">signal: Callable[[...], bool], function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#OnSignal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.OnSignal" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">OnSignal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">signal</span><span class="p">:</span> <span class="n">Callable[[…], bool]</span></em>, <em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#OnSignal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.OnSignal" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function based on boolean output of signalling function.</strong></p>
 <p>Useful for introducing data augmentation after an initial warm-up period.
 You can use it to turn on/off specific augmentation with respect to outer world,
@@ -380,7 +380,7 @@ for example turning on image rotations after 5 epochs and turning off 5 epochs
 before the end in order to fine-tune your network.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="kn">import</span> <span class="nn">torchdata</span>
 <span class="kn">import</span> <span class="nn">torchvision</span>
@@ -388,15 +388,15 @@ before the end in order to fine-tune your network.</p>
 
 <span class="c1"># Image loading dataset</span>
 <span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">FilesDataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
 
 <span class="k">class</span> <span class="nc">Handle</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
 <span class="c1"># you can change handle.value to switch whether mapping should be applied</span>
@@ -430,9 +430,9 @@ before the end in order to fine-tune your network.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.Repeat">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param">n: int</em>, <em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Repeat" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Repeat" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function repeatedly to the sample.</strong></p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase each value by 10 * 1</span>
@@ -455,9 +455,9 @@ before the end in order to fine-tune your network.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.Select">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Select" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">Select</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#Select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.Select" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Select elements from sample.</strong></p>
 <p>Sample has to be indexable object (has <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method implemented).</p>
 <p><strong>Important:</strong></p>
@@ -487,9 +487,9 @@ before the end in order to fine-tune your network.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.To">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">To</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em>, <em class="sig-param">*indices</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#To"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.To" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">To</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#To"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.To" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to specified elements of sample.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
 <p><strong>Important:</strong></p>
@@ -502,7 +502,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">To</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.maps.To.function">
 <code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.To.function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to apply to specified elements of sample.</p>
@@ -513,9 +513,9 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt>
-<code class="sig-name descname">*indices</code></dt>
+<code class="sig-name descname">\*indices</code></dt>
 <dd><p>Indices to which function will be applied. If left empty,
 function will not be applied to anything.</p>
 <dl class="field-list simple">
@@ -535,9 +535,9 @@ function will not be applied to anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.maps.ToAll">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">ToAll</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#ToAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.ToAll" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.maps.</code><code class="sig-name descname">ToAll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/maps.html#ToAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.maps.ToAll" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to each element of sample.</strong></p>
 <p>Sample has to be <code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable</span></code> object.</p>
 <p><strong>Important:</strong></p>
@@ -550,7 +550,7 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 <span class="n">selected</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">ToAll</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.maps.ToAll.function">
 <code class="sig-name descname">function</code><a class="headerlink" href="#torchdata.maps.ToAll.function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to apply to each element of sample.</p>
@@ -629,13 +629,13 @@ please use <a class="reference internal" href="#torchdata.maps.Flatten" title="t
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

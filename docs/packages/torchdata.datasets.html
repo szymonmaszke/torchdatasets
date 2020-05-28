@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -232,9 +232,9 @@ use <a class="reference internal" href="#torchdata.datasets.WrapDataset" title="
 </div>
 <p>After that you can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code> and other functionalities like you normally would with
 either <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> or <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a>.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.ChainDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ChainDataset</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ChainDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Concrete</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>responsible for chaining multiple datasets.</strong></p>
 <p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> (logical or operator) is used on instance
 of <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> can be used as well).
@@ -247,7 +247,7 @@ you can use it directly though.</p>
 </pre></div>
 </div>
 <p>Any <code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code> methods can be used normally.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.datasets.ChainDataset.datasets">
 <code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.datasets.ChainDataset.datasets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of datasets to be chained.</p>
@@ -258,17 +258,17 @@ you can use it directly though.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.ChainDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.ChainIterable">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ChainIterable</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainIterable" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ChainIterable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainIterable" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Concrete</strong> <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> <strong>responsible for chaining multiple datasets.</strong></p>
 <p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> (logical or operator) is used on instance
 of <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> (original <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Iterable</span></code> can be used as well).
@@ -281,7 +281,7 @@ you can use it directly though.</p>
 </pre></div>
 </div>
 <p>Any <code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code> methods can be used normally.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.datasets.ChainIterable.datasets">
 <code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.datasets.ChainIterable.datasets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of datasets to be chained.</p>
@@ -292,17 +292,17 @@ you can use it directly though.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.ChainIterable.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainIterable.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ChainIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ChainIterable.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.ConcatDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ConcatDataset</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ConcatDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Concrete</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>responsible for sample-wise concatenation.</strong></p>
 <p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> (logical or operator) is used on instance
 of <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> (original <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset">torch.utils.data.Dataset</a> can be used as well).</p>
@@ -316,7 +316,7 @@ you can use it directly though.</p>
 </pre></div>
 </div>
 <p>Any <code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code> methods can be used normally.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.datasets.ConcatDataset.datasets">
 <code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.datasets.ConcatDataset.datasets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of datasets to be concatenated sample-wise.</p>
@@ -327,17 +327,17 @@ you can use it directly though.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.ConcatDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.ConcatIterable">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ConcatIterable</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatIterable" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">ConcatIterable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatIterable" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Concrete</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code> <strong>responsible for sample-wise concatenation.</strong></p>
 <p>This class is returned when <code class="xref py py-obj docutils literal notranslate"><span class="pre">|</span></code> (logical or operator) is used on instance
 of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Iterable</span></code> (original <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset">torch.utils.data.IterableDataset</a> can be used as well).</p>
@@ -351,7 +351,7 @@ you can use it directly though.</p>
 </pre></div>
 </div>
 <p>Any <code class="xref py py-obj docutils literal notranslate"><span class="pre">IterableDataset</span></code> methods can be used normally.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.datasets.ConcatIterable.datasets">
 <code class="sig-name descname">datasets</code><a class="headerlink" href="#torchdata.datasets.ConcatIterable.datasets" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of datasets to be concatenated sample-wise.</p>
@@ -362,17 +362,17 @@ you can use it directly though.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.ConcatIterable.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">datasets: List</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatIterable.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#ConcatIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.ConcatIterable.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.Files">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">Files</code><span class="sig-paren">(</span><em class="sig-param">files: List[pathlib.Path], *args, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">Files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="p">:</span> <span class="n">List<span class="p">[</span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Create</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">Dataset</span></code> <strong>from list of files.</strong></p>
 <p>Each file is a separate sample. User can use this class directly
 as all necessary methods are implemented.</p>
@@ -388,12 +388,12 @@ and returns file. It’s implementation looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdata</span>
 <span class="kn">import</span> <span class="nn">torchvision</span>
 
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 
 <span class="c1"># Image loading dataset</span>
 <span class="k">class</span> <span class="nc">ImageDataset</span><span class="p">(</span><span class="n">torchdata</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">FilesDataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
 <span class="c1"># Useful class methods are inherited as well</span>
@@ -414,15 +414,15 @@ from files in folder.</p>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.Files.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">files: List[pathlib.Path], *args, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="p">:</span> <span class="n">List<span class="p">[</span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.Files.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">predicate: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">files</span></code> <strong>for which predicate returns</strong> <a href="#id1"><span class="problematic" id="id2">`</span></a>False`**.**</p>
 <p><strong>Note:</strong> This is different from <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a>’s <a class="reference internal" href="#torchdata.datasets.Files.filter" title="torchdata.datasets.Files.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a> method,
 as the filtering is done when called, not during iteration.</p>
@@ -440,9 +440,9 @@ indicating whether to keep a file.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.Files.from_folder">
-<em class="property">classmethod </em><code class="sig-name descname">from_folder</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">regex: str = '*'</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.from_folder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.from_folder" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_folder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">regex</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'*'</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.from_folder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.from_folder" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Create dataset from</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">pathlib.Path</span></code> <strong>-like object.</strong></p>
 <p>Path should be a directory and will be extended via <code class="xref py py-obj docutils literal notranslate"><span class="pre">glob</span></code> method taking <code class="xref py py-obj docutils literal notranslate"><span class="pre">regex</span></code>
 (if specified). Varargs and kwargs will be saved for use for <code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code> method.</p>
@@ -464,9 +464,9 @@ indicating whether to keep a file.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.Files.sort">
-<code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param">key=None</em>, <em class="sig-param">reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.sort" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Files.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Files.sort" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Sort files using Python’s built-in</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted</span></code> <strong>method.</strong></p>
 <p>Arguments are passed directly to <code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted</span></code>.</p>
 <dl class="field-list simple">
@@ -488,42 +488,42 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.Generator">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">Generator</code><span class="sig-paren">(</span><em class="sig-param">expression</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Generator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">Generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Generator" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterable wrapping any generator expression.</strong></p>
 <dl class="simple">
 <dt>expression: Generator expression</dt><dd><p>Generator from which one can <code class="xref py py-obj docutils literal notranslate"><span class="pre">yield</span></code> via <code class="xref py py-obj docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> syntax.</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.Generator.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">expression</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Generator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Generator.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#Generator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.Generator.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.TensorDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">TensorDataset</code><span class="sig-paren">(</span><em class="sig-param">*tensors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#TensorDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.TensorDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">TensorDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">tensors</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#TensorDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.TensorDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Dataset wrapping</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.tensors</span></code> <strong>.</strong></p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code> etc. enabled version of <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.TensorDataset">torch.utils.data.TensorDataset</a>.</p>
 <dl class="simple">
 <dt><a href="#id3"><span class="problematic" id="id4">*</span></a>tensors<span class="classifier">torch.Tensor</span></dt><dd><p>List of <code class="xref py py-obj docutils literal notranslate"><span class="pre">tensors</span></code> to be wrapped.</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.TensorDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*tensors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#TensorDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.TensorDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">tensors</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#TensorDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.TensorDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.WrapDataset">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapDataset</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Dataset wrapping standard</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code> <strong>and making it</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a> <strong>compatible.</strong></p>
 <p>All attributes of wrapped dataset can be used normally, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">torchdata</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">WrapDataset</span><span class="p">(</span>
@@ -536,17 +536,17 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 <dt>dataset: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code></dt><dd><p>Dataset to be wrapped</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.WrapDataset.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapDataset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapDataset.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.datasets.WrapIterable">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapIterable</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.datasets.</code><code class="sig-name descname">WrapIterable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterable wrapping standard</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.IterableDataset</span></code> <strong>and making it</strong> <a class="reference internal" href="torchdata.html#torchdata.Iterable" title="torchdata.Iterable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Iterable</span></code></a> <strong>compatible.</strong></p>
 <p>All attributes of wrapped dataset can be used normally as is the case for
 <a class="reference internal" href="#torchdata.datasets.WrapDataset" title="torchdata.datasets.WrapDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.datasets.WrapDataset</span></code></a>.</p>
@@ -554,9 +554,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 <dt>dataset: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.data.utils.Dataset</span></code></dt><dd><p>Dataset to be wrapped</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.datasets.WrapIterable.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/datasets.html#WrapIterable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.datasets.WrapIterable.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -620,13 +620,13 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

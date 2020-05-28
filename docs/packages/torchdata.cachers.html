@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.2
+                  0.2.0
                 </div>
               
             
@@ -226,15 +226,15 @@
 </div>
 <p>Users are encouraged to write their custom <code class="xref py py-obj docutils literal notranslate"><span class="pre">cachers</span></code> if the ones provided below
 are too slow or not good enough for their purposes (see <a class="reference internal" href="#torchdata.cachers.Cacher" title="torchdata.cachers.Cacher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cacher</span></code></a> abstract interface below).</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.cachers.Cacher">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.cachers.</code><code class="sig-name descname">Cacher</code><a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Interface to fulfil to make object compatible with</strong> <a class="reference internal" href="torchdata.html#torchdata.Dataset.cache" title="torchdata.Dataset.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset.cache</span></code></a> <strong>method.</strong></p>
 <p>If you want to implement your own <code class="xref py py-obj docutils literal notranslate"><span class="pre">caching</span></code> functionality, inherit from
 this class and implement methods described below.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Cacher.__contains__">
-<em class="property">abstract </em><code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__contains__" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return true if sample under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code> <strong>is cached.</strong></p>
 <p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code> returned, cacher’s <a class="reference internal" href="#torchdata.cachers.Cacher.__setitem__" title="torchdata.cachers.Cacher.__setitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code></a> will be called, hence if you are not
 going to cache sample under this <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>, you should describe this operation
@@ -249,9 +249,9 @@ to return correct value in such case.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Cacher.__getitem__">
-<em class="property">abstract </em><code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__getitem__" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Retrieve sample from cache.</strong></p>
 <p><strong>This function MUST return valid data sample and it’s users responsibility
 if custom cacher is implemented</strong>.</p>
@@ -264,9 +264,9 @@ if custom cacher is implemented</strong>.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Cacher.__setitem__">
-<em class="property">abstract </em><code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">data: Any</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__setitem__" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchdata/cachers.html#Cacher.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Cacher.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Saves sample under index in cache or do nothing.</strong></p>
 <p>This function should save sample under <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code> to be later
 retrieved by <a class="reference internal" href="#torchdata.cachers.Cacher.__getitem__" title="torchdata.cachers.Cacher.__getitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></a>.
@@ -285,34 +285,34 @@ in <code class="xref py py-obj docutils literal notranslate"><span class="pre">c
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.cachers.Memory">
 <em class="property">class </em><code class="sig-prename descclassname">torchdata.cachers.</code><code class="sig-name descname">Memory</code><a class="reference internal" href="../_modules/torchdata/cachers.html#Memory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save and load data in Python dictionary</strong>.</p>
 <p>This <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> is used by default inside <a class="reference internal" href="torchdata.html#torchdata.Dataset" title="torchdata.Dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchdata.Dataset</span></code></a>.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Memory.__contains__">
-<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__contains__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p>True if index in dictionary.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Memory.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve data from dictionary.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Memory.__setitem__">
-<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">data: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__setitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Memory.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Memory.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds data to dictionary.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchdata.cachers.Pickle">
-<em class="property">class </em><code class="sig-prename descclassname">torchdata.cachers.</code><code class="sig-name descname">Pickle</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">extension: str = '.pkl'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchdata.cachers.</code><code class="sig-name descname">Pickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">extension</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'.pkl'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save and load data from disk using</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">pickle</span></code> <strong>module.</strong></p>
 <p>Data will be saved as <code class="xref py py-obj docutils literal notranslate"><span class="pre">pkl</span></code> in specified path. If path does not exist,
 it will be created.</p>
@@ -329,7 +329,7 @@ it will be created.</p>
 <p>This <code class="xref py py-obj docutils literal notranslate"><span class="pre">cacher</span></code> can act between consecutive runs, just don’t use <a class="reference internal" href="#torchdata.cachers.Pickle.clean" title="torchdata.cachers.Pickle.clean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean()</span></code></a> method
 or don’t delete the folder manually. If so, <strong>please ensure correct sampling</strong>
 (same seed and sampling order) for reproducible behaviour between runs.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.cachers.Pickle.path">
 <code class="sig-name descname">path</code><a class="headerlink" href="#torchdata.cachers.Pickle.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Path to the folder where samples will be saved and loaded from.</p>
@@ -340,7 +340,7 @@ or don’t delete the folder manually. If so, <strong>please ensure correct samp
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchdata.cachers.Pickle.extension">
 <code class="sig-name descname">extension</code><a class="headerlink" href="#torchdata.cachers.Pickle.extension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extension to use for saved pickle files. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pkl</span></code></p>
@@ -351,29 +351,29 @@ or don’t delete the folder manually. If so, <strong>please ensure correct samp
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Pickle.__contains__">
-<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__contains__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check whether file exists on disk.</strong></p>
 <p>If file is available it is considered cached, hence you can cache data
 between multiple runs (if you ensure repeatable sampling).</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Pickle.__getitem__">
-<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__getitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Retrieve</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code> <strong>specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Name of the item will be equal to <code class="xref py py-obj docutils literal notranslate"><span class="pre">{self.path}/{index}{extension}</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Pickle.__setitem__">
-<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">data: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__setitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code> <strong>in specified folder.</strong></p>
 <p>Name of the item will be equal to <code class="xref py py-obj docutils literal notranslate"><span class="pre">{self.path}/{index}{extension}</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchdata.cachers.Pickle.clean">
 <code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchdata/cachers.html#Pickle.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdata.cachers.Pickle.clean" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove recursively folder</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">self.path</span></code>.</p>
@@ -440,13 +440,13 @@ between multiple runs (if you ensure repeatable sampling).</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   
