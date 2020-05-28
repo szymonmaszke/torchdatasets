@@ -1,9 +1,12 @@
-r"""**This module contains interface needed for** `cachers` **(used in** `cache` **method of** `torchdata.Dataset` **) .**
+r"""**This module contains interface needed for** `cachers` **(used in** `cache` **method of** `td.Dataset` **) .**
 
 To cache on disk all samples using Python's `pickle <https://docs.python.org/3/library/pickle.html>`__ in folder `cache`
-(assuming you have already created `torchdata.Dataset` instance named `dataset`)::
+(assuming you have already created `td.Dataset` instance named `dataset`)::
 
-    dataset.cache(torchdata.cachers.Pickle("./cache"))
+    import torchdata as td
+
+    ...
+    dataset.cache(td.cachers.Pickle("./cache"))
 
 Users are encouraged to write their custom `cachers` if the ones provided below
 are too slow or not good enough for their purposes (see `Cacher` abstract interface below).
@@ -89,7 +92,7 @@ class Pickle(Cacher):
 
     **This object can be used as a** `context manager` **and it will delete** `path` **at the end of block**::
 
-        with torchdata.cachers.Pickle(pathlib.Path("./disk")) as pickler:
+        with td.cachers.Pickle(pathlib.Path("./disk")) as pickler:
             dataset = dataset.map(lambda x: x+1).cache(pickler)
             ... # Do something with dataset
         ... # Folder removed

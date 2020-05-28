@@ -3,7 +3,9 @@ r"""**This module provides functions one can use with** `torchdata.Dataset.map` 
 Following `dataset` object will be used throughout documentation for brevity (if not defined explicitly)::
 
     # Image loading dataset
-    class Example(torchdata.Dataset):
+    import torchdata as td
+
+    class Example(td.Dataset):
         def __init__(self, max: int):
             self.values = list(range(max))
 
@@ -77,12 +79,12 @@ class OnSignal(Base):
         import torch
         from PIL import Image
 
-        import torchdata
+        import torchdata as td
         import torchvision
 
 
         # Image loading dataset
-        class ImageDataset(torchdata.FilesDataset):
+        class ImageDataset(td.datasets.Files):
             def __getitem__(self, index):
                 return Image.open(self.files[index])
 
@@ -102,7 +104,7 @@ class OnSignal(Base):
             .cache()
             # If handle returns True, mapping will be applied
             .map(
-                torchdata.maps.OnSignal(
+                td.maps.OnSignal(
                     handle, lambda image: image + torch.rand_like(image)
                 )
             )
@@ -179,8 +181,12 @@ class Repeat(Base):
 
     Example::
 
+        import torchdata as td
+
+        # Creating td.Dataset instance
+        ...
         # Increase each value by 10 * 1
-        dataset = dataset.map(torchdata.maps.Repeat(10, lambda x: x+1))
+        dataset = dataset.map(td.maps.Repeat(10, lambda x: x+1))
 
     Parameters
     ----------
@@ -235,7 +241,7 @@ class Select(_Choice):
         # Sample-wise concatenate dataset three times
         new_dataset = dataset | dataset
         # Only second (first index) element will be taken
-        selected = new_dataset.map(torchdata.maps.Select(1))
+        selected = new_dataset.map(td.maps.Select(1))
 
     Parameters
     ----------
@@ -271,7 +277,7 @@ class Drop(_Choice):
         # Sample-wise concatenate dataset three times
         new_dataset = dataset | dataset | dataset
         # Zeroth and last samples dropped
-        selected = new_dataset.map(torchdata.maps.Drop(0, 2))
+        selected = new_dataset.map(td.maps.Drop(0, 2))
 
     Parameters
     ----------
@@ -311,7 +317,7 @@ class ToAll(Base):
         # Sample-wise concatenate dataset three times
         new_dataset = dataset | dataset | dataset
         # Each concatenated sample will be increased by 1
-        selected = new_dataset.map(torchdata.maps.ToAll(lambda x: x+1))
+        selected = new_dataset.map(td.maps.ToAll(lambda x: x+1))
 
     Attributes
     ----------
@@ -347,7 +353,7 @@ class To(Base):
         # Sample-wise concatenate dataset three times
         new_dataset = dataset | dataset | dataset
         # Zero and first subsamples will be increased by one, last one left untouched
-        selected = new_dataset.map(torchdata.maps.To(lambda x: x+1, 0, 1))
+        selected = new_dataset.map(td.maps.To(lambda x: x+1, 0, 1))
 
     Attributes
     ----------
@@ -391,7 +397,7 @@ class Except(Base):
         # Sample-wise concatenate dataset three times
         dataset |= dataset
         # Every element increased by one except the first one
-        selected = new_dataset.map(torchdata.maps.Except(lambda x: x+1, 0))
+        selected = new_dataset.map(td.maps.Except(lambda x: x+1, 0))
 
     Attributes
     ----------

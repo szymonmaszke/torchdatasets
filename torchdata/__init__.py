@@ -3,11 +3,11 @@ r"""**This module contains PyTorch compatible datasets with extended capabilitie
 To quickly start with `torchdata`, just inherit from `torchdata.Dataset` and create
 your dataset as you normally would, for example::
 
-    import torchdata
+    import torchdata as td
     from PIL import Image
 
-    # Image loading dataset (use torchdata.Files for even less typing :D )
-    class Dataset(torchdata.Dataset):
+    # Image loading dataset (use td.datasets.Files for even less typing :D )
+    class Dataset(td.Dataset):
         def __init__(self, path: pathlib.Path):
             super().__init__() # This is necessary
             self.files = [file for file in path.glob("*")]
@@ -30,12 +30,12 @@ can still be used)::
     # You can create DataLoader as well
     dataloader = torch.utils.data.DataLoader(dataset)
 
-`torchdata.Iterable` is an extension of
+`td.Iterable` is an extension of
 `torch.utils.data.IterableDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset>`__,
 which allows the user to use `map`, `apply` and `filter`, for example::
 
     # Based on original PyTorch example
-    class Dataset(torchdata.Iterable):
+    class Dataset(td.Iterable):
         def __init__(self, start: int, end: int):
             super().__init__() # This is necessary
             self.start: int = start

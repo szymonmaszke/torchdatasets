@@ -693,7 +693,7 @@ class WrapDataset(_Wrap, Dataset):
 
     All attributes of wrapped dataset can be used normally, for example::
 
-        dataset = torchdata.datasets.WrapDataset(
+        dataset = td.datasets.WrapDataset(
             torchvision.datasets.MNIST("./data")
         )
         dataset.train # True, has all MNIST attributes

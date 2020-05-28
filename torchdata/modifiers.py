@@ -3,7 +3,7 @@ r"""**This module allows you to modify behaviour of** `torchdata.cachers`.
 To cache in `memory` only `20` first samples you could do (assuming you have already created
 `torchdata.Dataset` instance named `dataset`)::
 
-    dataset.cache(torchdata.modifiers.UpToIndex(20, torchdata.cachers.Memory()))
+    dataset.cache(td.modifiers.UpToIndex(20, td.cachers.Memory()))
 
 Modifers could be mixed intuitively as well using logical operators `|` (or) and
 `&` (and).
@@ -11,8 +11,8 @@ Modifers could be mixed intuitively as well using logical operators `|` (or) and
 **Example** (cache to disk `20` first or samples with index `1000` and upwards)::
 
     dataset.cache(
-        torchdata.modifiers.UpToIndex(20, torchdata.cachers.Memory())
-        | torchdata.modifiers.FromIndex(1000, torchdata.cachers.Memory())
+        td.modifiers.UpToIndex(20, td.cachers.Memory())
+        | td.modifiers.FromIndex(1000, td.cachers.Memory())
     )
 
 You can mix provided modifiers or extend them by inheriting from `Modifier`
@@ -22,8 +22,8 @@ For most of cases `Lambda` modifier should be sufficient, for example::
 
     # Only element up to `25th` and those which are divisible by `2`
     dataset = dataset.cache(
-        torchdata.modifiers.UpToIndex(25, cacher)
-        & torchdata.modifiers.Lambda(lambda index: index % 2 == 0, cacher)
+        td.modifiers.UpToIndex(25, cacher)
+        & td.modifiers.Lambda(lambda index: index % 2 == 0, cacher)
     )
 
 
@@ -45,9 +45,11 @@ class Modifier(Base):
     to work, see example below.
 
     Example implementation of `modifier` caching only elements `0` to `100`
-    of any `torchdata.cacher.Cacher`::
+    of any `td.cacher.Cacher`::
 
-        class ExampleModifier(Modifier):
+        import torchdata as td
+
+        class ExampleModifier(td.modifiers.Modifier):
 
             # You have to assign cacher to self.cacher so modifier works.
             def __init__(self, cacher):
