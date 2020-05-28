@@ -15,8 +15,8 @@
 
 # :bulb: Examples
 
-__Check documentation here:
-[https://szymonmaszke.github.io/torchdata/packages/torchdata.html](https://szymonmaszke.github.io/torchdata/packages/torchdata.html)__
+__Check documentation here:__
+[https://szymonmaszke.github.io/torchdata](https://szymonmaszke.github.io/torchdata)
 
 ## General example
 
