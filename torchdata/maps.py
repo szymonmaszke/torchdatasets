@@ -20,6 +20,9 @@ Following `dataset` object will be used throughout documentation for brevity (if
 
 `maps` below are general and can be used in various scenarios.
 
+If users want to create their own `map` objects, they can use single argument
+callables taking sample and returning sample after modifications.
+
 """
 
 import typing

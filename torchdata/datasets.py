@@ -420,8 +420,10 @@ class ConcatIterable(Iterable):
     of `Iterable` (original `torch.utils.data.IterableDataset
     <https://pytorch.org/docs/stable/data.html#torch.utils.data.IterableDataset>`__ can be used as well).
 
-    **Important:** This class is meant to be more of a proxy for `|` operator,
-    you can use it directly though.
+    .. note::
+
+        This class is meant to be more of a proxy for `|` operator,
+        you can use it directly though.
 
     **Example**::
 
@@ -460,8 +462,10 @@ class ChainDataset(TorchConcatDataset, Dataset):
     of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).
     Acts just like PyTorch's `+` or rather `torch.utils.data.ConcatDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ConcatDataset>`__
 
-    **Important:** This class is meant to be more of a proxy for `+` operator,
-    you can use it directly though.
+    .. note::
+
+        This class is meant to be more of a proxy for `+` operator,
+        you can use it directly though.
 
     **Example**::
 
@@ -489,8 +493,11 @@ class ChainIterable(TorchChain, Iterable):
     of `torchdata.Iterable` (original `torch.utils.data.Iterable` can be used as well).
     Acts just like PyTorch's `+` and `ChainDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ChainDataset>`__.
 
-    **Important:** This class is meant to be more of a proxy for `+` operator,
-    you can use it directly though.
+    .. note::
+
+        This class is meant to be more of a proxy for `+` operator,
+        you can use it directly though.
+
 
     **Example**::
 

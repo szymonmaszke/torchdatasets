@@ -26,8 +26,6 @@ For most of cases `Lambda` modifier should be sufficient, for example::
         & td.modifiers.Lambda(lambda index: index % 2 == 0, cacher)
     )
 
-
-
 """
 
 import abc
@@ -39,10 +37,12 @@ from ._base import Base
 class Modifier(Base):
     r"""**Interface for all modifiers.**
 
-    Most methods are pre-configured, so user should not override them.
-    In-fact only `condition` has to be overriden and `__init__` implemented.
-    Constructor should assign `cacher` to `self` in order for everything
-    to work, see example below.
+    .. note::
+
+        Most methods are pre-configured, so user should not override them.
+        In-fact only `condition` has to be overriden and `__init__` implemented.
+        Constructor should assign `cacher` to `self` in order for everything
+        to work, see example below.
 
     Example implementation of `modifier` caching only elements `0` to `100`
     of any `td.cacher.Cacher`::
@@ -58,13 +58,17 @@ class Modifier(Base):
             def condition(self, index):
                 return index < 100 # Cache if index smaller than 100
 
+
     """
 
     @abc.abstractmethod
     def condition(self, index: int) -> bool:
         r"""**Based on index, decide whether cache should interact with the sample.**
 
-        Only this function should be implemented by user.
+        .. note::
+
+            Only this function should be implemented by user.
+
         If `True` returned, `cacher` will act on sample normally (e.g. saving it or loading).
 
         Parameters
@@ -82,7 +86,10 @@ class Modifier(Base):
     def __contains__(self, index: int) -> bool:
         r"""**Acts as invisible proxy for** `cacher`'s `__contains__` **method.**
 
-        **User should not override this method.**
+        .. note::
+
+            **User should not override this method.**
+
         For more information check `torchdata.cacher.Cacher` interface.
 
         Parameters
@@ -98,7 +105,10 @@ class Modifier(Base):
     def __setitem__(self, index: int, data: typing.Any) -> None:
         r"""**Acts as invisible proxy for** `cacher`'s `__setitem__` **method.**
 
-        **User should not override this method.**
+        .. note::
+
+            **User should not override this method.**
+
         For more information check `torchdata.cacher.Cacher` interface.
 
         Parameters
@@ -114,7 +124,10 @@ class Modifier(Base):
     def __getitem__(self, index: int):
         r"""**Acts as invisible proxy for** `cacher`'s `__getitem__` **method.**
 
-        **User should not override this method.**
+        .. note::
+
+            **User should not override this method.**
+
         For more information check `torchdata.cacher.Cacher` interface.
 
         Parameters
@@ -127,10 +140,14 @@ class Modifier(Base):
     def __or__(self, other):
         r"""**If self or other returns True, then use** `cacher`.
 
-        User should not override this method.
+        .. note::
 
-        **Important:** `self` and `other` should have the same `cacher` wrapped.
-        Otherwise exception is thrown. Cacher of first modifier is used in such case.
+            **User should not override this method.**
+
+        .. note::
+
+            **IMPORTANT:** `self` and `other` should have the same `cacher` wrapped.
+            Otherwise exception is thrown. Cacher of first modifier is used in such case.
 
         Parameters
         ----------
@@ -148,8 +165,14 @@ class Modifier(Base):
     def __and__(self, other):
         r"""**If self and other returns True, then use** `cacher`.
 
-        **Important:** `self` and `other` should have the same `cacher` wrapped.
-        Cacher of first modifier is used no matter what.
+        .. note::
+
+            **User should not override this method.**
+
+        .. note::
+
+            **IMPORTANT:** `self` and `other` should have the same `cacher` wrapped.
+            Otherwise exception is thrown. Cacher of first modifier is used in such case.
 
         Parameters
         ----------
