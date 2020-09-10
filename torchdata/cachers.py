@@ -14,6 +14,7 @@ are too slow or not good enough for their purposes (see `Cacher` abstract interf
 """
 
 import abc
+import multiprocessing
 import pathlib
 import pickle
 import shutil
@@ -305,3 +306,29 @@ class Tensor(Cacher):
 
     def __exit__(self, *args):
         self.clean()
+
+
+class SharedMemory(Cacher):
+    r"""**Save and load data in shared between processes Python dictionary**.
+
+    .. note::
+
+        This `cacher` should be used with `torch.utils.data.DataLoader` if
+        `num_workers` is greater than default `0`.
+
+    """
+
+    def __init__(self):
+        self.cache = multiprocessing.Manager().dict()
+
+    def __contains__(self, index: int) -> bool:
+        """True if index in dictionary."""
+        return index in self.cache
+
+    def __setitem__(self, index: int, data: int):
+        """Adds data to dictionary."""
+        self.cache[index] = data
+
+    def __getitem__(self, index: int):
+        """Retrieve data from dictionary."""
+        return self.cache[index]
