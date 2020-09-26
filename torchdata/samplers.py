@@ -79,6 +79,28 @@ class _Equalizer(Sampler):
         return self.num_samples
 
 
+class WeightedImbalancedSampler(torch.utils.data.WeightedRandomSampler):
+    r"""**Sample elements using per-class weights.**
+
+    Data points with underrepresented classes will have higher probability
+    of being chosen.
+
+    Parameters
+    ----------
+    labels : torch.Tensor
+            Tensor containing labels for respective samples.
+    """
+
+    def __init__(self, labels, num_samples: int):
+        super().__init__(
+            weights=(
+                torch.nn.functional.one_hot(labels)
+                * (1 / torch.bincount(labels).float())
+            ).sum(dim=1),
+            num_samples=num_samples,
+        )
+
+
 class RandomOverSampler(_Equalizer):
     r"""**Sample elements randomly with underrepresented classes upsampled.**
 
