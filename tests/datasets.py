@@ -1,3 +1,4 @@
+import torch
 import torchdata
 
 
@@ -15,6 +16,18 @@ class ExampleDataset(torchdata.Dataset):
     def __init__(self, start: int, end: int):
         super().__init__()
         self.values = list(range(start, end))
+
+    def __getitem__(self, index):
+        return self.values[index]
+
+    def __len__(self):
+        return len(self.values)
+
+
+class ExampleTensorDataset(torchdata.Dataset):
+    def __init__(self, size):
+        super().__init__()
+        self.values = torch.randn(size, 5)
 
     def __getitem__(self, index):
         return self.values[index]

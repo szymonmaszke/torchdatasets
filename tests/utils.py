@@ -1,3 +1,4 @@
+import pathlib
 import time
 import typing
 
@@ -27,7 +28,6 @@ def index_is_sample(dataset, modifier: typing.Callable = None):
     if modifier is None:
         modifier = lambda x: x
     for index, sample in enumerate(dataset):
-        print(sample)
         assert modifier(index) == sample
 
 
@@ -41,3 +41,7 @@ def create_dataset_many_samples(samples):
 def is_none(dataset):
     for elem in dataset:
         assert elem is None
+
+
+def is_on_disk(path: pathlib.Path, number: int, extension: str):
+    return (path / str(number)).with_suffix(extension).is_file()
