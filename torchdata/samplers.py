@@ -48,6 +48,12 @@ class RandomSubsetSampler(Base, RandomSampler):
 
 class _Equalizer(Sampler):
     def __init__(self, labels: torch.tensor, function):
+        if len(labels.shape) > 1:
+            raise ValueError(
+                "labels can only have a single dimension (N, ), got shape: {}".format(
+                    labels.shape
+                )
+            )
         tensors = [
             torch.nonzero(labels == i, as_tuple=False).flatten()
             for i in torch.unique(labels)
@@ -85,6 +91,11 @@ class WeightedImbalancedSampler(torch.utils.data.WeightedRandomSampler):
     Data points with underrepresented classes will have higher probability
     of being chosen.
 
+    .. note::
+
+        Labels (possibly multiclass) have to be of shape `(N,)`
+        (single dimension). No additional dimensions allowed.
+
     Parameters
     ----------
     labels : torch.Tensor
@@ -106,6 +117,12 @@ class RandomOverSampler(_Equalizer):
 
     Length is equal to `max_samples_per_class * classes`.
 
+    .. note::
+
+        Labels (possibly multiclass) have to be of shape `(N,)`
+        (single dimension). No additional dimensions allowed.
+
+
     Parameters
     ----------
     labels : torch.Tensor
@@ -120,6 +137,11 @@ class RandomUnderSampler(_Equalizer):
     r"""**Sample elements randomly with overrepresnted classes downsampled.**
 
     Length is equal to `min_samples_per_class * classes`.
+
+    .. note::
+
+        Labels (possibly multiclass) have to be of shape `(N,)`
+        (single dimension). No additional dimensions allowed.
 
     Parameters
     ----------
