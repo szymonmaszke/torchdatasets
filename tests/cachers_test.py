@@ -38,3 +38,21 @@ def test_tensor_cache():
             pass
         for i in range(datapoints):
             assert is_on_disk(path, i, ".pt")
+
+
+def test_shared_memory():
+    dataset = (
+        ExampleTensorDataset(1000)
+        .map(lambda tensor: tensor * 2)
+        .map(lambda tensor: tensor + tensor)
+        .cache(torchdata.cachers.SharedMemory())
+    )
+    dataloader = torch.utils.data.DataLoader(dataset, num_workers=2, batch_size=10)
+    with torchfunc.Timer() as timer:
+        for _ in dataloader:
+            pass
+        initial_pass = timer.checkpoint()
+        for _ in dataloader:
+            pass
+        cached_pass = timer.checkpoint()
+        assert cached_pass < initial_pass

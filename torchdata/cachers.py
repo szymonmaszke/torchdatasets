@@ -318,7 +318,7 @@ class Tensor(Cacher):
 
 
 class SharedMemory(Cacher):
-    r"""**Save and load data in shared between processes Python dictionary**.
+    r"""**Save and load data in shared dictionary between multiple processes **.
 
     .. note::
 
