@@ -1,32 +1,41 @@
-import torch
+import itertools
 
+import pytest
+import torch
 import torchdata
 
 
-def create_example(over: bool):
-    labels = torch.tensor([0, 0, 0, 1, 0, 0, 1])
-    sampler_class = getattr(
-        torchdata.samplers, "Random" + ("Over" if over else "Under") + "Sampler"
-    )
-    sampler = sampler_class(labels)
-    return torch.tensor([labels[index] for index in sampler])
+def create_inputs(high: int):
+    return torch.randint(high=high, size=(100,))
 
 
-def test_random_oversampler():
-    oversampled = create_example(True)
-    assert (oversampled == 0).sum() == (oversampled == 1).sum()
+def verify_example(sampler, inputs):
+    count = torch.bincount(torch.tensor([inputs[index] for index in sampler]))
+    return torch.all(count == torch.max(count))
 
 
-def test_random_oversampler_length():
-    oversampled = create_example(True)
-    assert len(oversampled) == 2 * 5
+@pytest.mark.parametrize(
+    "sampler_cls,inputs",
+    list(
+        itertools.product(
+            (
+                torchdata.samplers.RandomOverSampler,
+                torchdata.samplers.RandomUnderSampler,
+            ),
+            [create_inputs(i) for i in [1, 2, 5, 7]],
+        )
+    ),
+)
+def test_samplers(sampler_cls, inputs):
+    sampler = sampler_cls(inputs)
+    assert verify_example(sampler, inputs)
 
 
-def test_random_undersampler():
-    undersampled = create_example(False)
-    assert (undersampled == 0).sum() == (undersampled == 1).sum()
-
-
-def test_random_undersampler_length():
-    undersampled = create_example(False)
-    assert len(undersampled) == 2 * 2
+@pytest.mark.parametrize(
+    "inputs",
+    [create_inputs(i) for i in [1, 2, 5, 7]],
+)
+def test_weighted_imbalanced_sampler(inputs):
+    sampler = torchdata.samplers.WeightedImbalancedSampler(inputs, num_samples=50)
+    for _ in sampler:
+        pass
