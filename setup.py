@@ -21,7 +21,7 @@ setuptools.setup(
     description="PyTorch based library focused on data processing and input pipelines in general.",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/torchdata",
+    url="https://github.com/szymonmaszke/torchdata",
     packages=setuptools.find_packages(),
     install_requires=open("environments/requirements.txt").read().splitlines(),
     python_requires=">=3.6",
