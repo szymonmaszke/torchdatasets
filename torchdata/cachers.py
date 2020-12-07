@@ -15,10 +15,12 @@ are too slow or not good enough for their purposes (see `Cacher` abstract interf
 
 import abc
 import multiprocessing
+from multiprocessing import Manager
 import pathlib
 import pickle
 import shutil
 import typing
+from typing import Optional
 
 import torch
 
@@ -184,10 +186,17 @@ class Memory(Cacher):
 
     This `cacher` is used by default inside `torchdata.Dataset`.
 
+    Attributes
+    ----------
+    manager: multiprocessing.Manager
+            Optional, instance of multiprocessing.Manager
     """
 
-    def __init__(self):
-        self.cache = {}
+    def __init__(self, manager: Optional[Manager]=None):
+        if manager is None:
+            self.cache = {}
+        else:
+            self.cache = manager.dict()
 
     def __contains__(self, index: int) -> bool:
         """True if index in dictionary."""
