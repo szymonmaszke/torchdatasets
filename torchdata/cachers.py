@@ -192,7 +192,9 @@ class Memory(Cacher):
     """
 
     def __init__(self, cache: Optional[dict]=None):
-        self.cache = cache or {}
+        self.cache = cache
+        if cache is None:
+            self.cache = {}
 
     def __contains__(self, index: int) -> bool:
         """True if index in dictionary."""
