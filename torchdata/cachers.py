@@ -15,7 +15,6 @@ are too slow or not good enough for their purposes (see `Cacher` abstract interf
 
 import abc
 import multiprocessing
-from multiprocessing import Manager
 import pathlib
 import pickle
 import shutil
@@ -188,15 +187,12 @@ class Memory(Cacher):
 
     Attributes
     ----------
-    manager: multiprocessing.Manager
-            Optional, instance of multiprocessing.Manager
+    cache: dict
+            Optional, user-provided caching dictionary (i.e. obtained with multiprocessing.Manager)
     """
 
-    def __init__(self, manager: Optional[Manager]=None):
-        if manager is None:
-            self.cache = {}
-        else:
-            self.cache = manager.dict()
+    def __init__(self, cache: Optional[dict]=None):
+        self.cache = cache or {}
 
     def __contains__(self, index: int) -> bool:
         """True if index in dictionary."""
