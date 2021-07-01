@@ -153,8 +153,11 @@ class _DatasetBase(Base):
         )
         return self._chain_object((self, other))
 
+    
+class MetaIterableWrapper(MetaIterable, GenericMeta): pass
 
-class Iterable(TorchIterable, _DatasetBase, metaclass=MetaIterable):
+
+class Iterable(TorchIterable, _DatasetBase, metaclass=MetaIterableWrapper):
     r"""`torch.utils.data.IterableDataset` **dataset with extended capabilities**.
 
     This class inherits from
