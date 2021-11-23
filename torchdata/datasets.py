@@ -25,9 +25,16 @@ from torch.utils.data import ConcatDataset as TorchConcatDataset
 from torch.utils.data import Dataset as TorchDataset
 from torch.utils.data import IterableDataset as TorchIterable
 from torch.utils.data import TensorDataset as TorchTensorDataset
+from torch.utils.data import _typing
 
 from ._base import Base, MetaDataset, MetaIterable
 from .cachers import Memory
+
+try:
+    from typing import GenericMeta
+except ImportError:
+    # in python > 3.7, genericmeta doesn't exist
+    class GenericMeta(type): pass
 
 
 class _DatasetBase(Base):
@@ -154,7 +161,7 @@ class _DatasetBase(Base):
         return self._chain_object((self, other))
 
     
-class MetaIterableWrapper(MetaIterable, GenericMeta): pass
+class MetaIterableWrapper(MetaIterable, GenericMeta, _typing._DataPipeMeta): pass
 
 
 class Iterable(TorchIterable, _DatasetBase, metaclass=MetaIterableWrapper):
