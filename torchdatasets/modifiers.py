@@ -1,7 +1,7 @@
-r"""**This module allows you to modify behaviour of** `torchdata.cachers`.
+r"""**This module allows you to modify behaviour of** `torchdatasets.cachers`.
 
 To cache in `memory` only `20` first samples you could do (assuming you have already created
-`torchdata.Dataset` instance named `dataset`)::
+`torchdatasets.Dataset` instance named `dataset`)::
 
     dataset.cache(td.modifiers.UpToIndex(20, td.cachers.Memory()))
 
@@ -47,7 +47,7 @@ class Modifier(Base):
     Example implementation of `modifier` caching only elements `0` to `100`
     of any `td.cacher.Cacher`::
 
-        import torchdata as td
+        import torchdatasets as td
 
         class ExampleModifier(td.modifiers.Modifier):
 
@@ -90,7 +90,7 @@ class Modifier(Base):
 
             **User should not override this method.**
 
-        For more information check `torchdata.cacher.Cacher` interface.
+        For more information check `torchdatasets.cacher.Cacher` interface.
 
         Parameters
         ----------
@@ -109,7 +109,7 @@ class Modifier(Base):
 
             **User should not override this method.**
 
-        For more information check `torchdata.cacher.Cacher` interface.
+        For more information check `torchdatasets.cacher.Cacher` interface.
 
         Parameters
         ----------
@@ -128,7 +128,7 @@ class Modifier(Base):
 
             **User should not override this method.**
 
-        For more information check `torchdata.cacher.Cacher` interface.
+        For more information check `torchdatasets.cacher.Cacher` interface.
 
         Parameters
         ----------
@@ -193,7 +193,7 @@ class _Mix(Modifier):
 
     Parameters
     ----------
-    *modifiers: List[torchdata.modifiers.Modifier]
+    *modifiers: List[torchdatasets.modifiers.Modifier]
             List of modifiers
 
     """
@@ -230,7 +230,7 @@ class _Percent(Modifier):
             Percentage specified as flow between `[0, 1]`.
     length : int
             How many samples are in dataset. You can pass `len(dataset)`.
-    cacher : torchdata.cacher.Cacher
+    cacher : torchdatasets.cacher.Cacher
             Instance of cacher
 
     """
@@ -273,7 +273,7 @@ class _Index(Modifier):
     ----------
     index : int
             Index of sample
-    cacher : torchdata.cacher.Cacher
+    cacher : torchdatasets.cacher.Cacher
             Instance of cacher
 
     """
@@ -310,7 +310,7 @@ class Indices(Modifier):
 
     Parameters
     ----------
-    cacher : List[torchdata.modifiers.Modifier]
+    cacher : List[torchdatasets.modifiers.Modifier]
             List of modifiers
     index : int
             Index of sample
@@ -333,7 +333,7 @@ class Lambda(Modifier):
     function: Callable
             Single-element callable, if `True` returned, cache this sample.
             Number of sample is passed as an argument.
-    cacher : torchdata.cacher.Cacher
+    cacher : torchdatasets.cacher.Cacher
             Instance of cacher
 
     """

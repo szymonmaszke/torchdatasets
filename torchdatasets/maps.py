@@ -1,9 +1,9 @@
-r"""**This module provides functions one can use with** `torchdata.Dataset.map` **method.**
+r"""**This module provides functions one can use with** `torchdatasets.Dataset.map` **method.**
 
 Following `dataset` object will be used throughout documentation for brevity (if not defined explicitly)::
 
     # Image loading dataset
-    import torchdata as td
+    import torchdatasets as td
 
     class Example(td.Dataset):
         def __init__(self, max: int):
@@ -35,7 +35,7 @@ class After(Base):
 
     Useful for introducing data augmentation after an initial warm-up period.
     If you want a direct control over when function will be applied to sample,
-    please use `torchdata.transforms.OnSignal`.
+    please use `torchdatasets.transforms.OnSignal`.
 
     Example::
 
@@ -82,7 +82,7 @@ class OnSignal(Base):
         import torch
         from PIL import Image
 
-        import torchdata as td
+        import torchdatasets as td
         import torchvision
 
 
@@ -145,7 +145,7 @@ class Flatten(Base):
         # Nest elements
         dataset = dataset.map(lambda x: (x, (x, (x, x), x),))
         # Flatten no matter how deep
-        dataset = dataset.map(torchdata.maps.Flatten())
+        dataset = dataset.map(torchdatasets.maps.Flatten())
 
     Parameters
     ----------
@@ -184,7 +184,7 @@ class Repeat(Base):
 
     Example::
 
-        import torchdata as td
+        import torchdatasets as td
 
         # Creating td.Dataset instance
         ...
@@ -313,7 +313,7 @@ class ToAll(Base):
     **Important:**
 
     If you want to apply function to all nested elements (e.g. in nested `tuple`),
-    please use `torchdata.maps.Flatten` object first.
+    please use `torchdatasets.maps.Flatten` object first.
 
     Example::
 
@@ -349,7 +349,7 @@ class To(Base):
     **Important:**
 
     If you want to apply function to all nested elements (e.g. in nested `tuple`),
-    please use `torchdata.maps.Flatten` object first.
+    please use `torchdatasets.maps.Flatten` object first.
 
     Example::
 
@@ -393,7 +393,7 @@ class Except(Base):
     **Important:**
 
     If you want to apply function to all nested elements (e.g. in nested `tuple`),
-    please use `torchdata.maps.Flatten` object first.
+    please use `torchdatasets.maps.Flatten` object first.
 
     Example::
 

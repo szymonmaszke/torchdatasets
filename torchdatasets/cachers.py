@@ -3,7 +3,7 @@ r"""**This module contains interface needed for** `cachers` **(used in** `cache`
 To cache on disk all samples using Python's `pickle <https://docs.python.org/3/library/pickle.html>`__ in folder `cache`
 (assuming you have already created `td.Dataset` instance named `dataset`)::
 
-    import torchdata as td
+    import torchdatasets as td
 
     ...
     dataset.cache(td.cachers.Pickle("./cache"))
@@ -27,7 +27,7 @@ from ._base import Base
 
 
 class Cacher(Base):
-    r"""**Interface to fulfil to make object compatible with** `torchdata.Dataset.cache` **method.**
+    r"""**Interface to fulfil to make object compatible with** `torchdatasets.Dataset.cache` **method.**
 
     If you want to implement your own `caching` functionality, inherit from
     this class and implement methods described below.
@@ -183,7 +183,7 @@ class Pickle(Cacher):
 class Memory(Cacher):
     r"""**Save and load data in Python dictionary**.
 
-    This `cacher` is used by default inside `torchdata.Dataset`.
+    This `cacher` is used by default inside `torchdatasets.Dataset`.
 
     Attributes
     ----------

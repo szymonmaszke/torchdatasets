@@ -1,9 +1,9 @@
 r"""**This module contains PyTorch compatible datasets with extended capabilities.**
 
-To quickly start with `torchdata`, just inherit from `torchdata.Dataset` and create
+To quickly start with `torchdatasets`, just inherit from `torchdatasets.Dataset` and create
 your dataset as you normally would, for example::
 
-    import torchdata as td
+    import torchdatasets as td
     from PIL import Image
 
     # Image loading dataset (use td.datasets.Files for even less typing :D )

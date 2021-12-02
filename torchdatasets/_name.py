@@ -1,1 +1,1 @@
-_name = "torchdata"
+_name = "torchdatasets"

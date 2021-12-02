@@ -6,7 +6,7 @@ import setuptools
 def read(HERE: pathlib.Path, filename, variable):
     namespace = {}
 
-    exec(open(HERE / "torchdata" / filename).read(), namespace)  # get version
+    exec(open(HERE / "torchdatasets" / filename).read(), namespace)  # get version
     return namespace[variable]
 
 
@@ -21,7 +21,7 @@ setuptools.setup(
     description="PyTorch based library focused on data processing and input pipelines in general.",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/szymonmaszke/torchdata",
+    url="https://github.com/szymonmaszke/torchdatasets",
     packages=setuptools.find_packages(),
     install_requires=open("environments/requirements.txt").read().splitlines(),
     python_requires=">=3.6",
@@ -40,9 +40,9 @@ setuptools.setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     project_urls={
-        "Website": "https://szymonmaszke.github.io/torchdata",
-        "Documentation": "https://szymonmaszke.github.io/torchdata/#torchdata",
-        "Issues": "https://github.com/szymonmaszke/torchdata/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc",
+        "Website": "https://szymonmaszke.github.io/torchdatasets",
+        "Documentation": "https://szymonmaszke.github.io/torchdatasets/#torchdatasets",
+        "Issues": "https://github.com/szymonmaszke/torchdatasets/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc",
     },
     keywords="pytorch torch data datasets map cache memory disk apply database",
 )

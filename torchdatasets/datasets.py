@@ -1,18 +1,18 @@
-"""**Concrete implementations of** `torchdata.Dataset` **and** `torchdata.Iterable`.
+"""**Concrete implementations of** `torchdatasets.Dataset` **and** `torchdatasets.Iterable`.
 
 Classes below extend and/or make it easier for user to implement common functionalities.
 To use standard PyTorch datasets defined by, for example, `torchvision`, you can
 use `WrapDataset` or `WrapIterable` like this::
 
-    import torchdata
+    import torchdatasets
     import torchvision
 
-    dataset = torchdata.datasets.WrapDataset(
+    dataset = torchdatasets.datasets.WrapDataset(
         torchvision.datasets.MNIST("./data", download=True)
     )
 
 After that you can use `map`, `apply` and other functionalities like you normally would with
-either `torchdata.Dataset` or `torchdata.Iterable`.
+either `torchdatasets.Dataset` or `torchdatasets.Iterable`.
 """
 
 import abc
@@ -81,7 +81,7 @@ class _DatasetBase(Base):
 
         **Example**::
 
-            class Dataset(torchdata.Dataset):
+            class Dataset(torchdatasets.Dataset):
                 def __init__(self, max: int):
                     super().__init__() # This is necessary
                     self.range = list(range(max))
@@ -180,7 +180,7 @@ class Iterable(TorchIterable, _DatasetBase, metaclass=MetaIterableWrapper):
     **Example**::
 
         # Based on original PyTorch example
-        class Dataset(torchdata.Iterable):
+        class Dataset(torchdatasets.Iterable):
             def __init__(self, start: int, end: int):
                 super().__init__() # This is necessary
                 self.start: int = start
@@ -266,7 +266,7 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDatasetWrapper):
         from PIL import Image
 
         # Image loading dataset (use Files for more serious business)
-        class Dataset(torchdata.Dataset):
+        class Dataset(torchdatasets.Dataset):
             def __init__(self, path: pathlib.Path):
                 super().__init__() # This is necessary
                 self.files = [file for file in path.glob("*")]
@@ -301,16 +301,16 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDatasetWrapper):
         r"""**Cache data in memory, disk or specify custom caching.**
 
         By default all samples are cached in memory. To change this behaviour specify `cacher`
-        argument. Some `cacher` implementations can be found in `torchdata.cacher` module or you can
-        provide your own by inheriting from `torchdata.cacher.Cacher` and implementing
+        argument. Some `cacher` implementations can be found in `torchdatasets.cacher` module or you can
+        provide your own by inheriting from `torchdatasets.cacher.Cacher` and implementing
         appropriate methods.
 
         Parameters
         ----------
-        cacher : torchdata.cacher.Cacher, optional
-                Instance of `torchdata.cacher.Cacher` (or any other object with compatible interface).
+        cacher : torchdatasets.cacher.Cacher, optional
+                Instance of `torchdatasets.cacher.Cacher` (or any other object with compatible interface).
                 Check `cacher` module documentation for more information.
-                Default: `torchdata.cacher.Memory` which caches data in-memory
+                Default: `torchdatasets.cacher.Memory` which caches data in-memory
 
         Returns
         -------
@@ -331,7 +331,7 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDatasetWrapper):
 
         **Example**::
 
-            class Dataset(torchdata.Dataset):
+            class Dataset(torchdatasets.Dataset):
                 def __init__(self, max: int):
                     super().__init__() # This is necessary
                     self.range = list(range(max))
@@ -390,10 +390,10 @@ class Dataset(TorchDataset, _DatasetBase, metaclass=MetaDatasetWrapper):
 
 
 class ConcatDataset(Dataset):
-    r"""**Concrete** `torchdata.Dataset` **responsible for sample-wise concatenation.**
+    r"""**Concrete** `torchdatasets.Dataset` **responsible for sample-wise concatenation.**
 
     This class is returned when `|` (logical or operator) is used on instance
-    of `torchdata.Dataset` (original `torch.utils.data.Dataset
+    of `torchdatasets.Dataset` (original `torch.utils.data.Dataset
     <https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset>`__ can be used as well).
 
     **Important:** This class is meant to be more of a proxy for `|` operator,
@@ -402,7 +402,7 @@ class ConcatDataset(Dataset):
     **Example**::
 
         dataset = (
-            torchdata.ConcatDataset([dataset1, dataset2, dataset3])
+            torchdatasets.ConcatDataset([dataset1, dataset2, dataset3])
             .map(lambda sample: sample[0] + sample[1] + sample[2]))
         )
 
@@ -410,7 +410,7 @@ class ConcatDataset(Dataset):
 
     Attributes
     ----------
-    datasets : List[Union[torchdata.Dataset, torch.utils.data.Dataset]]
+    datasets : List[Union[torchdatasets.Dataset, torch.utils.data.Dataset]]
             List of datasets to be concatenated sample-wise.
 
     """
@@ -441,7 +441,7 @@ class ConcatIterable(Iterable):
     **Example**::
 
         dataset = (
-            torchdata.ConcatIterable([dataset1, dataset2, dataset3])
+            torchdatasets.ConcatIterable([dataset1, dataset2, dataset3])
             .map(lambda x, y, z: (x + y, z))
         )
 
@@ -449,7 +449,7 @@ class ConcatIterable(Iterable):
 
     Attributes
     ----------
-    datasets : List[Union[torchdata.Iterable, torch.utils.data.IterableDataset]]
+    datasets : List[Union[torchdatasets.Iterable, torch.utils.data.IterableDataset]]
             List of datasets to be concatenated sample-wise.
 
     """
@@ -469,10 +469,10 @@ class ConcatIterable(Iterable):
 
 
 class ChainDataset(TorchConcatDataset, Dataset):
-    r"""**Concrete** `torchdata.Dataset` **responsible for chaining multiple datasets.**
+    r"""**Concrete** `torchdatasets.Dataset` **responsible for chaining multiple datasets.**
 
     This class is returned when `+` (logical or operator) is used on instance
-    of `torchdata.Dataset` (original `torch.utils.data.Dataset` can be used as well).
+    of `torchdatasets.Dataset` (original `torch.utils.data.Dataset` can be used as well).
     Acts just like PyTorch's `+` or rather `torch.utils.data.ConcatDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ConcatDataset>`__
 
     .. note::
@@ -483,13 +483,13 @@ class ChainDataset(TorchConcatDataset, Dataset):
     **Example**::
 
         # Iterate over 3 datasets consecutively
-        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])
+        dataset = torchdatasets.ChainDataset([dataset1, dataset2, dataset3])
 
     Any `Dataset` methods can be used normally.
 
     Attributes
     ----------
-    datasets : List[Union[torchdata.Dataset, torch.utils.data.Dataset]]
+    datasets : List[Union[torchdatasets.Dataset, torch.utils.data.Dataset]]
             List of datasets to be chained.
 
     """
@@ -500,10 +500,10 @@ class ChainDataset(TorchConcatDataset, Dataset):
 
 
 class ChainIterable(TorchChain, Iterable):
-    r"""**Concrete** `torchdata.Iterable` **responsible for chaining multiple datasets.**
+    r"""**Concrete** `torchdatasets.Iterable` **responsible for chaining multiple datasets.**
 
     This class is returned when `+` (logical or operator) is used on instance
-    of `torchdata.Iterable` (original `torch.utils.data.Iterable` can be used as well).
+    of `torchdatasets.Iterable` (original `torch.utils.data.Iterable` can be used as well).
     Acts just like PyTorch's `+` and `ChainDataset <https://pytorch.org/docs/stable/data.html#torch.utils.data.ChainDataset>`__.
 
     .. note::
@@ -515,13 +515,13 @@ class ChainIterable(TorchChain, Iterable):
     **Example**::
 
         # Iterate over 3 iterable datasets consecutively
-        dataset = torchdata.ChainDataset([dataset1, dataset2, dataset3])
+        dataset = torchdatasets.ChainDataset([dataset1, dataset2, dataset3])
 
     Any `Iterable` methods can be used normally.
 
     Attributes
     ----------
-    datasets : List[Union[torchdata.Iterable, torch.utils.data.IterableDataset]]
+    datasets : List[Union[torchdatasets.Iterable, torch.utils.data.IterableDataset]]
             List of datasets to be chained.
 
     """
@@ -554,14 +554,14 @@ class Files(Dataset):
     you can use `map` method in order to modify returned `file` or you can overload
     `__getitem__` (image opening example below)::
 
-        import torchdata
+        import torchdatasets
         import torchvision
 
         from PIL import Image
 
 
         # Image loading dataset
-        class ImageDataset(torchdata.datasets.FilesDataset):
+        class ImageDataset(torchdatasets.datasets.FilesDataset):
             def __getitem__(self, index):
                 return Image.open(self.files[index])
 
@@ -629,7 +629,7 @@ class Files(Dataset):
     def filter(self, predicate: typing.Callable):
         r"""**Remove** `files` **for which predicate returns** `False`**.**
 
-        **Note:** This is different from `torchdata.Iterable`'s `filter` method,
+        **Note:** This is different from `torchdatasets.Iterable`'s `filter` method,
         as the filtering is done when called, not during iteration.
 
         Parameters
@@ -709,7 +709,7 @@ class _Wrap:
 
 
 class WrapDataset(_Wrap, Dataset):
-    r"""**Dataset wrapping standard** `torch.data.utils.Dataset` **and making it** `torchdata.Dataset` **compatible.**
+    r"""**Dataset wrapping standard** `torch.data.utils.Dataset` **and making it** `torchdatasets.Dataset` **compatible.**
 
     All attributes of wrapped dataset can be used normally, for example::
 
@@ -736,10 +736,10 @@ class WrapDataset(_Wrap, Dataset):
 
 
 class WrapIterable(_Wrap, Iterable):
-    r"""**Iterable wrapping standard** `torch.data.utils.IterableDataset` **and making it** `torchdata.Iterable` **compatible.**
+    r"""**Iterable wrapping standard** `torch.data.utils.IterableDataset` **and making it** `torchdatasets.Iterable` **compatible.**
 
     All attributes of wrapped dataset can be used normally as is the case for
-    `torchdata.datasets.WrapDataset`.
+    `torchdatasets.datasets.WrapDataset`.
 
     Parameters:
     -----------
