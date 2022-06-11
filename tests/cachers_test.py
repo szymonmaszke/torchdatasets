@@ -1,7 +1,7 @@
 import pathlib
 
 import torch
-import torchdata
+import torchdatasets
 import torchfunc
 
 from .datasets import ExampleDataset, ExampleTensorDataset
@@ -10,7 +10,7 @@ from .utils import artificial_slowdown, index_is_sample, is_on_disk
 from multiprocessing import Process, Manager
 
 def test_pickle_cache_slowdown():
-    with torchdata.cachers.Pickle(pathlib.Path("./disk")) as pickler:
+    with torchdatasets.cachers.Pickle(pathlib.Path("./disk")) as pickler:
         dataset = ExampleDataset(0, 5).map(artificial_slowdown).cache(pickler)
         with torchfunc.Timer() as timer:
             index_is_sample(dataset)
@@ -22,7 +22,7 @@ def test_pickle_cache_slowdown():
 def test_pickle_cache():
     datapoints = 10
     path = pathlib.Path("./disk")
-    with torchdata.cachers.Pickle(path) as pickler:
+    with torchdatasets.cachers.Pickle(path) as pickler:
         dataset = ExampleDataset(0, 10).cache(pickler)
         for _ in dataset:
             pass
@@ -33,7 +33,7 @@ def test_pickle_cache():
 def test_tensor_cache():
     datapoints = 5
     path = pathlib.Path("./disk")
-    with torchdata.cachers.Tensor(path) as cacher:
+    with torchdatasets.cachers.Tensor(path) as cacher:
         dataset = ExampleTensorDataset(datapoints).cache(cacher)
         for _ in dataset:
             pass
@@ -45,7 +45,7 @@ def test_memory_cache():
         ExampleTensorDataset(1000)
         .map(lambda tensor: tensor * 2)
         .map(lambda tensor: tensor + tensor)
-        .cache(torchdata.cachers.Memory())
+        .cache(torchdatasets.cachers.Memory())
     )
 
     dataloader = torch.utils.data.DataLoader(dataset, num_workers=0, batch_size=10)
@@ -61,7 +61,7 @@ def test_memory_cache():
 
 
 def shared_subprocess(cache, refs):
-    cacher = torchdata.cachers.Memory(cache)
+    cacher = torchdatasets.cachers.Memory(cache)
 
     if id(cacher.cache) in refs.keys():
         refs[id(cacher.cache)] += 1
