@@ -1,8 +1,8 @@
 import torch
-import torchdata
+import torchdatasets
 
 
-class ExampleIterable(torchdata.Iterable):
+class ExampleIterable(torchdatasets.Iterable):
     def __init__(self, start: int, end: int):
         super().__init__()
         self.start: int = start
@@ -12,7 +12,7 @@ class ExampleIterable(torchdata.Iterable):
         return iter(range(self.start, self.end))
 
 
-class ExampleDataset(torchdata.Dataset):
+class ExampleDataset(torchdatasets.Dataset):
     def __init__(self, start: int, end: int):
         super().__init__()
         self.values = list(range(start, end))
@@ -24,7 +24,7 @@ class ExampleDataset(torchdata.Dataset):
         return len(self.values)
 
 
-class ExampleTensorDataset(torchdata.Dataset):
+class ExampleTensorDataset(torchdatasets.Dataset):
     def __init__(self, size):
         super().__init__()
         self.values = torch.randn(size, 5)

@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 import torch
-import torchdata
+import torchdatasets
 
 
 def create_inputs(high: int):
@@ -19,8 +19,8 @@ def verify_example(sampler, inputs):
     list(
         itertools.product(
             (
-                torchdata.samplers.RandomOverSampler,
-                torchdata.samplers.RandomUnderSampler,
+                torchdatasets.samplers.RandomOverSampler,
+                torchdatasets.samplers.RandomUnderSampler,
             ),
             [create_inputs(i) for i in [1, 2, 5, 7]],
         )
@@ -36,6 +36,6 @@ def test_samplers(sampler_cls, inputs):
     [create_inputs(i) for i in [1, 2, 5, 7]],
 )
 def test_weighted_imbalanced_sampler(inputs):
-    sampler = torchdata.samplers.WeightedImbalancedSampler(inputs, num_samples=50)
+    sampler = torchdatasets.samplers.WeightedImbalancedSampler(inputs, num_samples=50)
     for _ in sampler:
         pass

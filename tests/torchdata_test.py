@@ -2,7 +2,7 @@ import time
 
 import torch
 
-import torchdata
+import torchdatasets
 import torchfunc
 
 from .datasets import ExampleDataset, ExampleIterable
@@ -75,7 +75,7 @@ def test_dataset_complicated_cache():
         )
         .cache()
         .map(lambda values: ((values, values), values))
-        .map(torchdata.maps.Flatten())
+        .map(torchdatasets.maps.Flatten())
         .cache()
         .map(lambda values: values[1])
         .map(lambda value: value ** 2)

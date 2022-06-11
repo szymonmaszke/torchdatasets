@@ -1,13 +1,13 @@
 import typing
 
-import torchdata
+import torchdatasets
 
 from .datasets import ExampleDataset
 from .utils import create_dataset_many_samples, index_is_sample, is_none
 
 
 def test_after():
-    dataset = ExampleDataset(0, 25).map(torchdata.maps.After(10, lambda x: x ** 2))
+    dataset = ExampleDataset(0, 25).map(torchdatasets.maps.After(10, lambda x: x ** 2))
     for index, element in enumerate(dataset):
         if index > 10:
             assert element == index ** 2
@@ -25,7 +25,7 @@ def test_onsignal():
 
     handler = Handle()
     dataset = ExampleDataset(0, 25).map(
-        torchdata.maps.OnSignal(handler, lambda x: x ** 2)
+        torchdatasets.maps.OnSignal(handler, lambda x: x ** 2)
     )
     for index, element in enumerate(dataset):
         if index == 10:
@@ -37,52 +37,52 @@ def test_onsignal():
 
 
 def test_repeat():
-    dataset = ExampleDataset(0, 25).map(torchdata.maps.Repeat(10, lambda x: x + 1))
+    dataset = ExampleDataset(0, 25).map(torchdatasets.maps.Repeat(10, lambda x: x + 1))
     index_is_sample(dataset, modifier=lambda x: x + 10)
 
 
 def test_select():
-    index_is_sample(create_dataset_many_samples(2).map(torchdata.maps.Select(0)))
+    index_is_sample(create_dataset_many_samples(2).map(torchdatasets.maps.Select(0)))
 
 
 def test_select_none():
-    is_none(create_dataset_many_samples(2).map(torchdata.maps.Select()))
+    is_none(create_dataset_many_samples(2).map(torchdatasets.maps.Select()))
 
 
 def test_select_multiple():
     index_is_sample(
         create_dataset_many_samples(3)
-        .map(torchdata.maps.Select(0, 1))
-        .map(torchdata.maps.Select(1))
+        .map(torchdatasets.maps.Select(0, 1))
+        .map(torchdatasets.maps.Select(1))
     )
 
 
 def test_flatten_flattened():
-    index_is_sample(create_dataset_many_samples(1).map(torchdata.maps.Flatten()))
+    index_is_sample(create_dataset_many_samples(1).map(torchdatasets.maps.Flatten()))
 
 
 def test_flatten_signle():
-    index_is_sample(ExampleDataset(0, 10).map(torchdata.maps.Flatten()))
+    index_is_sample(ExampleDataset(0, 10).map(torchdatasets.maps.Flatten()))
 
 
 def test_drop():
-    index_is_sample(create_dataset_many_samples(2).map(torchdata.maps.Drop(0)))
+    index_is_sample(create_dataset_many_samples(2).map(torchdatasets.maps.Drop(0)))
 
 
 def test_drop_all():
-    is_none(create_dataset_many_samples(2).map(torchdata.maps.Drop(0, 1)))
+    is_none(create_dataset_many_samples(2).map(torchdatasets.maps.Drop(0, 1)))
 
 
 def test_drop_multiple():
     index_is_sample(
         create_dataset_many_samples(3)
-        .map(torchdata.maps.Drop(0, 2))
-        .map(torchdata.maps.Select(1))
+        .map(torchdatasets.maps.Drop(0, 2))
+        .map(torchdatasets.maps.Select(1))
     )
 
 
 def test_to_all():
-    dataset = create_dataset_many_samples(8).map(torchdata.maps.ToAll(lambda x: -x))
+    dataset = create_dataset_many_samples(8).map(torchdatasets.maps.ToAll(lambda x: -x))
     for index, sample in enumerate(dataset):
         for subsample in sample:
             assert -index == subsample
@@ -95,7 +95,7 @@ def indices_test(to: bool, length: int, threshold: int):
         return subsample
 
     dataset = create_dataset_many_samples(length).map(
-        (torchdata.maps.To if to else torchdata.maps.Except)(
+        (torchdatasets.maps.To if to else torchdatasets.maps.Except)(
             lambda x: -x, *list(range(threshold))
         )
     )

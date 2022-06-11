@@ -2,7 +2,7 @@ import pathlib
 import time
 import typing
 
-import torchdata
+import torchdatasets
 
 from .datasets import ExampleDataset
 
@@ -35,7 +35,7 @@ def create_dataset_many_samples(samples):
     dataset = ExampleDataset(0, 25)
     for _ in range(samples - 1):
         dataset |= dataset
-    return dataset.map(torchdata.maps.Flatten())
+    return dataset.map(torchdatasets.maps.Flatten())
 
 
 def is_none(dataset):
